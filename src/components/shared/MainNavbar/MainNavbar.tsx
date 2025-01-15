@@ -14,6 +14,7 @@ const UnderLine = ({ isActive }: { isActive: boolean }) => (
             height: '4px',
             marginBottom: '-4px',
             backgroundColor: isActive ? '#2266C7' : 'transparent',
+            zIndex: 200,
         }}
     />
 )
@@ -35,8 +36,10 @@ export const MainNavbar = () => {
                 alignItems: 'center',
                 boxShadow: '0px 0px 8px 1px rgba(0, 0, 0, 0.10)',
                 backgroundColor: 'ffffffBF',
-                position: 'sticky',
+                position: 'fixed',
                 padding: '0 16px',
+                zIndex: 100,
+                top: 0,
             }}
         >
             <Link
@@ -73,31 +76,6 @@ export const MainNavbar = () => {
                     }}
                 >
                     <Link
-                        href="/academy"
-                        style={{
-                            display: 'flex',
-                            gap: '10px',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Image
-                            src={'/icons/AcademyIcon.svg'}
-                            alt="Apps Icon"
-                            width={30}
-                            height={30}
-                        />
-                        אקדמיה
-                    </Link>
-                    <UnderLine isActive={currentMainPage === 'academy'} />
-                </Stack>
-
-                <Stack
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}
-                >
-                    <Link
                         href="/apps"
                         style={{
                             display: 'flex',
@@ -114,6 +92,30 @@ export const MainNavbar = () => {
                         אפליקציות
                     </Link>
                     <UnderLine isActive={currentMainPage === 'apps'} />
+                </Stack>
+                <Stack
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}
+                >
+                    <Link
+                        href="/academy"
+                        style={{
+                            display: 'flex',
+                            gap: '10px',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Image
+                            src={'/icons/AcademyIcon.svg'}
+                            alt="Apps Icon"
+                            width={30}
+                            height={30}
+                        />
+                        אקדמיה
+                    </Link>
+                    <UnderLine isActive={currentMainPage === 'academy'} />
                 </Stack>
 
                 <Stack
