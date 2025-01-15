@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { Assistant } from 'next/font/google'
 import './globals.css'
 
-const assistant = Assistant()
+const assistant = Assistant({ subsets: ['hebrew'] })
 
 export const metadata: Metadata = {
     title: 'Create Next App',
