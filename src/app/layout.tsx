@@ -1,5 +1,10 @@
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
+import { MainNavbar } from '@shared'
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import { Assistant } from 'next/font/google'
+import './globals.css'
+
+const assistant = Assistant()
 
 export const metadata: Metadata = {
     title: 'Create Next App',
@@ -13,23 +18,13 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="he" dir="rtl">
-            <body>
-                <header>
-                    <nav
-                        style={{
-                            display: 'flex',
-                            gap: '1rem',
-                            justifyContent: 'center',
-                            padding: '1rem',
-                        }}
-                    >
-                        <Link href="/">בית</Link>
-                        <Link href="/academy">אקדמיה</Link>
-                        <Link href="/apps">אפליקציות</Link>
-                        <Link href="/services">שירותים</Link>
-                    </nav>
-                </header>
-                {children}
+            <body className={assistant.className}>
+                <AppRouterCacheProvider>
+                    <header>
+                        <MainNavbar />
+                    </header>
+                    {children}
+                </AppRouterCacheProvider>
             </body>
         </html>
     )
