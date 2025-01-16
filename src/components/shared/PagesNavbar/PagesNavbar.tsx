@@ -30,7 +30,6 @@ const PageLink = ({
                 backgroundColor: isActive ? '#2266C7' : 'transparent',
                 color: isActive ? 'white' : 'black',
                 cursor: 'pointer',
-                zIndex: 100,
             }}
         >
             <Link href={href} style={{ padding: '10px' }}>
