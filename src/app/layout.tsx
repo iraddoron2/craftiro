@@ -1,3 +1,4 @@
+import { Stack } from '@core'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { MainNavbar } from '@shared'
 import type { Metadata } from 'next'
@@ -28,7 +29,15 @@ export default function RootLayout({
                     >
                         <MainNavbar />
                     </header>
-                    {children}
+                    <Stack
+                        sx={{
+                            marginTop: 'calc(60px + 8px)',
+                            marginRight: 'calc(200px + 24px)',
+                            marginLeft: 'calc(200px + 24px)',
+                        }}
+                    >
+                        {children}
+                    </Stack>
                 </AppRouterCacheProvider>
             </body>
         </html>

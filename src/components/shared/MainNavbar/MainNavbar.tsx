@@ -35,10 +35,9 @@ export const MainNavbar = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 boxShadow: '0px 0px 8px 1px rgba(0, 0, 0, 0.10)',
-                backgroundColor: 'ffffffBF',
+                backgroundColor: '#ffffffBf',
                 position: 'fixed',
                 padding: '0 16px',
-                zIndex: 100,
                 top: 0,
             }}
         >
