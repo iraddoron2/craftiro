@@ -11,7 +11,6 @@ export default function Layout({
             sx={{
                 flexDirection: 'column',
                 minHeight: '100vh',
-                margin: '60px 200px',
             }}
         >
             <PagesNavbar
