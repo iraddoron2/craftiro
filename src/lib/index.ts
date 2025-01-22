@@ -1,0 +1,1 @@
+export { useTabsNavbar } from './useTabsNavbar'
