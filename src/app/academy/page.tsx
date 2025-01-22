@@ -1,3 +1,5 @@
-export default async function Page() {
-    return <h1>אקדמיה</h1>
+import { Stack } from '@core'
+
+export default function Page() {
+    return <Stack>hi</Stack>
 }

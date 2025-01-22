@@ -49,10 +49,16 @@ export type TrackSectionLesson = {
     lessonRecordingUrl: string
     objectives: LessonObjective[]
     materials: string[] // Modules ids
-    externalMaterials: string[] // Modules ids
+    bonusMaterials: string[] // Modules ids
 }
 
 export type TrackSection = {
+    id: string
+    title: string
+    description: string
+    tags: string[]
+    startingDate: Date
+    completionDate: Date
     lessons: TrackSectionLesson[]
 }
 
@@ -68,12 +74,12 @@ export type Track = {
 }
 
 export type LearningDiary = {
-    studentTracksData: Track[]
+    tracks: Track[]
 }
 
 export type ModuleStatus = {
     moduleId: string
-    status: TaskStatus & ('locked' | 'wish-list')
+    status: 'completed' | 'not-started' | 'in-progress' | 'locked' | 'wish-list'
 }
 
 export type MusicStudiesMusicPiece = {
@@ -85,7 +91,7 @@ export type MusicStudiesMusicPiece = {
     status: 'whish-list' | 'in-progress' | 'completed'
 }
 
-export type AcademyData = {
+export type Academy = {
     startingDate: Date
     plan: AcademyPlan
     active: boolean
@@ -102,5 +108,24 @@ export type User = {
     lastName: string
     email: string
     roles: UserRole[]
-    academyData: AcademyData
+    academy: Academy
 }
+
+export type TabsNavbarProps = {
+    linksGroups: {
+        href: string
+        label: string
+    }[][]
+    currentPath: string
+}
+
+export type TabLink = {
+    path: string
+    label: string
+}
+
+export type LinkGroup = TabLink[]
+
+export type CurrentPath = string
+
+export type LinksGroups = LinkGroup[]

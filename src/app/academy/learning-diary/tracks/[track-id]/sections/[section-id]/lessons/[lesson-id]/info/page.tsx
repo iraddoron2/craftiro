@@ -1,0 +1,160 @@
+'use client'
+
+import { currentUser } from '@/data'
+import {
+    getDateInFormatDDMMYYYY,
+    getDayInWeekFromDateHebrew,
+    getLessonFromLessonId,
+    getTimeBetweenDatesInMinutes,
+    getTimeFromDateInFormatHHMM,
+} from '@/helpers'
+import { useTabsNavbar } from '@/lib'
+import { LinksGroups } from '@/types'
+import { Stack, Text } from '@core'
+import { useParams, usePathname } from 'next/navigation'
+import { useEffect, useMemo } from 'react'
+import { LessonTitle } from '../_components'
+
+export default function Page() {
+    const pathname = usePathname()
+    const params = useParams()
+    const tabsNavbar = useTabsNavbar()
+    const lessonId = params['lesson-id'] as string
+    const trackId = params['track-id'] as string
+    const sectionId = params['section-id'] as string
+    const lesson = getLessonFromLessonId(currentUser, lessonId)
+
+    const linksGroups: LinksGroups = useMemo(
+        () => [
+            [
+                { path: '/academy/learning-diary', label: 'מסך ראשי' },
+                {
+                    path: '/academy/learning-diary/full-diary',
+                    label: 'יומן מלא',
+                },
+                {
+                    path: '/academy/learning-diary/tracks-in-progress',
+                    label: 'מסלולים בתהליך',
+                },
+            ],
+            [
+                {
+                    path: `/academy/learning-diary/tracks/${trackId}/sections/${sectionId}/lessons/${lessonId}`,
+                    label: 'מסך שיעור ראשי',
+                },
+                {
+                    path: `/academy/learning-diary/tracks/${trackId}/sections/${sectionId}/lessons/${lessonId}/info`,
+                    label: 'מידע על השיעור',
+                },
+                {
+                    path: `/academy/learning-diary/tracks/${trackId}/sections/${sectionId}/lessons/${lessonId}/improvement`,
+                    label: 'התפתחות',
+                },
+                {
+                    path: `/academy/learning-diary/tracks/${trackId}/sections/${sectionId}/lessons/${lessonId}/next-goals`,
+                    label: 'יעדים להמשך',
+                },
+                {
+                    path: `/academy/learning-diary/tracks/${trackId}/sections/${sectionId}/lessons/${lessonId}/lesson-recording`,
+                    label: 'הקלטת שיעור',
+                },
+                {
+                    path: `/academy/learning-diary/tracks/${trackId}/sections/${sectionId}/lessons/${lessonId}/objectives`,
+                    label: 'משימות',
+                },
+                {
+                    path: `/academy/learning-diary/tracks/${trackId}/sections/${sectionId}/lessons/${lessonId}/materials`,
+                    label: 'חומרי לימוד',
+                },
+                {
+                    path: `/academy/learning-diary/tracks/${trackId}/sections/${sectionId}/lessons/${lessonId}/bonus-materials`,
+                    label: 'חומרי העשרה',
+                },
+            ],
+        ],
+        [lessonId, sectionId, trackId]
+    )
+
+    useEffect(() => {
+        if (tabsNavbar.currentPath !== pathname) {
+            tabsNavbar.updateCurrentPath(pathname)
+            tabsNavbar.updateLinksGroups(linksGroups)
+        }
+    }, [linksGroups, pathname, tabsNavbar])
+
+    if (!lesson) {
+        return <h1>Lesson not found</h1>
+    }
+
+    const { id, mainSubjects, lessonStart, lessonEnd } = lesson
+
+    return (
+        <Stack>
+            <LessonTitle lessonId={id} />
+            <Stack
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    gap: '24px',
+                }}
+            >
+                <Text
+                    variant="body1"
+                    sx={{
+                        fontSize: '24px',
+                    }}
+                    text={`יום ${getDayInWeekFromDateHebrew(lessonStart)}`}
+                />
+                <Text
+                    variant="body1"
+                    sx={{
+                        fontSize: '24px',
+                    }}
+                    text={getDateInFormatDDMMYYYY(lessonStart)}
+                />
+                <Text
+                    variant="body1"
+                    sx={{
+                        fontSize: '24px',
+                    }}
+                    text={`${getTimeFromDateInFormatHHMM(
+                        lessonStart
+                    )} - ${getTimeFromDateInFormatHHMM(lessonEnd)}`}
+                />
+                <Text
+                    variant="body1"
+                    sx={{
+                        fontSize: '24px',
+                    }}
+                    text={`${getTimeBetweenDatesInMinutes(
+                        lessonStart,
+                        lessonEnd
+                    )} דקות`}
+                />
+            </Stack>
+            <Text
+                variant="h3"
+                text={`נושאים עיקריים:`}
+                sx={{
+                    fontSize: '32px',
+                }}
+            />
+            <Stack>
+                <ol>
+                    {mainSubjects.map((subject) => (
+                        <li
+                            key={subject}
+                            style={{
+                                fontSize: '24px',
+                                marginRight: '20px',
+                            }}
+                        >
+                            {subject}
+                        </li>
+                    ))}
+                </ol>
+            </Stack>
+        </Stack>
+    )
+}
