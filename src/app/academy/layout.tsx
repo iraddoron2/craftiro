@@ -14,26 +14,11 @@ export default function Layout({
 }>) {
     const pathname = usePathname()
     const tabsNavbar = useTabsNavbar()
-    const linksGroups: LinksGroups = useMemo(
-        () => [
-            [
-                { path: '/academy/learning-diary', label: 'מסך ראשי' },
-                {
-                    path: '/academy/learning-diary/full-diary',
-                    label: 'יומן מלא',
-                },
-                {
-                    path: '/academy/learning-diary/tracks-in-progress',
-                    label: 'מסלולים בתהליך',
-                },
-            ],
-        ],
-        []
-    )
+    const linksGroups: LinksGroups = useMemo(() => [[]], [])
+
     useEffect(() => {
         console.log('linksGroups', linksGroups)
-        console.log('pathname', pathname)
-        console.log('tabsNavbar', tabsNavbar)
+
         if (tabsNavbar.currentPath !== pathname) {
             tabsNavbar.updateCurrentPath(pathname)
             tabsNavbar.updateLinksGroups(linksGroups)
