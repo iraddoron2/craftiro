@@ -1,6 +1,7 @@
 'use client'
 
-import { Stack } from '@core'
+import { Stack, Text } from '@core'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -18,6 +19,75 @@ const UnderLine = ({ isActive }: { isActive: boolean }) => (
         }}
     />
 )
+
+export const SignInProfileImage = () => {
+    return (
+        <Stack
+            sx={{
+                borderRadius: '500px',
+                padding: '10px',
+                overflow: 'hidden',
+                backgroundColor: 'white',
+                border: '3px solid #2266C7',
+                '&:hover': {
+                    backgroundColor: '#2266C7',
+                    cursor: 'pointer',
+                    color: 'white',
+                },
+            }}
+        >
+            <Text text="כניסה" />
+        </Stack>
+    )
+}
+
+export const UserProfileImage = () => {
+    const { status, data: session } = useSession()
+
+    if (status === 'authenticated') {
+        const userProfileImage = session?.user?.image as string
+        return (
+            <Stack
+                sx={{
+                    borderRadius: '50%',
+                    overflow: 'hidden',
+                }}
+            >
+                <Image
+                    src={userProfileImage}
+                    alt="Apps Icon"
+                    width={46}
+                    height={46}
+                />
+            </Stack>
+        )
+    }
+
+    if (status === 'loading') {
+        return <p>Loading...</p>
+    }
+
+    if (status === 'unauthenticated') {
+        return <SignInProfileImage />
+    }
+
+    return null
+}
+
+export const UserProfileImageBox = () => {
+    return (
+        <Stack
+            sx={{
+                overflow: 'hidden',
+                backgroundColor: 'white',
+            }}
+        >
+            <Link href="/sign-in">
+                <UserProfileImage />
+            </Link>
+        </Stack>
+    )
+}
 
 export const MainNavbar = () => {
     const pathname = usePathname()
@@ -142,12 +212,8 @@ export const MainNavbar = () => {
                     <UnderLine isActive={currentMainPage === 'services'} />
                 </Stack>
             </Stack>
-            <Image
-                src={'/images/DemoProfile.png'}
-                alt="Apps Icon"
-                width={46}
-                height={46}
-            />
+
+            <UserProfileImageBox />
         </Stack>
     )
 }

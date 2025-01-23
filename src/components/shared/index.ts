@@ -3,6 +3,8 @@
 export { GoogleSignInButton } from './GoogleSignInButton'
 export { MainLinkButton } from './MainLinkButton'
 export { MainNavbar } from './MainNavbar'
+export { NextAuthProvider } from './NextAuthProvider'
 export { PagesNavbar } from './PagesNavbar'
 export { SectionTitleWithLines } from './SectionTitleWithLines'
 export { TabsNavbar } from './TabsNavbar'
+export { UserInfo } from './UserInfo'

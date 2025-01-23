@@ -1,6 +1,6 @@
 import { Stack } from '@core'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
-import { MainNavbar } from '@shared'
+import { MainNavbar, NextAuthProvider } from '@shared'
 import type { Metadata } from 'next'
 import { Assistant } from 'next/font/google'
 import './globals.css'
@@ -21,23 +21,25 @@ export default function RootLayout({
         <html lang="he" dir="rtl">
             <body className={assistant.className}>
                 <AppRouterCacheProvider>
-                    <header
-                        style={{
-                            position: 'relative',
-                            zIndex: 100,
-                        }}
-                    >
-                        <MainNavbar />
-                    </header>
-                    <Stack
-                        sx={{
-                            marginTop: 'calc(60px + 8px)',
-                            marginRight: 'calc(200px + 24px)',
-                            marginLeft: 'calc(200px + 24px)',
-                        }}
-                    >
-                        {children}
-                    </Stack>
+                    <NextAuthProvider>
+                        <header
+                            style={{
+                                position: 'relative',
+                                zIndex: 100,
+                            }}
+                        >
+                            <MainNavbar />
+                        </header>
+                        <Stack
+                            sx={{
+                                marginTop: 'calc(60px + 8px)',
+                                marginRight: 'calc(200px + 24px)',
+                                marginLeft: 'calc(200px + 24px)',
+                            }}
+                        >
+                            {children}
+                        </Stack>
+                    </NextAuthProvider>
                 </AppRouterCacheProvider>
             </body>
         </html>
