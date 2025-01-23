@@ -42,7 +42,6 @@ const PageLink = ({
 export const PagesNavbar = ({ links }: Props) => {
     const pathname = usePathname()
     const currentPage = pathname.split('/')[2]
-    console.log('currentPage', currentPage)
     return (
         <Stack
             sx={{

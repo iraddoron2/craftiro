@@ -1,11 +1,28 @@
+'use client'
+
+import { useTabsNavbar } from '@/lib'
+import { LinksGroups } from '@/types'
 import { Stack } from '@core'
 import { PagesNavbar, TabsNavbar } from '@shared'
+import { usePathname } from 'next/navigation'
+import { useEffect, useMemo } from 'react'
 
 export default function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode
 }>) {
+    const pathname = usePathname()
+    const tabsNavbar = useTabsNavbar()
+    const linksGroups: LinksGroups = useMemo(() => [[]], [])
+
+    useEffect(() => {
+        if (tabsNavbar.currentPath !== pathname) {
+            tabsNavbar.updateCurrentPath(pathname)
+            tabsNavbar.updateLinksGroups(linksGroups)
+        }
+    }, [linksGroups, pathname, tabsNavbar])
+
     return (
         <Stack
             sx={{
