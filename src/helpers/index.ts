@@ -1,3 +1,4 @@
+import { currentEnvironment } from '@/constants'
 import { Track, User } from '@/types'
 
 export const getTrackFromTrackId = (user: User, trackId: string) => {
@@ -52,4 +53,12 @@ export const getTimeFromDateInFormatHHMM = (date: Date) => {
 export const getTimeBetweenDatesInMinutes = (date1: Date, date2: Date) => {
     const diff = date1.getTime() - date2.getTime()
     return Math.abs(Math.round(diff / 1000 / 60))
+}
+
+export const getBaseDomain = () => {
+    if (currentEnvironment === 'dev') {
+        return 'http://localhost:3000'
+    } else {
+        return 'https://www.craftiro.com'
+    }
 }
