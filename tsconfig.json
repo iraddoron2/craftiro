@@ -27,7 +27,8 @@
             "@helpers": ["./src/helpers"],
             "@hooks": ["./src/hooks"],
             "@lib": ["./src/lib"],
-            "@assets": ["./src/assets/*"]
+            "@assets": ["./src/assets/*"],
+            "@constants": ["./src/constants"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
