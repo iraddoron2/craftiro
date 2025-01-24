@@ -1,7 +1,7 @@
 'use client'
 
 import { useTabsNavbar } from '@/lib'
-import { LinksGroups } from '@/types'
+
 import { Stack } from '@core'
 import { PagesNavbar, TabsNavbar } from '@shared'
 import { usePathname } from 'next/navigation'
@@ -13,25 +13,53 @@ export default function Layout({
     children: React.ReactNode
 }>) {
     const pathname = usePathname()
-    const tabsNavbar = useTabsNavbar()
-    const linksGroups: LinksGroups = useMemo(() => [[]], [])
+    const { linksGroups, updateLinksGroups, updateCurrentPath } =
+        useTabsNavbar()
+
+    const defaultLinksGroups = useMemo(
+        () => [
+            [
+                { path: '/academy/learning-diary', label: 'מסך ראשי' },
+                {
+                    path: '/academy/learning-diary/full-diary',
+                    label: 'יומן מלא',
+                },
+                {
+                    path: '/academy/learning-diary/tracks-in-progress',
+                    label: 'מסלולים בתהליך',
+                },
+            ],
+        ],
+        []
+    )
 
     useEffect(() => {
-        console.log('linksGroups', linksGroups)
+        // Update current path if it has changed
+        updateCurrentPath(pathname)
 
-        if (tabsNavbar.currentPath !== pathname) {
-            tabsNavbar.updateCurrentPath(pathname)
-            tabsNavbar.updateLinksGroups(linksGroups)
+        // Check if linksGroups is empty before updating
+        if (linksGroups.length === 0) {
+            const savedLinksGroups = localStorage.getItem('linksGroups')
+            if (savedLinksGroups) {
+                updateLinksGroups(JSON.parse(savedLinksGroups))
+            } else {
+                localStorage.setItem(
+                    'linksGroups',
+                    JSON.stringify(defaultLinksGroups)
+                )
+                updateLinksGroups(defaultLinksGroups)
+            }
         }
-    }, [linksGroups, pathname, tabsNavbar])
+    }, [
+        pathname,
+        linksGroups,
+        updateCurrentPath,
+        updateLinksGroups,
+        defaultLinksGroups,
+    ])
 
     return (
-        <Stack
-            sx={{
-                flexDirection: 'column',
-                minHeight: '100vh',
-            }}
-        >
+        <Stack sx={{ flexDirection: 'column', minHeight: '100vh' }}>
             <PagesNavbar
                 links={[
                     { href: '/academy', label: 'עמוד בית' },
