@@ -1,3 +1,5 @@
+'use client'
+
 import { CurrentPath, LinksGroups } from '@/types'
 import { create } from 'zustand'
 
