@@ -2,12 +2,14 @@
 
 import { useTabsNavbar } from '@/lib'
 import { LinksGroups } from '@/types'
+import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 
-export default function Page() {
+const PageContent = () => {
     const pathname = usePathname()
     const tabsNavbar = useTabsNavbar()
+
     const linksGroups: LinksGroups = useMemo(
         () => [
             [
@@ -26,10 +28,15 @@ export default function Page() {
     )
 
     useEffect(() => {
+        // Ensure updates are client-side only
         if (tabsNavbar.currentPath !== pathname) {
             tabsNavbar.updateCurrentPath(pathname)
             tabsNavbar.updateLinksGroups(linksGroups)
         }
     }, [linksGroups, pathname, tabsNavbar])
+
     return <h1>יומן למידה</h1>
 }
+
+// Use dynamic import to ensure client-side rendering
+export default dynamic(() => Promise.resolve(PageContent), { ssr: false })
