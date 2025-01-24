@@ -43,6 +43,10 @@ export default function Layout({
             if (savedLinksGroups) {
                 updateLinksGroups(JSON.parse(savedLinksGroups))
             } else {
+                localStorage.setItem(
+                    'linksGroups',
+                    JSON.stringify(defaultLinksGroups)
+                )
                 updateLinksGroups(defaultLinksGroups)
             }
         }
