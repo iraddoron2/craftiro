@@ -15,8 +15,10 @@ export default function Page() {
     const trackId = rawTrackId.replace('_', '')
     const track = getTrackFromTrackId(currentUser, trackId)
     const pathname = usePathname()
-    const tabsNavbar = useTabsNavbar()
-    const linksGroups: LinksGroups = useMemo(
+    const { linksGroups, updateLinksGroups, updateCurrentPath } =
+        useTabsNavbar()
+
+    const defaultLinksGroups: LinksGroups = useMemo(
         () => [
             [
                 { path: '/academy/learning-diary', label: 'מסך ראשי' },
@@ -34,11 +36,41 @@ export default function Page() {
     )
 
     useEffect(() => {
-        if (tabsNavbar.currentPath !== pathname) {
-            tabsNavbar.updateCurrentPath(pathname)
-            tabsNavbar.updateLinksGroups(linksGroups)
+        // Update current path if it has changed
+        updateCurrentPath(pathname)
+
+        // Handle senerio where linksGroups not in the local storage
+        if (linksGroups.length === 0) {
+            const savedLinksGroups = localStorage.getItem('linksGroups')
+            if (savedLinksGroups) {
+                updateLinksGroups(JSON.parse(savedLinksGroups))
+            } else {
+                localStorage.setItem(
+                    'linksGroups',
+                    JSON.stringify(defaultLinksGroups)
+                )
+                updateLinksGroups(defaultLinksGroups)
+            }
         }
-    }, [linksGroups, pathname, tabsNavbar])
+
+        // Handle senerio where saved linksGroups not equal to defaultLinksGroups
+        if (
+            JSON.stringify(linksGroups) !== JSON.stringify(defaultLinksGroups)
+        ) {
+            localStorage.setItem(
+                'linksGroups',
+                JSON.stringify(defaultLinksGroups)
+            )
+            updateLinksGroups(defaultLinksGroups)
+        }
+    }, [
+        pathname,
+        linksGroups,
+        updateCurrentPath,
+        updateLinksGroups,
+        defaultLinksGroups,
+    ])
+
     if (!track) {
         return <h1>Track not found</h1>
     }

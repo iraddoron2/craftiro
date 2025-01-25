@@ -1,7 +1,7 @@
 'use client'
 
 import { useTabsNavbar } from '@/lib'
-
+import { LinksGroups } from '@/types'
 import { Stack } from '@core'
 import { PagesNavbar, TabsNavbar } from '@shared'
 import { usePathname } from 'next/navigation'
@@ -16,7 +16,7 @@ export default function Layout({
     const { linksGroups, updateLinksGroups, updateCurrentPath } =
         useTabsNavbar()
 
-    const defaultLinksGroups = useMemo(
+    const defaultLinksGroups: LinksGroups = useMemo(
         () => [
             [
                 { path: '/academy/learning-diary', label: 'מסך ראשי' },
@@ -37,7 +37,7 @@ export default function Layout({
         // Update current path if it has changed
         updateCurrentPath(pathname)
 
-        // Check if linksGroups is empty before updating
+        // Handle senerio where linksGroups not in the local storage
         if (linksGroups.length === 0) {
             const savedLinksGroups = localStorage.getItem('linksGroups')
             if (savedLinksGroups) {
@@ -49,6 +49,17 @@ export default function Layout({
                 )
                 updateLinksGroups(defaultLinksGroups)
             }
+        }
+
+        // Handle senerio where saved linksGroups not equal to defaultLinksGroups
+        if (
+            JSON.stringify(linksGroups) !== JSON.stringify(defaultLinksGroups)
+        ) {
+            localStorage.setItem(
+                'linksGroups',
+                JSON.stringify(defaultLinksGroups)
+            )
+            updateLinksGroups(defaultLinksGroups)
         }
     }, [
         pathname,
