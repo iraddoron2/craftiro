@@ -7,8 +7,10 @@ import { useEffect, useMemo } from 'react'
 
 export default function Page() {
     const pathname = usePathname()
-    const tabsNavbar = useTabsNavbar()
-    const linksGroups: LinksGroups = useMemo(
+    const { linksGroups, updateLinksGroups, updateCurrentPath } =
+        useTabsNavbar()
+
+    const defaultLinksGroups: LinksGroups = useMemo(
         () => [
             [
                 { path: '/academy/learning-diary', label: 'מסך ראשי' },
@@ -26,10 +28,28 @@ export default function Page() {
     )
 
     useEffect(() => {
-        if (tabsNavbar.currentPath !== pathname) {
-            tabsNavbar.updateCurrentPath(pathname)
-            tabsNavbar.updateLinksGroups(linksGroups)
+        // Update current path if it has changed
+        updateCurrentPath(pathname)
+
+        // Check if linksGroups is empty before updating
+        if (linksGroups.length === 0) {
+            const savedLinksGroups = localStorage.getItem('linksGroups')
+            if (savedLinksGroups) {
+                updateLinksGroups(JSON.parse(savedLinksGroups))
+            } else {
+                localStorage.setItem(
+                    'linksGroups',
+                    JSON.stringify(defaultLinksGroups)
+                )
+                updateLinksGroups(defaultLinksGroups)
+            }
         }
-    }, [linksGroups, pathname, tabsNavbar])
+    }, [
+        pathname,
+        linksGroups,
+        updateCurrentPath,
+        updateLinksGroups,
+        defaultLinksGroups,
+    ])
     return <h1>יומן למידה</h1>
 }
