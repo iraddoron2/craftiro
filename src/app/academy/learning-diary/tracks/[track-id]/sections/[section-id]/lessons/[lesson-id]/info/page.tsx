@@ -18,13 +18,14 @@ import { LessonTitle } from '../_components'
 export default function Page() {
     const pathname = usePathname()
     const params = useParams()
-    const tabsNavbar = useTabsNavbar()
+    const { linksGroups, updateLinksGroups, updateCurrentPath } =
+        useTabsNavbar()
     const lessonId = params['lesson-id'] as string
     const trackId = params['track-id'] as string
     const sectionId = params['section-id'] as string
     const lesson = getLessonFromLessonId(currentUser, lessonId)
 
-    const linksGroups: LinksGroups = useMemo(
+    const defaultLinksGroups: LinksGroups = useMemo(
         () => [
             [
                 { path: '/academy/learning-diary', label: 'מסך ראשי' },
@@ -76,11 +77,40 @@ export default function Page() {
     )
 
     useEffect(() => {
-        if (tabsNavbar.currentPath !== pathname) {
-            tabsNavbar.updateCurrentPath(pathname)
-            tabsNavbar.updateLinksGroups(linksGroups)
+        // Update current path if it has changed
+        updateCurrentPath(pathname)
+
+        // Handle senerio where linksGroups not in the local storage
+        if (linksGroups.length === 0) {
+            const savedLinksGroups = localStorage.getItem('linksGroups')
+            if (savedLinksGroups) {
+                updateLinksGroups(JSON.parse(savedLinksGroups))
+            } else {
+                localStorage.setItem(
+                    'linksGroups',
+                    JSON.stringify(defaultLinksGroups)
+                )
+                updateLinksGroups(defaultLinksGroups)
+            }
         }
-    }, [linksGroups, pathname, tabsNavbar])
+
+        // Handle senerio where saved linksGroups not equal to defaultLinksGroups
+        if (
+            JSON.stringify(linksGroups) !== JSON.stringify(defaultLinksGroups)
+        ) {
+            localStorage.setItem(
+                'linksGroups',
+                JSON.stringify(defaultLinksGroups)
+            )
+            updateLinksGroups(defaultLinksGroups)
+        }
+    }, [
+        pathname,
+        linksGroups,
+        updateCurrentPath,
+        updateLinksGroups,
+        defaultLinksGroups,
+    ])
 
     if (!lesson) {
         return <h1>Lesson not found</h1>

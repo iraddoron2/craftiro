@@ -14,13 +14,14 @@ import { useEffect, useMemo } from 'react'
 export default function Page() {
     const pathname = usePathname()
     const params = useParams()
-    const tabsNavbar = useTabsNavbar()
+    const { linksGroups, updateLinksGroups, updateCurrentPath } =
+        useTabsNavbar()
     const lessonId = params['lesson-id'] as string
     const trackId = params['track-id'] as string
     const sectionId = params['section-id'] as string
     const lesson = getLessonFromLessonId(currentUser, lessonId)
 
-    const linksGroups: LinksGroups = useMemo(
+    const defaultLinksGroups: LinksGroups = useMemo(
         () => [
             [
                 { path: '/academy/learning-diary', label: 'מסך ראשי' },
@@ -72,11 +73,37 @@ export default function Page() {
     )
 
     useEffect(() => {
-        if (tabsNavbar.currentPath !== pathname) {
-            tabsNavbar.updateCurrentPath(pathname)
-            tabsNavbar.updateLinksGroups(linksGroups)
+        // Update current path if it has changed
+        updateCurrentPath(pathname)
+
+        // Retrieve saved linksGroups from localStorage
+        const savedLinksGroups = localStorage.getItem('linksGroups')
+        const parsedLinksGroups = savedLinksGroups
+            ? JSON.parse(savedLinksGroups)
+            : null
+
+        // Update linksGroups only if it differs from the current state
+        if (parsedLinksGroups) {
+            if (
+                JSON.stringify(parsedLinksGroups) !==
+                JSON.stringify(linksGroups)
+            ) {
+                updateLinksGroups(parsedLinksGroups)
+            }
+        } else {
+            localStorage.setItem(
+                'linksGroups',
+                JSON.stringify(defaultLinksGroups)
+            )
+            updateLinksGroups(defaultLinksGroups)
         }
-    }, [linksGroups, pathname, tabsNavbar])
+    }, [
+        pathname,
+        updateCurrentPath,
+        updateLinksGroups,
+        defaultLinksGroups,
+        linksGroups,
+    ])
 
     if (!lesson) {
         return <Text text="Lesson not found" />
