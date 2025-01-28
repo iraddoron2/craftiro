@@ -10,13 +10,15 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    roles: {
+        type: [String],
+        enum: ['user', 'admin', 'student', 'teacher'],
+        default: ['user'],
+    },
 })
 
-const User = models.User || mongoose.model('User', userSchema)
+// const User = mongoose.model('User', userSchema)
+
+const User = models?.User || mongoose.model('User', userSchema)
 
 export default User
-
-// {
-//     timestamps: true,
-//     collection: 'prod',
-// }
