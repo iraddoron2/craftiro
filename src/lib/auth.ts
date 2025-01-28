@@ -19,8 +19,6 @@ export const authConfig: NextAuthOptions = {
     ],
     callbacks: {
         async signIn({ user, account }) {
-            console.log('signIn', user, account)
-
             const baseDomain = getBaseDomain()
 
             if (account?.provider === 'google') {

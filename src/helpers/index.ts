@@ -62,3 +62,16 @@ export const getBaseDomain = () => {
         return 'https://www.craftiro.com'
     }
 }
+
+export const getUserData = async () => {
+    async function fetchData() {
+        const query = await fetch(`${getBaseDomain()}/api/user`)
+        const response = await query.json()
+        return response
+    }
+    fetchData()
+}
+
+export const isAdmin = (user: User) => {
+    return user.roles.includes('admin')
+}

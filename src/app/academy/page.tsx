@@ -12,9 +12,6 @@ export default function Page() {
     const tabsNavbar = useTabsNavbar()
     const linksGroups: LinksGroups = useMemo(() => [[]], [])
     useEffect(() => {
-        console.log('linksGroups', linksGroups)
-        console.log('pathname', pathname)
-        console.log('tabsNavbar', tabsNavbar)
         if (tabsNavbar.currentPath !== pathname) {
             tabsNavbar.updateCurrentPath(pathname)
             tabsNavbar.updateLinksGroups(linksGroups)
