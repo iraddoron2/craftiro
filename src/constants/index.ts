@@ -1,1 +1,1 @@
-export const currentEnvironment = 'dev' as 'dev' | 'prod'
+export const currentEnvironment = 'prod' as 'dev' | 'prod'
