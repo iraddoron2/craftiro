@@ -1,24 +1,14 @@
-import { User as UserType } from '@/types'
+import User from '@/models/user'
+import { Academy, User as UserType } from '@/types'
 import { getBaseDomain } from '@/utils'
 import argon2 from 'argon2'
 import { SignJWT, jwtVerify } from 'jose'
 import { NextAuthOptions } from 'next-auth'
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
-
-// import {  User, getServerSession } from 'next-auth'
-// import { usSession } from 'next-auth/react'
-// import { redirect } from 'next/navigation'
-// import { PrismaAdapter } from '@next-auth/prisma-adapter'
-
-// import { CredentialsProvider } from 'next-auth/providers/credentials'
-import User from '@/models/user'
-import { Academy } from '@/types'
 import GoogleProvider from 'next-auth/providers/google'
+// import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 import { NextRequest, NextResponse } from 'next/server'
 import { connectMongoDB } from './mongodb'
-
-// import prisma from './prisma'
 
 const second = 1000
 const minute = 60 * second
@@ -102,6 +92,7 @@ export const decrypt = async (input: string): Promise<any> => {
 }
 
 export const login = async (formData: FormData) => {
+    console.log('login function')
     // Get user email and password from the form data
     const userLoginInfo = {
         email: formData.get('email') as string,

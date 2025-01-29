@@ -1,10 +1,10 @@
-import { signUp } from '@/lib/auth'
-import { redirect } from 'next/navigation'
+// import { signUp } from '@/lib/auth'
+// import { redirect } from 'next/navigation'
 
 export default function Page() {
     return (
         <section>
-            <form
+            {/* <form
                 action={async (formData) => {
                     'use server'
                     await signUp(formData)
@@ -22,7 +22,7 @@ export default function Page() {
                     name="confirmPassword"
                 />
                 <button type="submit">Sign Up</button>
-            </form>
+            </form> */}
         </section>
     )
 }
