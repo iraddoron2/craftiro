@@ -4,7 +4,7 @@ import { currentUser } from '@/data'
 import {
     getLessonFromLessonId,
     getLessonNumberInTrackFromLessonId,
-} from '@/helpers'
+} from '@/utils'
 import { Stack, Text } from '@core'
 
 type Props = {

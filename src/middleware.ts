@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getBaseDomain } from './helpers'
+// import { updateSession } from './lib/auth'
+import { getBaseDomain } from './utils'
 
 export default async function middleware(request: NextRequest) {
     console.log('In the middleware mouth')
     console.log('request', request)
+
+    // await updateSession(request)
 
     const apiUserCall = `${getBaseDomain()}/api/user`
     const getData = async () => {
