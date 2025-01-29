@@ -1,8 +1,6 @@
-'use client'
-
-import { getBaseDomain } from '@/helpers'
-import { useEffect } from 'react'
 import styles from './page.module.css'
+
+import { getSession } from '@/lib/auth'
 
 // const getUserFromDb = async () => {
 //     const apiUserCall = `${getBaseDomain()}/api/user`
@@ -27,20 +25,13 @@ import styles from './page.module.css'
 //     }
 // }
 
-export default function Home() {
-    useEffect(() => {
-        const apiUserCall = `${getBaseDomain()}/api/user`
-        const getData = async () => {
-            const query = await fetch(apiUserCall)
-            const response = await query.json()
-            console.log('response from api', response)
-        }
-        getData()
-    }, [])
+export default async function Home() {
+    const session = await getSession()
+
     return (
         <div className={styles.page}>
             <h1>Craftiro</h1>
-            <pre></pre>
+            <pre>{JSON.stringify(session, null, 2)}</pre>
         </div>
     )
 }

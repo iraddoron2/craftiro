@@ -1,9 +1,9 @@
 'use client'
 
 import { currentUser } from '@/data'
-import { getLessonFromLessonId } from '@/helpers'
 import { useTabsNavbar } from '@/lib'
 import { LinksGroups } from '@/types'
+import { getLessonFromLessonId } from '@/utils'
 import { Stack, Text } from '@core'
 import { useParams, usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
@@ -110,11 +110,11 @@ export default function Page() {
         return <h1>Lesson not found</h1>
     }
 
-    const { id, lessonRecordingUrl } = lesson
+    const { id, lessonRecordingUrlPrivate, lessonRecordingUrlPublic } = lesson
     return (
         <Stack>
             <LessonTitle lessonId={id} />
-            <Text text="הקלטת שיעור" />
+            <Text text="הקלטת שיעור - פרטי לא ערוך" />
             <Stack
                 sx={{
                     maxWidth: '800px',
@@ -123,7 +123,23 @@ export default function Page() {
                 }}
             >
                 <iframe
-                    src={lessonRecordingUrl}
+                    src={lessonRecordingUrlPrivate}
+                    width="100%"
+                    height="500"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                />
+            </Stack>
+            <Text text="הקלטת שיעור - ציבורי" />
+            <Stack
+                sx={{
+                    maxWidth: '800px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}
+            >
+                <iframe
+                    src={lessonRecordingUrlPublic}
                     width="100%"
                     height="500"
                     allow="autoplay; fullscreen; picture-in-picture"

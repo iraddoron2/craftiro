@@ -9,7 +9,9 @@ const user1: User = {
     academy: {
         startingDate: new Date('2021-01-01'),
         plan: 'pro',
-        active: true,
+        active: {
+            expiredDate: new Date('2028-01-01'),
+        },
         learningDiary: {
             tracks: [
                 {
@@ -51,7 +53,9 @@ const user1: User = {
                                         'קטעים עם סולפז',
                                         'קטעים עם קורדים וסולפז',
                                     ],
-                                    lessonRecordingUrl:
+                                    lessonRecordingUrlPrivate:
+                                        'https://www.youtube.com/embed/wraGEXJTYKQ',
+                                    lessonRecordingUrlPublic:
                                         'https://www.youtube.com/embed/wraGEXJTYKQ',
                                     objectives: [
                                         {
@@ -101,6 +105,8 @@ const user1: User = {
             ],
         },
     },
+    username: '',
+    hashedPassword: '',
 }
 
 export const users = [user1]

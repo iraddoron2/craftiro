@@ -1,9 +1,9 @@
 'use client'
 
 import { currentUser } from '@/data'
-import { getTrackFromTrackId } from '@/helpers'
 import { useTabsNavbar } from '@/lib'
 import { LinksGroups } from '@/types'
+import { getTrackFromTrackId } from '@/utils'
 import { Stack, Text } from '@core'
 import { MainLinkButton, SectionTitleWithLines } from '@shared'
 import { useParams, usePathname } from 'next/navigation'

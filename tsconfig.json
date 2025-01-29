@@ -24,7 +24,7 @@
             "@core": ["./src/components/core"],
             "@icons": ["./src/icons/*"],
             "@data": ["./src/data/*"],
-            "@helpers": ["./src/helpers"],
+            "@utils": ["./src/utils"],
             "@hooks": ["./src/hooks"],
             "@lib": ["./src/lib"],
             "@assets": ["./src/assets/*"],

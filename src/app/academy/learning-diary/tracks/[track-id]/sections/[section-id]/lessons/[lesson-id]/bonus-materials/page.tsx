@@ -1,9 +1,9 @@
 'use client'
 
 import { currentUser } from '@/data'
-import { getLessonFromLessonId } from '@/helpers'
 import { useTabsNavbar } from '@/lib'
 import { LinksGroups } from '@/types'
+import { getLessonFromLessonId } from '@/utils'
 import { Stack, Text } from '@core'
 import { useParams, usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'

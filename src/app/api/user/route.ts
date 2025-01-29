@@ -4,12 +4,47 @@ import { getToken } from 'next-auth/jwt'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
-    const { name, email } = await request.json()
-    const defaultRole = 'user'
+    const { email, firstName, lastName, username, academyPlan } =
+        await request.json()
+
+    // Connect to MongoDB
     await connectMongoDB()
 
-    await User.create({ name, email, role: defaultRole })
-    return NextResponse.json({ message: 'User Registered' }, { status: 201 })
+    try {
+        // Create a new user based on the schema
+        const newUser = await User.create({
+            email,
+            firstName: firstName || 'שם פרטי',
+            lastName: lastName || 'שם משפחה',
+            username: username || 'שם משתמש',
+            roles: ['user'], // Default role
+            academy: {
+                plan: academyPlan || 'free', // Default to 'free' if no plan is provided
+                startingDate: new Date(),
+                active: {
+                    expiredDate: new Date(), // Default expiration date
+                },
+                learningDiary: {
+                    tracks: [], // Empty by default
+                },
+                modulesStatus: [], // Empty by default
+                musicStudies: {
+                    musicPieces: [], // Empty by default
+                },
+            },
+        })
+
+        return NextResponse.json(
+            { message: 'User Registered', user: newUser },
+            { status: 201 }
+        )
+    } catch (error) {
+        console.error('Error creating user:', error)
+        return NextResponse.json(
+            { message: 'Error registering user', error: error },
+            { status: 500 }
+        )
+    }
 }
 
 export async function GET(request: NextRequest) {
