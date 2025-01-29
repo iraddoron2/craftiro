@@ -1,7 +1,7 @@
 'use client'
 
-import { isAdmin } from '@/helpers'
 import { useUser } from '@/hooks'
+import { isAdmin } from '@/utils'
 
 export default function Page() {
     const { user, isLoading, error } = useUser()

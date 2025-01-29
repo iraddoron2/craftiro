@@ -46,7 +46,8 @@ export type TrackSectionLesson = {
     lessonEnd: Date
     improvments: string[]
     goalsForNextLesson: string[]
-    lessonRecordingUrl: string
+    lessonRecordingUrlPrivate: string
+    lessonRecordingUrlPublic: string
     objectives: LessonObjective[]
     materials: string[] // Modules ids
     bonusMaterials: string[] // Modules ids
@@ -88,13 +89,15 @@ export type MusicStudiesMusicPiece = {
         | 'lead-sheet-pieces'
         | 'lead-sheet-cinema-pieces'
     id: string
-    status: 'whish-list' | 'in-progress' | 'completed'
+    status: 'whish-list' | 'in-progress' | 'completed' | 'not-started'
 }
 
 export type Academy = {
-    startingDate: Date
+    startingDate: Date | null
     plan: AcademyPlan
-    active: boolean
+    active: {
+        expiredDate: Date | null
+    }
     learningDiary: LearningDiary
     modulesStatus: ModuleStatus[]
     musicStudies: {
@@ -106,7 +109,9 @@ export type User = {
     id: string
     firstName: string
     lastName: string
+    username: string
     email: string
+    hashedPassword: string
     roles: UserRole[]
     academy: Academy
 }
