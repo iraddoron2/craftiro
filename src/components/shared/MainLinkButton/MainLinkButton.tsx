@@ -5,10 +5,10 @@ import Link from 'next/link'
 
 type MainLinkButtonProps = {
     label: string
-    url: string
+    path: string
 }
 
-export const MainLinkButton = ({ label, url }: MainLinkButtonProps) => {
+export const MainLinkButton = ({ label, path }: MainLinkButtonProps) => {
     return (
         <Stack
             sx={{
@@ -28,7 +28,7 @@ export const MainLinkButton = ({ label, url }: MainLinkButtonProps) => {
                 },
             }}
         >
-            <Link href={url}>
+            <Link href={path}>
                 <Text text={label} />
             </Link>
         </Stack>

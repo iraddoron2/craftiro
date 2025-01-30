@@ -1,22 +1,20 @@
 'use client'
 
+import { LinkGroup } from '@/types'
 import { Stack } from '@core'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 type Props = {
-    links: {
-        href: string
-        label: string
-    }[]
+    links: LinkGroup
 }
 
 const PageLink = ({
-    href,
+    path,
     label,
     isActive,
 }: {
-    href: string
+    path: string
     label: string
     isActive: boolean
 }) => {
@@ -32,7 +30,7 @@ const PageLink = ({
                 cursor: 'pointer',
             }}
         >
-            <Link href={href} style={{ padding: '10px' }}>
+            <Link href={path} style={{ padding: '10px' }}>
                 {label}
             </Link>
         </Stack>
@@ -54,14 +52,16 @@ export const PagesNavbar = ({ links }: Props) => {
                 right: 0,
             }}
         >
-            {links.map((link) => (
-                <PageLink
-                    key={link.href}
-                    href={link.href}
-                    label={link.label}
-                    isActive={link.href.split('/')[2] === currentPage}
-                />
-            ))}
+            {links.map((link) => {
+                return (
+                    <PageLink
+                        key={link.path}
+                        path={link.path}
+                        label={link.label}
+                        isActive={link.path.split('/')[2] === currentPage}
+                    />
+                )
+            })}
         </Stack>
     )
 }

@@ -1,11 +1,16 @@
 'use client'
 
-import { useTabsNavbar } from '@/lib'
+import { LinksGroups } from '@/types'
 import { Stack } from '@core'
+import { usePathname } from 'next/navigation'
 import { Divider, TabLink } from './_components'
 
-export const TabsNavbar = () => {
-    const { linksGroups, currentPath } = useTabsNavbar()
+type Props = {
+    linksGroups: LinksGroups
+}
+export const TabsNavbar = ({ linksGroups }: Props) => {
+    const currentPath = usePathname()
+    console.log('linksGroups', linksGroups)
     return (
         <Stack
             sx={{
@@ -18,10 +23,10 @@ export const TabsNavbar = () => {
                 left: 0,
             }}
         >
-            {linksGroups.map((linksGroups, index, arr) => {
+            {linksGroups?.map((linksGroup, index, arr) => {
                 return (
-                    <Stack key={index}>
-                        {linksGroups.map((linkGroup) => {
+                    <Stack key={index} className="stack in TabsNavbar">
+                        {linksGroup.map((linkGroup) => {
                             const { path, label } = linkGroup
                             return (
                                 <TabLink
@@ -32,7 +37,6 @@ export const TabsNavbar = () => {
                                 />
                             )
                         })}
-
                         {index < arr.length - 1 && <Divider />}
                     </Stack>
                 )
