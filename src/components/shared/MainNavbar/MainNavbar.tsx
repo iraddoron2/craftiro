@@ -1,95 +1,16 @@
 'use client'
 
-import { Stack, Text } from '@core'
-import { useSession } from 'next-auth/react'
+import { Stack } from '@core'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { UnderLine } from './_components'
 
-const UnderLine = ({ isActive }: { isActive: boolean }) => (
-    <div
-        style={{
-            position: 'relative',
-            bottom: -8,
-            width: '100%',
-            height: '4px',
-            marginBottom: '-4px',
-            backgroundColor: isActive ? '#2266C7' : 'transparent',
-            zIndex: 200,
-        }}
-    />
-)
-
-export const SignInProfileImage = () => {
-    return (
-        <Stack
-            sx={{
-                borderRadius: '500px',
-                padding: '10px',
-                overflow: 'hidden',
-                backgroundColor: 'white',
-                border: '3px solid #2266C7',
-                '&:hover': {
-                    backgroundColor: '#2266C7',
-                    cursor: 'pointer',
-                    color: 'white',
-                },
-            }}
-        >
-            <Text text="כניסה" />
-        </Stack>
-    )
+type Props = {
+    boxComponent: React.ReactNode
 }
 
-export const UserProfileImage = () => {
-    const { status, data: session } = useSession()
-
-    if (status === 'authenticated') {
-        const userProfileImage = session?.user?.image as string
-        return (
-            <Stack
-                sx={{
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                }}
-            >
-                <Image
-                    src={userProfileImage}
-                    alt="Apps Icon"
-                    width={46}
-                    height={46}
-                />
-            </Stack>
-        )
-    }
-
-    if (status === 'loading') {
-        return <p>Loading...</p>
-    }
-
-    if (status === 'unauthenticated') {
-        return <SignInProfileImage />
-    }
-
-    return null
-}
-
-export const UserProfileImageBox = () => {
-    return (
-        <Stack
-            sx={{
-                overflow: 'hidden',
-                backgroundColor: 'white',
-            }}
-        >
-            <Link href="/sign-in">
-                <UserProfileImage />
-            </Link>
-        </Stack>
-    )
-}
-
-export const MainNavbar = () => {
+export const MainNavbar = ({ boxComponent }: Props) => {
     const pathname = usePathname()
     const currentMainPage = pathname.split('/')[1]
 
@@ -212,8 +133,7 @@ export const MainNavbar = () => {
                     <UnderLine isActive={currentMainPage === 'services'} />
                 </Stack>
             </Stack>
-
-            <UserProfileImageBox />
+            {boxComponent}
         </Stack>
     )
 }

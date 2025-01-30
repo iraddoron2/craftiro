@@ -111,7 +111,6 @@ export const login = async (formData: FormData) => {
     // Check if the user exists in the database
     await connectMongoDB()
     const user = await User.findOne({ email: userLoginInfo.email })
-    console.log('user from login', user)
 
     // Redirect to the sign-in page if the user doesn't exist
     if (!user) {
@@ -143,12 +142,11 @@ export const login = async (formData: FormData) => {
 export const signUp = async (formData: FormData) => {
     // Get user email from the form data
     const userEmail = formData.get('email')
-    console.log('userEmail', userEmail)
 
     // Check if the user already exists
     await connectMongoDB()
     const userFromDatabase = await User.findOne({ email: userEmail })
-    console.log('userFromDatabase', userFromDatabase)
+
     if (userFromDatabase) {
         redirect('/sign-in')
     }
@@ -156,7 +154,6 @@ export const signUp = async (formData: FormData) => {
     // Create new hashed password
     const password = formData.get('password') as string
     const hashedPassword = await argon2.hash(password)
-    console.log('hashedPassword', hashedPassword)
 
     // Create a new user based on the schema and the form data
     const user = {
@@ -168,16 +165,14 @@ export const signUp = async (formData: FormData) => {
         roles: defaultRolesArray,
         academy: academyDefaultObject,
     } as unknown as UserType
-    console.log('user before create new user in mongo', user)
 
     // Save the user in the database
     await User.create(user)
 
     // Create the session
     const expires = new Date(Date.now() + 10 * day)
-    console.log('expires', expires)
+
     const session = await encrypt({ user, expires })
-    console.log('session', session)
 
     // Save the session in a cookie
     ;(
@@ -196,7 +191,6 @@ export const logout = async () => {
 
 export const getSession = async () => {
     const session = (await cookies()).get('session')?.value
-    console.log('session', session)
 
     if (!session) return null
     return await decrypt(session)
