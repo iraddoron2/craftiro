@@ -1,3 +1,7 @@
+import {
+    ProfileButtonBox,
+    ProfileButtonContent,
+} from '@/components/shared/MainNavbar/_components'
 import { Stack } from '@core'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { MainNavbar, NextAuthProvider } from '@shared'
@@ -28,7 +32,15 @@ export default function RootLayout({
                                 zIndex: 100,
                             }}
                         >
-                            <MainNavbar />
+                            <MainNavbar
+                                boxComponent={
+                                    <ProfileButtonBox
+                                        contentComponent={
+                                            <ProfileButtonContent />
+                                        }
+                                    />
+                                }
+                            />
                         </header>
                         <Stack
                             sx={{
