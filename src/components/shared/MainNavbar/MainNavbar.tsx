@@ -5,20 +5,7 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-
-const UnderLine = ({ isActive }: { isActive: boolean }) => (
-    <div
-        style={{
-            position: 'relative',
-            bottom: -8,
-            width: '100%',
-            height: '4px',
-            marginBottom: '-4px',
-            backgroundColor: isActive ? '#2266C7' : 'transparent',
-            zIndex: 200,
-        }}
-    />
-)
+import { UnderLine } from './_components'
 
 export const SignInProfileImage = () => {
     return (
