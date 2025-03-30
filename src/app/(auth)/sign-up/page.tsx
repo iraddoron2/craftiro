@@ -1,3 +1,5 @@
+'use client'
+
 import { signUp } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 

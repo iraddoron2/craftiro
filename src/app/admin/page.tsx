@@ -1,26 +1,42 @@
-'use client'
+import { getSession } from '@/lib/auth'
+import { LinksGroups, User } from '@/types'
+import { getBaseDomain, isAdmin } from '@/utils'
+import { Stack } from '@core'
+import { TabsNavbar } from '@shared'
+import { cookies } from 'next/headers' // Import cookies from Next.js
+import { CustomerLink } from './_components'
 
-import { useUser } from '@/hooks'
-import { isAdmin } from '@/utils'
+const tabsLinksGroups: LinksGroups = [
+    [
+        { path: '/admin/users', label: 'כל הלקוחות' },
+        { path: '/admin/users/details', label: 'פרטי לקוח' },
+    ],
+    [
+        {
+            path: '/admin/users/transactions/future',
+            label: 'עסקאות עתידיות',
+        },
+        {
+            path: '/admin/users/transactions/commitments',
+            label: 'מחויבויות',
+        },
+        { path: '/admin/users/transactions/requests', label: 'בקשות' },
+        { path: '/admin/users/transactions/additions', label: 'תוספות' },
+        {
+            path: '/admin/users/transactions/history',
+            label: 'היסטוריית עסקאות',
+        },
+        { path: '/admin/users/transactions/profits', label: 'רווחים' },
+        { path: '/admin/users/general-info', label: 'מידע חופשי' },
+    ],
+]
 
-export default function Page() {
-    const { user, isLoading, error } = useUser()
+export default async function Page() {
+    const session = await getSession()
+    // const cookieStore = await cookies()
 
+    const isLoading = session === null
     if (isLoading) return <h1>Loading...</h1>
 
-    if (error) return <h1>Error: {error.message}</h1>
-
-    if (user === null) return <h1>Unauthorized</h1>
-
-    const admin = isAdmin(user)
-
-    if (!admin) return <h1>אין גישה</h1>
-
-    return (
-        <>
-            <h1>admin</h1>
-            <pre>{JSON.stringify(user, null, 2)}</pre>
-            <br />
-        </>
-    )
+    // Get all users
 }

@@ -1,7 +1,26 @@
 import { connectMongoDB } from '@/lib/mongodb'
 import User from '@/models/user'
-import { getToken } from 'next-auth/jwt'
 import { NextRequest, NextResponse } from 'next/server'
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function GET(request: NextRequest) {
+    await connectMongoDB()
+
+    try {
+        const users = await User.find()
+
+        return NextResponse.json({
+            body: users,
+            status: 200,
+        })
+    } catch (error) {
+        console.error('Error getting users:', error)
+        return NextResponse.json(
+            { message: 'Error getting users', error: error },
+            { status: 500 }
+        )
+    }
+}
 
 export async function POST(request: NextRequest) {
     const { email, firstName, lastName, username, academyPlan } =
@@ -45,21 +64,4 @@ export async function POST(request: NextRequest) {
             { status: 500 }
         )
     }
-}
-
-export async function GET(request: NextRequest) {
-    await connectMongoDB()
-
-    const token = await getToken({ req: request })
-
-    if (!token) {
-        return NextResponse.redirect(new URL('/sign-in', request.url))
-    }
-    const userEmail = token.email
-
-    const user = await User.findOne({ email: userEmail })
-
-    return NextResponse.json({
-        body: user,
-    })
 }

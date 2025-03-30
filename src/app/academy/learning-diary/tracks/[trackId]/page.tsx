@@ -1,4 +1,3 @@
-import { currentUser } from '@/data'
 import { getSession } from '@/lib/auth'
 import { LinksGroups, User } from '@/types'
 import { getTrackFromTrackId } from '@/utils'
@@ -35,8 +34,6 @@ export default async function Page({ params }: Props) {
     if (!user) {
         return <h1>Loading...</h1>
     }
-
-    console.log('user', user)
 
     const track = getTrackFromTrackId(user, trackId)
 

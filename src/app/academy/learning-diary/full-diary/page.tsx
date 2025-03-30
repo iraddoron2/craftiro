@@ -31,7 +31,7 @@ export default function Page() {
                         />
                         <MainLinkButton
                             label={title}
-                            url={`/academy/learning-diary/tracks/${id}`}
+                            path={`/academy/learning-diary/tracks/${id}`}
                         />
                     </Stack>
                 )

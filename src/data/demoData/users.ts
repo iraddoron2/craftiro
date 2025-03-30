@@ -1,7 +1,7 @@
 import { User } from '@/types'
 
 const user1: User = {
-    id: '1',
+    _id: '1',
     firstName: 'דרורית',
     lastName: 'לטם ניצן',
     email: 'drorite13@gmail.com',

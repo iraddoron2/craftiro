@@ -193,7 +193,10 @@ export const getSession = async () => {
     const session = (await cookies()).get('session')?.value
 
     if (!session) return null
-    return await decrypt(session)
+
+    const decryptSession = await decrypt(session)
+
+    return decryptSession
 }
 
 export const updateSession = async (request: NextRequest) => {

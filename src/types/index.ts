@@ -64,7 +64,7 @@ export type TrackSection = {
 }
 
 export type Track = {
-    id: string
+    _id: string
     title: string
     description: string
     sections: TrackSection[]
@@ -106,7 +106,7 @@ export type Academy = {
 }
 
 export type User = {
-    id: string
+    _id: string
     firstName: string
     lastName: string
     username: string

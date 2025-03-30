@@ -10,7 +10,7 @@ type Props = {
 }
 export const TabsNavbar = ({ linksGroups }: Props) => {
     const currentPath = usePathname()
-    console.log('linksGroups', linksGroups)
+
     return (
         <Stack
             sx={{

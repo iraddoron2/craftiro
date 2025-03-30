@@ -1,5 +1,6 @@
 import { currentEnvironment } from '@/constants'
 import { Track, User } from '@/types'
+import { userAcademyActions } from './userAcademyActions'
 
 export const getTrackFromTrackId = (user: User, trackId: string) => {
     const track = user.academy.learningDiary.tracks.find(
@@ -75,3 +76,5 @@ export const getUserData = async () => {
 export const isAdmin = (user: User) => {
     return user.roles.includes('admin')
 }
+
+export { userAcademyActions }
