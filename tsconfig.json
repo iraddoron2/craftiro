@@ -28,7 +28,8 @@
             "@hooks": ["./src/hooks"],
             "@lib": ["./src/lib"],
             "@assets": ["./src/assets/*"],
-            "@constants": ["./src/constants"]
+            "@constants": ["./src/constants"],
+            "@styles": ["./src/styles"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

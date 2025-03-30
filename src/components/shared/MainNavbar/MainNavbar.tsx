@@ -1,5 +1,6 @@
 'use client'
 
+import { elementsColors } from '@/styles'
 import { Stack } from '@core'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -25,10 +26,12 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
-                boxShadow: '0px 0px 8px 1px rgba(0, 0, 0, 0.10)',
                 backgroundColor: '#ffffffBf',
                 position: 'fixed',
-                padding: '0 16px',
+                padding: '8px 8px',
+                borderBottomSize: '2px',
+                borderBottomStyle: 'solid',
+                borderBottomColor: elementsColors.divider,
                 top: 0,
             }}
         >
@@ -45,8 +48,8 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                 <Image
                     src={'/icons/LogoColor.svg'}
                     alt="Apps Icon"
-                    width={60}
-                    height={60}
+                    width={32}
+                    height={32}
                 />
             </Link>
 
