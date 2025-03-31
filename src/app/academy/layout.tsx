@@ -1,9 +1,10 @@
 'use client'
 
 import { useTabsNavbar } from '@/lib'
+import { elementsSizes } from '@/styles'
 import { LinksGroups } from '@/types'
 import { Stack } from '@core'
-import { PagesNavbar, TabsNavbar } from '@shared'
+import { PagesNavbar } from '@shared'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 
@@ -74,27 +75,19 @@ export default function Layout({
             <PagesNavbar
                 links={[
                     { href: '/academy', label: 'עמוד בית' },
-                    { href: '/academy/learning-diary', label: 'יומן למידה' },
-                    { href: '/academy/syllabus', label: 'סילבוס' },
-                    { href: '/academy/objectives', label: 'משימות' },
-                    { href: '/academy/moduls', label: 'מודולים' },
-                    { href: '/academy/games', label: 'משחקים' },
-                    {
-                        href: '/academy/online-lessons',
-                        label: 'שיעורי אונליין',
-                    },
-                    { href: '/academy/goals', label: 'מטרות' },
-                    { href: '/academy/books', label: 'ספרים' },
-                    { href: '/academy/courses', label: 'קורסים' },
-                    { href: '/academy/blinks', label: 'בלינקס' },
-                    { href: '/academy/certificates', label: 'תעודות' },
-                    { href: '/academy/stats', label: 'סטטיסטיקות' },
-                    { href: '/academy/requests', label: 'בקשות' },
-                    { href: '/academy/plan', label: 'מנוי' },
+                    { href: '/academy/modules', label: 'מודולים' },
                 ]}
             />
-            <Stack>{children}</Stack>
-            <TabsNavbar />
+            <Stack
+                sx={{
+                    width: `calc(100vw - ${elementsSizes.pagesNavbarWidth})`,
+                    marginRight: elementsSizes.pagesNavbarWidth,
+                    paddingRight: '12px',
+                    paddingLeft: '12px',
+                }}
+            >
+                {children}
+            </Stack>
         </Stack>
     )
 }
