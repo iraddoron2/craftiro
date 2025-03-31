@@ -5,7 +5,7 @@ import { Stack } from '@core'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { NavbarLink, UnderLine } from './_components'
+import { NavbarLink } from './_components'
 
 type Props = {
     boxComponent: React.ReactNode
