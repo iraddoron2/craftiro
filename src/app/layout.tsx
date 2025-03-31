@@ -2,6 +2,7 @@ import {
     ProfileButtonBox,
     ProfileButtonContent,
 } from '@/components/shared/MainNavbar/_components'
+import { elementsSizes } from '@/styles'
 import { Stack } from '@core'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { MainNavbar, NextAuthProvider } from '@shared'
@@ -44,9 +45,7 @@ export default function RootLayout({
                         </header>
                         <Stack
                             sx={{
-                                marginTop: 'calc(60px + 8px)',
-                                marginRight: 'calc(200px + 24px)',
-                                marginLeft: 'calc(200px + 24px)',
+                                marginTop: `calc(${elementsSizes.mainNavbarHeight} + 8px)`,
                             }}
                         >
                             {children}
