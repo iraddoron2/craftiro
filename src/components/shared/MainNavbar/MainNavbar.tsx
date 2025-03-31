@@ -1,10 +1,11 @@
 'use client'
 
+import { elementsColors } from '@/styles'
 import { Stack } from '@core'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { UnderLine } from './_components'
+import { NavbarLink } from './_components'
 
 type Props = {
     boxComponent: React.ReactNode
@@ -25,10 +26,12 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
-                boxShadow: '0px 0px 8px 1px rgba(0, 0, 0, 0.10)',
                 backgroundColor: '#ffffffBf',
                 position: 'fixed',
-                padding: '0 16px',
+                padding: '8px 8px',
+                borderBottomSize: '2px',
+                borderBottomStyle: 'solid',
+                borderBottomColor: elementsColors.divider,
                 top: 0,
             }}
         >
@@ -45,8 +48,8 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                 <Image
                     src={'/icons/LogoColor.svg'}
                     alt="Apps Icon"
-                    width={60}
-                    height={60}
+                    width={32}
+                    height={32}
                 />
             </Link>
 
@@ -64,48 +67,18 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                         display: 'flex',
                         flexDirection: 'column',
                     }}
-                >
-                    <Link
-                        href="/apps"
-                        style={{
-                            display: 'flex',
-                            gap: '10px',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Image
-                            src={'/icons/AppsIcon.svg'}
-                            alt="Apps Icon"
-                            width={30}
-                            height={30}
-                        />
-                        אפליקציות
-                    </Link>
-                    <UnderLine isActive={currentMainPage === 'apps'} />
-                </Stack>
+                ></Stack>
                 <Stack
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
                     }}
                 >
-                    <Link
+                    <NavbarLink
+                        isActive={currentMainPage === 'academy'}
                         href="/academy"
-                        style={{
-                            display: 'flex',
-                            gap: '10px',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Image
-                            src={'/icons/AcademyIcon.svg'}
-                            alt="Apps Icon"
-                            width={30}
-                            height={30}
-                        />
-                        אקדמיה
-                    </Link>
-                    <UnderLine isActive={currentMainPage === 'academy'} />
+                        label="אקדמיה"
+                    />
                 </Stack>
 
                 <Stack
@@ -114,23 +87,11 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                         flexDirection: 'column',
                     }}
                 >
-                    <Link
-                        href="/services"
-                        style={{
-                            display: 'flex',
-                            gap: '10px',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Image
-                            src={'/icons/ServicesIcon.svg'}
-                            alt="Apps Icon"
-                            width={30}
-                            height={30}
-                        />
-                        שירותים
-                    </Link>
-                    <UnderLine isActive={currentMainPage === 'services'} />
+                    <NavbarLink
+                        isActive={currentMainPage === 'admin'}
+                        href="/admin"
+                        label="מנהל"
+                    />
                 </Stack>
             </Stack>
             {boxComponent}
