@@ -1,33 +1,6 @@
-import { Level } from './level'
-
 export type UserRole = 'admin' | 'guest' | 'user'
 
 export type AcademyPlan = 'free' | 'basic' | 'advanced' | 'pro'
-
-export type Chapter = {
-    id: string
-    title: string
-    intro: string
-    levels: Level[]
-}
-
-export type Unit = {
-    id: string
-    chapters: Chapter[]
-}
-
-export type Module = {
-    id: string
-    title: string
-    introParagraph: string
-    moduleQuestions: string[] // Questions that will be answered in the module
-    prerequisitesModules: string[] // Modules ids
-    tags: string[]
-    editors: string[]
-    contentCreators: string[]
-    version: string // Format: '1.0.0'
-    learningUnits: Unit[]
-}
 
 export type TaskStatus = 'not-started' | 'in-progress' | 'completed'
 
