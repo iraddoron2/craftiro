@@ -423,6 +423,7 @@ export type OpenEndedQuestion = {
 export type QuestionData = MultipleChoiceQuestion | OpenEndedQuestion
 
 export type Question = {
+    _id: string
     questionType: 'multiple-choice' | 'open-ended'
     questionDescription: string // The question itself
     questionData: QuestionData
@@ -442,6 +443,7 @@ export type ParagraphExercise = {
 export type ExerciseData = InstructionExercise | ParagraphExercise
 
 export type Exercise = {
+    _id: string
     exerciseType: 'instructions' | 'paragraph'
     exerciseData: ExerciseData
 }
