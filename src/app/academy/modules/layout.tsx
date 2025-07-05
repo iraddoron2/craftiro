@@ -4,9 +4,16 @@ import { useTabsNavbar } from '@/lib'
 import { elementsSizes } from '@/styles'
 import { LinksGroups } from '@/types'
 import { Stack } from '@core'
-import { PagesNavbar } from '@shared'
+import { TabsGroup } from '@shared'
 import { usePathname } from 'next/navigation'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
+
+const tabs = {
+    links: [
+        { href: '/academy/modules', label: 'ראשי' },
+        { href: '/academy/modules/search', label: 'חיפוש' },
+    ],
+}
 
 export default function Layout({
     children,
@@ -16,8 +23,6 @@ export default function Layout({
     const pathname = usePathname()
     const { linksGroups, updateLinksGroups, updateCurrentPath } =
         useTabsNavbar()
-
-    const [isMobile, setIsMobile] = useState<boolean | null>(null)
 
     const defaultLinksGroups: LinksGroups = useMemo(
         () => [
@@ -35,17 +40,6 @@ export default function Layout({
         ],
         []
     )
-
-    // Sometimes make a hydration error!!!
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768)
-        }
-
-        handleResize()
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
 
     useEffect(() => {
         updateCurrentPath(pathname)
@@ -80,28 +74,29 @@ export default function Layout({
         defaultLinksGroups,
     ])
 
-    // לא נרנדר כלום עד שהמסך הוגדר (מונע hydration mismatch)
-    if (isMobile === null) return null
-
     return (
-        <Stack sx={{ flexDirection: 'column', minHeight: '100vh' }}>
-            <PagesNavbar
-                links={[
-                    { href: '/academy', label: 'עמוד בית' },
-                    { href: '/academy/modules', label: 'מודולים' },
-                ]}
-            />
+        <Stack
+            sx={{
+                flexDirection: 'column',
+                minHeight: '100vh',
+            }}
+        >
+            <TabsGroup links={tabs.links} />
+
             <Stack
                 sx={{
-                    width: isMobile
-                        ? '100vw'
-                        : `calc(100vw - ${elementsSizes.pagesNavbarWidth})`,
-                    marginRight: isMobile ? 0 : elementsSizes.pagesNavbarWidth,
+                    width: `calc(100vw - ${elementsSizes.pagesNavbarWidth})`,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    minHeight: '100vh',
-                    padding: '16px',
+                    padding: '24px',
+
+                    // 📱 Mobile adjustments
+                    '@media (max-width: 768px)': {
+                        width: '100vw',
+                        padding: '16px',
+                        alignItems: 'stretch',
+                    },
                 }}
             >
                 {children}
