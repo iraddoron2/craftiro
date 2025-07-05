@@ -6,7 +6,7 @@ import { LinksGroups } from '@/types'
 import { Stack } from '@core'
 import { PagesNavbar } from '@shared'
 import { usePathname } from 'next/navigation'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 export default function Layout({
     children,
@@ -16,6 +16,8 @@ export default function Layout({
     const pathname = usePathname()
     const { linksGroups, updateLinksGroups, updateCurrentPath } =
         useTabsNavbar()
+
+    const [isMobile, setIsMobile] = useState<boolean | null>(null)
 
     const defaultLinksGroups: LinksGroups = useMemo(
         () => [
@@ -34,11 +36,20 @@ export default function Layout({
         []
     )
 
+    // Sometimes make a hydration error!!!
     useEffect(() => {
-        // Update current path if it has changed
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+
+        handleResize()
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    useEffect(() => {
         updateCurrentPath(pathname)
 
-        // Handle senerio where linksGroups not in the local storage
         if (linksGroups.length === 0) {
             const savedLinksGroups = localStorage.getItem('linksGroups')
             if (savedLinksGroups) {
@@ -52,7 +63,6 @@ export default function Layout({
             }
         }
 
-        // Handle senerio where saved linksGroups not equal to defaultLinksGroups
         if (
             JSON.stringify(linksGroups) !== JSON.stringify(defaultLinksGroups)
         ) {
@@ -70,6 +80,9 @@ export default function Layout({
         defaultLinksGroups,
     ])
 
+    // לא נרנדר כלום עד שהמסך הוגדר (מונע hydration mismatch)
+    if (isMobile === null) return null
+
     return (
         <Stack sx={{ flexDirection: 'column', minHeight: '100vh' }}>
             <PagesNavbar
@@ -80,8 +93,15 @@ export default function Layout({
             />
             <Stack
                 sx={{
-                    width: `calc(100vw - ${elementsSizes.pagesNavbarWidth})`,
-                    marginRight: elementsSizes.pagesNavbarWidth,
+                    width: isMobile
+                        ? '100vw'
+                        : `calc(100vw - ${elementsSizes.pagesNavbarWidth})`,
+                    marginRight: isMobile ? 0 : elementsSizes.pagesNavbarWidth,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    minHeight: '100vh',
+                    padding: '16px',
                 }}
             >
                 {children}

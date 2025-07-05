@@ -42,10 +42,8 @@ export default function Layout({
     )
 
     useEffect(() => {
-        // Update current path if it has changed
         updateCurrentPath(pathname)
 
-        // Handle senerio where linksGroups not in the local storage
         if (linksGroups.length === 0) {
             const savedLinksGroups = localStorage.getItem('linksGroups')
             if (savedLinksGroups) {
@@ -59,7 +57,6 @@ export default function Layout({
             }
         }
 
-        // Handle senerio where saved linksGroups not equal to defaultLinksGroups
         if (
             JSON.stringify(linksGroups) !== JSON.stringify(defaultLinksGroups)
         ) {
@@ -92,6 +89,14 @@ export default function Layout({
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+                    padding: '24px',
+
+                    // 📱 Mobile adjustments
+                    '@media (max-width: 768px)': {
+                        width: '100vw',
+                        padding: '16px',
+                        alignItems: 'stretch',
+                    },
                 }}
             >
                 {children}
