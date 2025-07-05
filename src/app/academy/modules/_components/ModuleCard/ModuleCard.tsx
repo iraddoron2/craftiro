@@ -32,7 +32,7 @@ export const ModuleCard = ({ moduleId }: Props) => {
                 backgroundColor: baseColors.white,
                 width: '100%',
                 maxWidth: '400px',
-                margin: '16px auto',
+
                 textAlign: 'center',
                 gap: '8px',
             }}

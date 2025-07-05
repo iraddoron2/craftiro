@@ -89,6 +89,9 @@ export default function Layout({
             <Stack
                 sx={{
                     width: `calc(100vw - ${elementsSizes.pagesNavbarWidth})`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
                 }}
             >
                 {children}
