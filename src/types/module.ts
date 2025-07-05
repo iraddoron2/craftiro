@@ -21,7 +21,7 @@ type ModuleMetadata = {
         authors: string[]
         contributors?: string[]
     }
-    analyticsData: {
+    analyticsData?: {
         views: number
         completions: number
         averageCompletionTime?: number
@@ -46,11 +46,12 @@ type ModuleMetadata = {
         shortDescription: string // 160 characters
         longDescription: string // 500 characters
         objectives: string[] // Learning outcomes of the module (e.g. 'Understand the basics of React')
-        subjects: string[]
+        subjects: string[] // Subjects covered in the module (e.g. 'React', 'Redux')
         estimatedCompletionTime?: number // In seconds
         language: string // Hebrew, English, etc.
+        betaVersionUrl?: string // URL to the beta version of the module. This is the link to the Google Docs Document that contains the module content.
     }
-    engagement: {
+    engagement?: {
         likes: number // Number of users who liked the module
         favorites: number // Number of users who saved the module
         shares: number // Number of users who shared the module
@@ -97,7 +98,7 @@ type ModuleMetadata = {
             badges?: string[] // Badges ids
         }[]
     }
-    evolution: {
+    evolution?: {
         featureRequests?: string[]
         improvementSuggestions?: string[]
         bugReports?: {
@@ -112,7 +113,7 @@ type ModuleMetadata = {
 export type Module = {
     _id: string
     metadata: ModuleMetadata
-    units: Unit[]
+    units?: Unit[]
 }
 
 type UnitMetaData = {

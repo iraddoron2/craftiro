@@ -30,6 +30,9 @@ export default function Page() {
             <button onClick={onSearchClick}>
                 <Text text="חפש" />
             </button>
+            <button onClick={onSearchClick}>
+                <Text text="כל המודולים" />
+            </button>
         </Stack>
     )
 }

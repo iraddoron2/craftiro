@@ -82,7 +82,6 @@ export default function Layout({
             sx={{
                 flexDirection: 'column',
                 minHeight: '100vh',
-                border: 'solid blue 2px',
             }}
         >
             <TabsGroup links={tabs.links} />
@@ -90,6 +89,9 @@ export default function Layout({
             <Stack
                 sx={{
                     width: `calc(100vw - ${elementsSizes.pagesNavbarWidth})`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
                 }}
             >
                 {children}
