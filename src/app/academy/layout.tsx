@@ -82,8 +82,6 @@ export default function Layout({
                 sx={{
                     width: `calc(100vw - ${elementsSizes.pagesNavbarWidth})`,
                     marginRight: elementsSizes.pagesNavbarWidth,
-                    paddingRight: '12px',
-                    paddingLeft: '12px',
                 }}
             >
                 {children}
