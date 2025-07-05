@@ -82,7 +82,6 @@ export default function Layout({
             sx={{
                 flexDirection: 'column',
                 minHeight: '100vh',
-                border: 'solid blue 2px',
             }}
         >
             <TabsGroup links={tabs.links} />
