@@ -78,15 +78,18 @@ export default function Layout({
     ])
 
     return (
-        <Stack sx={{ flexDirection: 'column', minHeight: '100vh' }}>
+        <Stack
+            sx={{
+                flexDirection: 'column',
+                minHeight: '100vh',
+                border: 'solid blue 2px',
+            }}
+        >
             <TabsGroup links={tabs.links} />
 
             <Stack
                 sx={{
                     width: `calc(100vw - ${elementsSizes.pagesNavbarWidth})`,
-                    marginRight: elementsSizes.pagesNavbarWidth,
-                    paddingRight: '12px',
-                    paddingLeft: '12px',
                 }}
             >
                 {children}
