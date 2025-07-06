@@ -171,7 +171,7 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                             width={32}
                             height={32}
                         />
-                        <span
+                        {/* <span
                             style={{
                                 fontSize: '20px',
                                 fontWeight: 'bold',
@@ -179,7 +179,7 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                             }}
                         >
                             דף הבית
-                        </span>
+                        </span> */}
                     </Link>
 
                     {/* קישורים */}
@@ -189,12 +189,12 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                         label="אקדמיה"
                         onClick={() => setIsMainMenuOpen(false)}
                     />
-                    <NavbarLink
+                    {/* <NavbarLink
                         isActive={currentMainPage === 'admin'}
                         href="/admin"
                         label="מנהל"
                         onClick={() => setIsMainMenuOpen(false)}
-                    />
+                    /> */}
                 </Stack>
             )}
         </>
