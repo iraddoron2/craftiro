@@ -27,7 +27,7 @@ export const NavbarLink = ({ isActive, href, label, onClick }: Props) => {
                 color: isActive ? baseColors.blue1 : '#696969',
                 borderColor: isActive ? baseColors.blue8 : '#00000000',
                 backgroundColor: isActive ? baseColors.blue6 : '#00000000',
-                width: '100%',
+                width: '100px',
                 height: '40px',
                 textDecoration: 'none',
                 transition: 'background-color 0.2s ease',

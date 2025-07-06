@@ -93,7 +93,6 @@ export default function Layout({
             />
             <Stack
                 sx={{
-                    width: `100vw`,
                     marginRight: isMobile ? 0 : elementsSizes.pagesNavbarWidth,
                     display: 'flex',
                     flexDirection: 'column',
