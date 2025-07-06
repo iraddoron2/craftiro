@@ -14,7 +14,8 @@ const assistant = Assistant({ subsets: ['hebrew'] })
 
 export const metadata: Metadata = {
     title: 'Craftiro',
-    description: 'לימודי מוזיקה, עיצוב גרפי, תכנות בשיעורי אונליין',
+    description:
+        'לימודי פסנתר מותאמים אישית – עם מדריך אישי, חומרים מגוונים, ולמידה בכל זמן ומקום',
 }
 
 export default function RootLayout({
