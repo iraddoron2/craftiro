@@ -57,10 +57,10 @@ export const ModuleCard = ({ moduleId }: Props) => {
                 text={`מודול מספר ${generalInfo.serialNumber}`}
                 variant="body1"
                 sx={{
-                    fontSize: '1rem',
+                    fontSize: '1.3rem',
                     color: '#444',
                     '@media (max-width: 600px)': {
-                        fontSize: '0.9rem',
+                        fontSize: '1.1rem',
                     },
                 }}
             />

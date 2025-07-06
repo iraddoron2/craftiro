@@ -4,16 +4,16 @@ import { useTabsNavbar } from '@/lib'
 import { elementsSizes } from '@/styles'
 import { LinksGroups } from '@/types'
 import { Stack } from '@core'
-import { TabsGroup } from '@shared'
+// import { TabsGroup } from '@shared'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 
-const tabs = {
-    links: [
-        { href: '/academy/modules', label: 'ראשי' },
-        { href: '/academy/modules/search', label: 'חיפוש' },
-    ],
-}
+// const tabs = {
+//     links: [
+//         { href: '/academy/modules', label: 'ראשי' },
+//         { href: '/academy/modules/search', label: 'חיפוש' },
+//     ],
+// }
 
 export default function Layout({
     children,
@@ -81,7 +81,7 @@ export default function Layout({
                 minHeight: '100vh',
             }}
         >
-            <TabsGroup links={tabs.links} />
+            {/* <TabsGroup links={tabs.links} /> */}
 
             <Stack
                 sx={{
