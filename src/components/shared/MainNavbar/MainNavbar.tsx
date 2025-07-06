@@ -86,11 +86,11 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                             href="/academy"
                             label="אקדמיה"
                         />
-                        <NavbarLink
+                        {/* <NavbarLink
                             isActive={currentMainPage === 'admin'}
                             href="/admin"
                             label="מנהל"
-                        />
+                        /> */}
                     </Stack>
 
                     {/* תוספת מימין */}
