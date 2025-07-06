@@ -17,7 +17,7 @@ export const MainNavbar = ({ boxComponent }: Props) => {
     const currentMainPage = pathname.split('/')[1]
 
     const [isMobile, setIsMobile] = useState<boolean | null>(null)
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isMainMenuOpen, setIsMainMenuOpen] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -101,7 +101,7 @@ export const MainNavbar = ({ boxComponent }: Props) => {
             {/* ✅ כפתור ☰ — בצד שמאל למעלה */}
             {isMobile && (
                 <button
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    onClick={() => setIsMainMenuOpen(!isMainMenuOpen)}
                     style={{
                         position: 'fixed',
                         top: 16,
@@ -109,7 +109,7 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                         zIndex: 2000,
                         background: 'none',
                         border: 'none',
-                        fontSize: '28px',
+                        fontSize: '32px',
                         cursor: 'pointer',
                     }}
                     aria-label="פתח תפריט ראשי"
@@ -119,45 +119,61 @@ export const MainNavbar = ({ boxComponent }: Props) => {
             )}
 
             {/* ✅ תפריט מוקפץ בצד ימין־עליון — כמו PagesNavbar */}
-            {isMobile && isMenuOpen && (
+            {isMobile && isMainMenuOpen && (
                 <Stack
                     sx={{
                         position: 'fixed',
-                        top: '60px',
-                        left: 16, // ⬅️ שינוי מ-right: 16
+                        top: 0,
+                        left: 0,
+                        width: '100vw',
+                        height: '100vh',
                         backgroundColor: '#fff',
-                        border: `1px solid ${elementsColors.divider}`,
-                        borderRadius: '12px',
-                        padding: '12px',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                        gap: '12px',
-                        zIndex: 1999,
-                        minWidth: '180px',
+                        zIndex: 9999,
+                        padding: '24px',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        gap: '24px',
                     }}
                 >
-                    {/* לוגו וקישורים כמו קודם */}
+                    {/* כפתור ✕ לסגירה */}
+                    <button
+                        onClick={() => setIsMainMenuOpen(false)}
+                        style={{
+                            position: 'absolute',
+                            top: 16,
+                            left: 16,
+                            fontSize: '28px',
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                        }}
+                        aria-label="סגור תפריט"
+                    >
+                        ✕
+                    </button>
+
+                    {/* לוגו למעלה במרכז */}
                     <Link
                         href="/"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={() => setIsMainMenuOpen(false)}
                         style={{
                             display: 'flex',
                             alignItems: 'center',
                             gap: '8px',
                             textDecoration: 'none',
+                            marginTop: '40px',
                         }}
                     >
                         <Image
                             src="/icons/LogoColor.svg"
                             alt="Apps Icon"
-                            width={24}
-                            height={24}
+                            width={32}
+                            height={32}
                         />
                         <span
                             style={{
-                                fontSize: '16px',
+                                fontSize: '20px',
                                 fontWeight: 'bold',
                                 color: '#333',
                             }}
@@ -166,17 +182,18 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                         </span>
                     </Link>
 
+                    {/* קישורים */}
                     <NavbarLink
                         isActive={currentMainPage === 'academy'}
                         href="/academy"
                         label="אקדמיה"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={() => setIsMainMenuOpen(false)}
                     />
                     <NavbarLink
                         isActive={currentMainPage === 'admin'}
                         href="/admin"
                         label="מנהל"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={() => setIsMainMenuOpen(false)}
                     />
                 </Stack>
             )}
