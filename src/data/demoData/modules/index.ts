@@ -1,6 +1,30 @@
 import { module1 } from './module1'
+import { module12 } from './module12'
+import { module15 } from './module15'
+import { module16 } from './module16'
+import { module17 } from './module17'
+import { module18 } from './module18'
+import { module19 } from './module19'
+import { module2 } from './module2'
+import { module20 } from './module20'
+import { module21 } from './module21'
+import { module3 } from './module3'
+import { module4 } from './module4'
 
-const modules = [module1]
+const modules = [
+    module1,
+    module2,
+    module3,
+    module4,
+    module12,
+    module15,
+    module16,
+    module17,
+    module18,
+    module19,
+    module20,
+    module21,
+]
 export { modules }
 
 // export const module1: Module = {
