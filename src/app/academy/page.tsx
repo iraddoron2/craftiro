@@ -2,7 +2,8 @@
 
 import { useTabsNavbar } from '@/lib'
 import { LinksGroups } from '@/types'
-import { Stack } from '@core'
+import { Button, Stack } from '@core'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 
@@ -10,6 +11,7 @@ export default function Page() {
     const pathname = usePathname()
     const tabsNavbar = useTabsNavbar()
     const linksGroups: LinksGroups = useMemo(() => [[]], [])
+
     useEffect(() => {
         if (tabsNavbar.currentPath !== pathname) {
             tabsNavbar.updateCurrentPath(pathname)
@@ -22,7 +24,15 @@ export default function Page() {
             sx={{
                 flexDirection: 'column',
                 minHeight: '100vh',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '24px',
+                padding: '32px',
             }}
-        ></Stack>
+        >
+            <Link href="/academy/modules">
+                <Button>לעמוד המודולים →</Button>
+            </Link>
+        </Stack>
     )
 }
