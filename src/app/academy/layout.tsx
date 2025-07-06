@@ -93,9 +93,6 @@ export default function Layout({
             />
             <Stack
                 sx={{
-                    width: isMobile
-                        ? '100vw'
-                        : `calc(100vw - ${elementsSizes.pagesNavbarWidth})`,
                     marginRight: isMobile ? 0 : elementsSizes.pagesNavbarWidth,
                     display: 'flex',
                     flexDirection: 'column',

@@ -26,19 +26,18 @@ const PageLink = ({
 }) => {
     return (
         <Stack
-            className="page-link"
             onClick={onClick}
             sx={{
                 display: 'flex',
-                ':hover': {
-                    backgroundColor: isActive ? '#2266C7' : '#2266C70F',
-                },
                 cursor: 'pointer',
                 width: '232px',
                 height: '40px',
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: '12px',
+                ':hover': {
+                    backgroundColor: !isActive ? '#2266C70F' : undefined,
+                },
             }}
         >
             <Link
@@ -58,6 +57,7 @@ const PageLink = ({
                     height: '100%',
                     borderRadius: '12px',
                     textDecoration: 'none',
+                    transition: 'background-color 0.2s ease',
                 }}
             >
                 {label}
@@ -71,7 +71,7 @@ export const PagesNavbar = ({ links }: Props) => {
     const currentPage = pathname.split('/')[2]
 
     const [isMobile, setIsMobile] = useState<boolean | null>(null)
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isPagesMenuOpen, setIsPagesMenuOpen] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -88,40 +88,47 @@ export const PagesNavbar = ({ links }: Props) => {
     if (isMobile) {
         return (
             <>
-                {/* כפתור המבורגר - תמיד מוצג */}
-                <button
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    style={{
-                        position: 'fixed',
-                        top: 16,
-                        right: 16,
-                        zIndex: 9999,
-                        background: 'none',
-                        border: 'none',
-                        fontSize: '32px',
-                        cursor: 'pointer',
-                    }}
-                    aria-label="תפריט דפים"
-                >
-                    ☰
-                </button>
+                {/* ☰ כפתור המבורגר */}
+                {isMobile && (
+                    <button
+                        onClick={() => setIsPagesMenuOpen(!isPagesMenuOpen)}
+                        style={{
+                            position: 'fixed',
+                            top: 16,
+                            right: 16,
+                            zIndex: 4000,
+                            background: 'none',
+                            border: 'none',
+                            fontSize: '32px',
+                            cursor: 'pointer',
+                        }}
+                        aria-label={
+                            isPagesMenuOpen ? 'סגור תפריט צד' : 'פתח תפריט צד'
+                        }
+                    >
+                        {isPagesMenuOpen ? '✕' : '☰'}
+                    </button>
+                )}
 
-                {/* תפריט נפתח - רק כשה-isMenuOpen true */}
-                {isMenuOpen && (
+                {/* תפריט מסך מלא */}
+                {isPagesMenuOpen && (
                     <Stack
                         sx={{
                             position: 'fixed',
-                            top: '60px',
-                            right: 0,
+                            top: 0,
+                            left: 0,
+                            width: '100vw',
+                            height: '100vh',
                             backgroundColor: '#fff',
-                            border: `1px solid ${elementsColors.divider}`,
-                            borderRadius: '12px 0 0 12px',
-                            padding: '12px',
-                            boxShadow: '-4px 0 12px rgba(0,0,0,0.15)',
-                            gap: '8px',
-                            zIndex: 1500,
+                            zIndex: 3000,
+                            padding: '24px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            gap: '24px',
                         }}
                     >
+                        {/* קישורים */}
                         {links.map((link) => (
                             <PageLink
                                 key={link.href}
@@ -130,7 +137,7 @@ export const PagesNavbar = ({ links }: Props) => {
                                 isActive={
                                     link.href.split('/')[2] === currentPage
                                 }
-                                onClick={() => setIsMenuOpen(false)}
+                                onClick={() => setIsPagesMenuOpen(false)}
                             />
                         ))}
                     </Stack>
