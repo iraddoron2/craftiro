@@ -1,4 +1,4 @@
-import styles from './page.module.css'
+// import styles from './page.module.css'
 
 // import { getSession } from '@/lib/auth'
 
@@ -25,13 +25,15 @@ import styles from './page.module.css'
 //     }
 // }
 
-export default async function Home() {
-    // const session = await getSession()
-
+export default function Home() {
     return (
-        <div className={styles.page}>
-            {/* <h1>Craftiro</h1> */}
-            {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
+        <div
+            style={{
+                minHeight: '100vh',
+                transition: 'background 0.2s',
+            }}
+        >
+            <div style={{ margin: '32px auto', textAlign: 'center' }}></div>
         </div>
     )
 }

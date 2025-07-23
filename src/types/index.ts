@@ -1,3 +1,5 @@
+import { themes } from '@/styles/themes'
+
 export type UserRole = 'admin' | 'guest' | 'user'
 
 export type AcademyPlan = 'free' | 'basic' | 'advanced' | 'pro'
@@ -107,3 +109,47 @@ export type LinkGroup = TabLink[]
 export type CurrentPath = string
 
 export type LinksGroups = LinkGroup[]
+
+export type ColorScale =
+    | 10
+    | 20
+    | 30
+    | 40
+    | 50
+    | 60
+    | 70
+    | 80
+    | 90
+    | 100
+    | 110
+    | 120
+    | 130
+    | 140
+    | 150
+    | 160
+    | 170
+    | 180
+    | 190
+
+export type ColorAliases = {
+    main: string
+    dark: string
+    darkest: string
+    light: string
+    lightest: string
+}
+
+export type ColorPalette = Record<ColorScale, string> & ColorAliases
+
+export type Theme = {
+    backgrounds: {
+        page: string
+        topNavbar: string
+        sideNavbar: string
+    }
+    text: {
+        onPageBackground: string
+    }
+}
+
+export type ThemeName = keyof typeof themes
