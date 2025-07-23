@@ -1,5 +1,5 @@
 import { currentEnvironment } from '@/constants'
-import { Track, User } from '@/types'
+import { ColorAliases, ColorPalette, ColorScale, Track, User } from '@/types'
 
 export const getTrackFromTrackId = (user: User, trackId: string) => {
     const track = user.academy.learningDiary.tracks.find(
@@ -74,4 +74,22 @@ export const getUserData = async () => {
 
 export const isAdmin = (user: User) => {
     return user.roles.includes('admin')
+}
+
+type ColorAliasKey = keyof ColorAliases
+
+type ColorAliasMap = Partial<Record<ColorAliasKey, ColorScale>>
+
+export function createColorPalette(
+    scale: Record<ColorScale, string>,
+    aliasMap?: ColorAliasMap
+): ColorPalette {
+    return {
+        ...scale,
+        main: scale[aliasMap?.main ?? 100],
+        dark: scale[aliasMap?.dark ?? 80],
+        darkest: scale[aliasMap?.darkest ?? 10],
+        light: scale[aliasMap?.light ?? 120],
+        lightest: scale[aliasMap?.lightest ?? 190],
+    }
 }

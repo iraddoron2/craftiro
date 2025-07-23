@@ -1,3 +1,15 @@
+import { black, white } from './colors/base'
+import { blue } from './colors/blue'
+import { brandBlue } from './colors/brandBlue'
+import { brandOrange } from './colors/brandOrange'
+import { brandPink } from './colors/brandPink'
+import { gray } from './colors/gray'
+import { green } from './colors/green'
+import { orange } from './colors/orange'
+import { purple } from './colors/purple'
+import { red } from './colors/red'
+import { yellow } from './colors/yellow'
+
 export const blues = {
     blue1: '#2266C7',
     blue2: '#140790',
@@ -52,4 +64,19 @@ export const baseColors = {
 
 export const elementsColors = {
     divider: baseColors.grey5,
+}
+
+export const colors = {
+    blue,
+    red,
+    green,
+    yellow,
+    orange,
+    purple,
+    gray,
+    black,
+    white,
+    brandOrange,
+    brandPink,
+    brandBlue,
 }
