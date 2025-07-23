@@ -2,6 +2,8 @@
 // import { getBaseDomain } from '@/helpers'
 import { User } from '@/types'
 // import { useSession } from 'next-auth/react'
+import { useThemeStore } from '@/store/themeStore'
+import { themes } from '@/styles/themes'
 import { useEffect, useState } from 'react'
 
 // export const useSessionStatus = () => {
@@ -44,4 +46,9 @@ export const useUser = () => {
     }, [])
 
     return { user, isLoading, error }
+}
+
+export const useTheme = () => {
+    const themeName = useThemeStore((s) => s.currentTheme)
+    return themes[themeName]
 }

@@ -1,3 +1,5 @@
+import { themes } from '@/styles/themes'
+
 export type UserRole = 'admin' | 'guest' | 'user'
 
 export type AcademyPlan = 'free' | 'basic' | 'advanced' | 'pro'
@@ -149,3 +151,5 @@ export type Theme = {
         onPageBackground: string
     }
 }
+
+export type ThemeName = keyof typeof themes
