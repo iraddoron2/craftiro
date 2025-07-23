@@ -2,12 +2,11 @@ import {
     ProfileButtonBox,
     ProfileButtonContent,
 } from '@/components/shared/MainNavbar/_components'
-import { elementsSizes } from '@/styles'
-import { Stack } from '@core'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { MainNavbar, NextAuthProvider } from '@shared'
 import type { Metadata } from 'next'
 import { Assistant } from 'next/font/google'
+import { PageContainer } from './_components/'
 import './globals.css'
 
 const assistant = Assistant({ subsets: ['hebrew'] })
@@ -15,7 +14,7 @@ const assistant = Assistant({ subsets: ['hebrew'] })
 export const metadata: Metadata = {
     title: 'Craftiro',
     description:
-        'לימודי פסנתר מותאמים אישית – עם מדריך אישי, חומרים מגוונים, ולמידה בכל זמן ומקום',
+        'ללמוד פסנתר בדרך שמתאימה לכם - קורסים דיגיטליים בפסנתר, מורים פרטיים, שיעורי פסנתר פרונטליים',
 }
 
 export default function RootLayout({
@@ -44,13 +43,7 @@ export default function RootLayout({
                                 }
                             />
                         </header>
-                        <Stack
-                            sx={{
-                                marginTop: `calc(${elementsSizes.mainNavbarHeight} + 8px)`,
-                            }}
-                        >
-                            {children}
-                        </Stack>
+                        <PageContainer>{children}</PageContainer>
                     </NextAuthProvider>
                 </AppRouterCacheProvider>
             </body>
