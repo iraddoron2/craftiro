@@ -146,9 +146,19 @@ export type Theme = {
         page: string
         topNavbar: string
         sideNavbar: string
+        miroColors: {
+            1: string
+            2: string
+            3: string
+            4: string
+            5: string
+            6: string
+        }
+        opacityCover: string // Opacity for cover backgrounds
     }
     text: {
         onPageBackground: string
+        onContrastBackground: string // Text color for contrast backgrounds
     }
 }
 

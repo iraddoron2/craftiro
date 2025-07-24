@@ -3,11 +3,21 @@ import { colors } from '../colors'
 
 export const fogTheme: Theme = {
     backgrounds: {
-        page: colors.gray[110], // רקע עמוד אפור בהיר-כהה
-        topNavbar: colors.brandBlue[100], // נבבר עליון כחול עז
-        sideNavbar: colors.gray[100], // נבבר צד אפור בינוני
+        page: colors.gray[110],
+        topNavbar: colors.brandBlue[100],
+        sideNavbar: colors.gray[100],
+        miroColors: {
+            1: colors.blue.main,
+            2: colors.red.main,
+            3: colors.green.main,
+            4: colors.yellow.main,
+            5: colors.purple.main,
+            6: colors.orange.main,
+        },
+        opacityCover: colors.opacityWhite[10],
     },
     text: {
-        onPageBackground: colors.black, // טקסט כהה על רקע בינוני
+        onPageBackground: colors.base.black,
+        onContrastBackground: colors.base.white,
     },
 }
