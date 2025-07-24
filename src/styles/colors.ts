@@ -1,10 +1,12 @@
-import { black, white } from './colors/base'
+import { base } from './colors/base'
 import { blue } from './colors/blue'
 import { brandBlue } from './colors/brandBlue'
 import { brandOrange } from './colors/brandOrange'
 import { brandPink } from './colors/brandPink'
 import { gray } from './colors/gray'
 import { green } from './colors/green'
+import { opacityWhite } from './colors/opacityWhite'
+import { opacityBlack } from './colors/opacityBlack'
 import { orange } from './colors/orange'
 import { purple } from './colors/purple'
 import { red } from './colors/red'
@@ -74,9 +76,10 @@ export const colors = {
     orange,
     purple,
     gray,
-    black,
-    white,
+    base,
     brandOrange,
     brandPink,
     brandBlue,
+    opacityWhite,
+    opacityBlack,
 }

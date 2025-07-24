@@ -1,2 +1,4 @@
-export const black = '#000003'
-export const white = '#FFFFFF'
+export const base = {
+    black: '#000000',
+    white: '#FFFFFF',
+}
