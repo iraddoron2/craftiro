@@ -1,15 +1,17 @@
 import { Stack } from '@core'
+import type { SxProps } from '@mui/material'
 
 type Props = {
     label: string
     backgroundColor: string
     textColor: string
+    sx?: SxProps // הוספנו את האפשרות לקבל sx
 }
 
-export const BoxChip = ({ label, backgroundColor, textColor }: Props) => {
+export const BoxChip = ({ label, backgroundColor, textColor, sx }: Props) => {
     return (
         <Stack
-            style={{
+            sx={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -22,6 +24,7 @@ export const BoxChip = ({ label, backgroundColor, textColor }: Props) => {
                 width: '314px',
                 height: '100px',
                 textAlign: 'center',
+                ...sx,
             }}
         >
             {label}

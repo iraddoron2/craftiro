@@ -1,0 +1,1 @@
+export { AcademyTitle } from './AcademyTitle'

@@ -6,6 +6,7 @@ import {
     Button as MuiBaseButton,
     ButtonProps as MuiButtonProps,
 } from '@mui/base/Button'
+import { ButtonProps as MuiMaterialButtonProps } from '@mui/material'
 
 type ButtonVariant = 'contained' | 'outlined' | 'text'
 
@@ -22,6 +23,7 @@ type ButtonProps = MuiButtonProps & {
     className?: string
     loadingText?: string
     style?: React.CSSProperties
+    sx?: MuiMaterialButtonProps
 }
 
 // You can later move these out if you want
@@ -92,7 +94,6 @@ export const Button = ({
 
     let activeTimeout: NodeJS.Timeout | null = null
 
-    // === תיקון קריטי ===
     function setButtonStyle(e: React.MouseEvent, style: typeof defaultStyle) {
         const el = e.currentTarget as HTMLElement | null
         if (!el) return
