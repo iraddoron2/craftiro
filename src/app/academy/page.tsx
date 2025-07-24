@@ -31,7 +31,7 @@ export default function Page() {
             }}
         >
             <Link href="/academy/modules">
-                <Button>לעמוד המודולים →</Button>
+                <Button label="כניסה למודולים" color="primary" />
             </Link>
         </Stack>
     )

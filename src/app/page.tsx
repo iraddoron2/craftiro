@@ -1,4 +1,8 @@
+'use client'
 // import styles from './page.module.css'
+
+import { Stack } from '@core'
+import { Section1, Section2 } from './_components'
 
 // import { getSession } from '@/lib/auth'
 
@@ -27,13 +31,12 @@
 
 export default function Home() {
     return (
-        <div
-            style={{
-                minHeight: '100vh',
-                transition: 'background 0.2s',
-            }}
+        <Stack
+            direction="column"
+            sx={{ width: '100vw', minHeight: '100vh', margin: 0, padding: 0 }}
         >
-            <div style={{ margin: '32px auto', textAlign: 'center' }}></div>
-        </div>
+            <Section1 />
+            <Section2 />
+        </Stack>
     )
 }
