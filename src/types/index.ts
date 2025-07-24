@@ -142,7 +142,7 @@ export type ColorAliases = {
 export type ColorPalette = Record<ColorScale, string> & ColorAliases
 
 export type Theme = {
-    backgrounds: {
+    background: {
         page: string
         topNavbar: string
         sideNavbar: string
@@ -159,6 +159,114 @@ export type Theme = {
     text: {
         onPageBackground: string
         onContrastBackground: string // Text color for contrast backgrounds
+    }
+    button: {
+        primary: {
+            contained: {
+                default: {
+                    background: string
+                    text: string
+                    border: string
+                }
+                hover: {
+                    background: string
+                    text: string
+                    border: string
+                }
+                active: {
+                    background: string
+                    text: string
+                    border: string
+                }
+            }
+            outlined: {
+                default: {
+                    background: string
+                    text: string
+                    border: string
+                }
+                hover: {
+                    background: string
+                    text: string
+                    border: string
+                }
+                active: {
+                    background: string
+                    text: string
+                    border: string
+                }
+            }
+            text: {
+                default: {
+                    background: string // Usually transparent for text buttons
+                    text: string
+                    border: string // Usually transparent for text buttons
+                }
+                hover: {
+                    background: string // Usually transparent for text buttons
+                    text: string
+                    border: string // Usually transparent for text buttons
+                }
+                active: {
+                    background: string // Usually transparent for text buttons
+                    text: string
+                    border: string // Usually transparent for text buttons
+                }
+            }
+        }
+        secondary: {
+            contained: {
+                default: {
+                    background: string
+                    text: string
+                    border: string
+                }
+                hover: {
+                    background: string
+                    text: string
+                    border: string
+                }
+                active: {
+                    background: string
+                    text: string
+                    border: string
+                }
+            }
+            outlined: {
+                default: {
+                    background: string
+                    text: string
+                    border: string
+                }
+                hover: {
+                    background: string
+                    text: string
+                    border: string
+                }
+                active: {
+                    background: string
+                    text: string
+                    border: string
+                }
+            }
+            text: {
+                default: {
+                    background: string // Usually transparent for text buttons
+                    text: string
+                    border: string // Usually transparent for text buttons
+                }
+                hover: {
+                    background: string // Usually transparent for text buttons
+                    text: string
+                    border: string // Usually transparent for text buttons
+                }
+                active: {
+                    background: string // Usually transparent for text buttons
+                    text: string
+                    border: string // Usually transparent for text buttons
+                }
+            }
+        }
     }
 }
 

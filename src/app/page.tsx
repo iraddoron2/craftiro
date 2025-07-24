@@ -1,8 +1,9 @@
 'use client'
 // import styles from './page.module.css'
 
-import { Section, Stack, SvgImage, Text } from '@core'
+import { Button, Section, Stack, SvgImage, Text } from '@core'
 import { useTheme } from '@hooks'
+import { useRouter } from 'next/navigation'
 import { BoxChip } from './_components'
 
 // import { getSession } from '@/lib/auth'
@@ -32,6 +33,7 @@ import { BoxChip } from './_components'
 
 export default function Home() {
     const theme = useTheme()
+    const router = useRouter()
 
     return (
         <Stack
@@ -42,7 +44,7 @@ export default function Home() {
                 sx={{
                     minHeight: '100vh',
                     width: '100vw',
-                    background: theme.backgrounds.page,
+                    background: theme.background.page,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -100,22 +102,22 @@ export default function Home() {
                 >
                     <BoxChip
                         label="נגינת שירים בפסנתר"
-                        backgroundColor={theme.backgrounds.miroColors[6]}
+                        backgroundColor={theme.background.miroColors[6]}
                         textColor={theme.text.onContrastBackground}
                     />
                     <BoxChip
                         label="תיאוריית המוזיקה"
-                        backgroundColor={theme.backgrounds.miroColors[3]}
+                        backgroundColor={theme.background.miroColors[3]}
                         textColor={theme.text.onContrastBackground}
                     />
                     <BoxChip
                         label="אלתורים"
-                        backgroundColor={theme.backgrounds.miroColors[1]}
+                        backgroundColor={theme.background.miroColors[1]}
                         textColor={theme.text.onContrastBackground}
                     />
                     <BoxChip
                         label="הלחנה"
-                        backgroundColor={theme.backgrounds.miroColors[5]}
+                        backgroundColor={theme.background.miroColors[5]}
                         textColor={theme.text.onContrastBackground}
                     />
                 </Stack>
@@ -142,7 +144,7 @@ export default function Home() {
                         left: 0,
                         width: '100%',
                         height: '100%',
-                        backgroundColor: theme.backgrounds.opacityCover,
+                        backgroundColor: theme.background.opacityCover,
                         backgroundBlendMode: 'darken', // TODO: Not working, need to investigate
                         pointerEvents: 'none',
                         zIndex: 1,
@@ -184,13 +186,7 @@ export default function Home() {
                                     text="אקדמיה"
                                 />
                             </Stack>
-                            <Stack
-                                sx={
-                                    {
-                                        // border: 'solid red 2px',
-                                    }
-                                }
-                            >
+                            <Stack>
                                 <Text
                                     variant="h1"
                                     sx={{
@@ -201,6 +197,26 @@ export default function Home() {
                                         fontSize: '2rem',
                                     }}
                                     text="האקדמיה של קראפטירו - למידה שמביאה תוצאות"
+                                />
+                            </Stack>
+                            <Stack
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <Button
+                                    label="כניסה לאקדמיה"
+                                    color="secondary"
+                                    onClick={() => {
+                                        router.push('/academy')
+                                    }}
+                                    style={{
+                                        marginTop: '24px',
+                                        width: '200px',
+                                    }}
                                 />
                             </Stack>
                         </Stack>
@@ -218,44 +234,32 @@ export default function Home() {
                         >
                             <BoxChip
                                 label="קורסים דיגיטליים"
-                                backgroundColor={
-                                    theme.backgrounds.miroColors[6]
-                                }
+                                backgroundColor={theme.background.miroColors[6]}
                                 textColor={theme.text.onContrastBackground}
                             />
                             <BoxChip
                                 label="שיעורים פרטיים"
-                                backgroundColor={
-                                    theme.backgrounds.miroColors[1]
-                                }
+                                backgroundColor={theme.background.miroColors[1]}
                                 textColor={theme.text.onContrastBackground}
                             />
                             <BoxChip
                                 label="סיכומים"
-                                backgroundColor={
-                                    theme.backgrounds.miroColors[2]
-                                }
+                                backgroundColor={theme.background.miroColors[2]}
                                 textColor={theme.text.onContrastBackground}
                             />
                             <BoxChip
                                 label="משחקים"
-                                backgroundColor={
-                                    theme.backgrounds.miroColors[4]
-                                }
+                                backgroundColor={theme.background.miroColors[4]}
                                 textColor={theme.text.onContrastBackground}
                             />
                             <BoxChip
                                 label="תרגילים"
-                                backgroundColor={
-                                    theme.backgrounds.miroColors[3]
-                                }
+                                backgroundColor={theme.background.miroColors[3]}
                                 textColor={theme.text.onContrastBackground}
                             />
                             <BoxChip
                                 label="אתגרים"
-                                backgroundColor={
-                                    theme.backgrounds.miroColors[5]
-                                }
+                                backgroundColor={theme.background.miroColors[5]}
                                 textColor={theme.text.onContrastBackground}
                             />
                         </Stack>
