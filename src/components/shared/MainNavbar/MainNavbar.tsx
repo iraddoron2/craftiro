@@ -100,6 +100,7 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                             href="/academy"
                             label="אקדמיה"
                         />
+
                         {/* <NavbarLink
                             isActive={currentMainPage === 'admin'}
                             href="/admin"

@@ -30,6 +30,7 @@
             "@assets": ["./src/assets/*"],
             "@constants": ["./src/constants"],
             "@styles": ["./src/styles"],
+            "@types": ["./src/types"],
             "@store": ["./src/store"]
         }
     },

@@ -115,9 +115,14 @@ export default function Page() {
         <Stack>
             <LessonTitle lessonId={id} />
             <Stack>
-                {improvments.map((improvment) => {
-                    return <Text key={improvment} text={improvment} />
-                })}
+                {improvments
+                    .filter(
+                        (improvment: unknown): improvment is string =>
+                            typeof improvment === 'string'
+                    )
+                    .map((improvment: string) => (
+                        <Text key={improvment} text={improvment} />
+                    ))}
             </Stack>
         </Stack>
     )

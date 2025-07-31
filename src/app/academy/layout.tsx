@@ -89,6 +89,7 @@ export default function Layout({
                 links={[
                     { href: '/academy', label: 'עמוד בית' },
                     { href: '/academy/modules', label: 'מודולים' },
+                    { href: '/academy/exercises', label: 'תרגילים' },
                 ]}
             />
             <Stack

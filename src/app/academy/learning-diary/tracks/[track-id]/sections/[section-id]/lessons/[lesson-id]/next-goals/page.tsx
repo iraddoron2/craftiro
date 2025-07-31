@@ -6,7 +6,7 @@ import { LinksGroups } from '@/types'
 import { getLessonFromLessonId } from '@/utils'
 import { Stack, Text } from '@core'
 import { useParams, usePathname } from 'next/navigation'
-import { useEffect, useMemo } from 'react'
+import { Key, useEffect, useMemo } from 'react'
 import { LessonTitle } from '../_components'
 
 export default function Page() {
@@ -116,9 +116,11 @@ export default function Page() {
             <LessonTitle lessonId={id} />
             <Text text="יעדים לשיעור הבא" />
             <Stack>
-                {goalsForNextLesson.map((goal, index) => (
-                    <Text key={index} text={goal} />
-                ))}
+                {goalsForNextLesson.map(
+                    (goal: string, index: Key | null | undefined) => (
+                        <Text key={index} text={goal} />
+                    )
+                )}
             </Stack>
         </Stack>
     )
