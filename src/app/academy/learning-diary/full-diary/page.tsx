@@ -6,7 +6,7 @@ import { LinksGroups } from '@/types'
 import { Stack } from '@core'
 import { MainLinkButton, SectionTitleWithLines } from '@shared'
 import { usePathname } from 'next/navigation'
-import { useEffect, useMemo } from 'react'
+import { Key, useEffect, useMemo } from 'react'
 
 export default function Page() {
     const pathname = usePathname()
@@ -70,20 +70,32 @@ export default function Page() {
 
     return (
         <Stack>
-            {tracks.map((track, index) => {
-                const { startingDate, title, id } = track
-                return (
-                    <Stack key={index}>
-                        <SectionTitleWithLines
-                            title={startingDate.getFullYear()}
-                        />
-                        <MainLinkButton
-                            label={title}
-                            url={`/academy/learning-diary/tracks/${id}`}
-                        />
-                    </Stack>
-                )
-            })}
+            {tracks.map(
+                (
+                    track: {
+                        startingDate: unknown
+                        title: unknown
+                        id: unknown
+                    },
+                    index: Key | null | undefined
+                ) => {
+                    const { startingDate, title, id } = track
+                    return (
+                        <Stack key={index}>
+                            <SectionTitleWithLines
+                                title={(startingDate instanceof Date
+                                    ? startingDate
+                                    : new Date(startingDate as string)
+                                ).getFullYear()}
+                            />
+                            <MainLinkButton
+                                label={String(title)}
+                                url={`/academy/learning-diary/tracks/${id}`}
+                            />
+                        </Stack>
+                    )
+                }
+            )}
         </Stack>
     )
 }

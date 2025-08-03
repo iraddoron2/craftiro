@@ -6,7 +6,7 @@ import { LinksGroups } from '@/types'
 import { getLessonFromLessonId } from '@/utils'
 import { Stack, Text } from '@core'
 import { useParams, usePathname } from 'next/navigation'
-import { useEffect, useMemo } from 'react'
+import { Key, useEffect, useMemo } from 'react'
 import { LessonTitle } from '../_components'
 
 export default function Page() {
@@ -114,7 +114,7 @@ export default function Page() {
         <Stack>
             <LessonTitle lessonId={id} />
             <Stack>
-                {bonusMaterials.map((materialId) => {
+                {bonusMaterials.map((materialId: Key | null | undefined) => {
                     return (
                         <Text key={materialId} text={`מודול ${materialId}`} />
                     )

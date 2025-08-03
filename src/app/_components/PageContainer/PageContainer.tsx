@@ -1,8 +1,7 @@
 'use client'
 
-import { themes } from '@/styles' // מכיל את כל ה־themes
+import { themes } from '@/styles'
 import { Stack } from '@core'
-import { ThemeSwitcher } from '@shared'
 import { useThemeStore } from '@store'
 import React from 'react'
 
@@ -42,9 +41,7 @@ export const PageContainer: React.FC<PageContainerProps> = ({
                     right: 16,
                     zIndex: 1000, // לוודא שזה מעל כל דבר אחר
                 }}
-            >
-                <ThemeSwitcher />
-            </Stack>
+            ></Stack>
             {children}
         </Stack>
     )

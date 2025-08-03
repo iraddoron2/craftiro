@@ -30,7 +30,9 @@
             "@assets": ["./src/assets/*"],
             "@constants": ["./src/constants"],
             "@styles": ["./src/styles"],
-            "@store": ["./src/store"]
+            "@types": ["./src/types"],
+            "@store": ["./src/store"],
+            "@craftElements/base/*": ["./src/components/craftElements/base/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

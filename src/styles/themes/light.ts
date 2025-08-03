@@ -6,6 +6,7 @@ export const lightTheme: Theme = {
         page: colors.brandOrange[190],
         topNavbar: colors.base.white,
         sideNavbar: colors.gray[140],
+        card: colors.base.white,
         miroColors: {
             1: colors.blue.main,
             2: colors.red.main,
@@ -127,5 +128,8 @@ export const lightTheme: Theme = {
                 },
             },
         },
+    },
+    common: {
+        border: colors.gray[170],
     },
 }
