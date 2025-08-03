@@ -1,0 +1,1 @@
+export { ExerciseDetailCard } from './ExerciseDetailCard'

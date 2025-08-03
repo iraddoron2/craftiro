@@ -99,7 +99,7 @@ export default function Layout({
                     flexDirection: 'column',
                     alignItems: 'center',
                     minHeight: '100vh',
-                    padding: '16px',
+                    paddingTop: isMobile ? 0 : elementsSizes.mainNavbarHeight,
                 }}
             >
                 {children}

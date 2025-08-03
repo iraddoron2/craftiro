@@ -1,10 +1,6 @@
-import { CraftTextDecoration } from '@types'
+import { CraftElementBase } from './craftElementBase'
 
-export type CraftTextSegment = {
+export type CraftTextSegment = CraftElementBase & {
     text: string
-    decorations?: CraftTextDecoration[]
     linkUrl?: string // Optional, relevant if decorations includes 'link'
-    color?: string
-    fontSize?: number | string
-    fontFamily?: string
 }

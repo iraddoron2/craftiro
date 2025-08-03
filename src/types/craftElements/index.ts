@@ -1,4 +1,3 @@
 export * from './craftElement'
-export * from './craftParagraphElement'
-export * from './craftTextDecoration'
+export * from './craftParagraph'
 export * from './craftTextSegment'

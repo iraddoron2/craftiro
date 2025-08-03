@@ -7,7 +7,7 @@ export type ExerciseVersion = {
         authorsIds?: string[] // Array of author IDs. Example: ['123', '456']
         createdAt?: string // Creation timestamp (ISO string)
         updatedAt?: string // Last update timestamp (ISO string)
-        version: number // Version number, e.g. 1.0, 2.0
+        version?: number // Version number, e.g. 1.0, 2.0
     }
     details: {
         name?: string // Name of the version, e.g. 'Initial Release', 'Updated with new exercises'

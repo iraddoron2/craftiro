@@ -13,6 +13,7 @@ import {
 
 export type ExerciseBase = {
     _id: string // Unique identifier for the exercise
+    systemId: string // System ID for internal use
     meta: {
         authorsIds?: string[] // Array of author IDs. Example: ['123', '456']
         createdAt?: string // Creation and last update timestamps (ISO string). Example: '2024-07-23T08:00:00Z'

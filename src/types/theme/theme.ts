@@ -3,6 +3,7 @@ export type Theme = {
         page: string
         topNavbar: string
         sideNavbar: string
+        card: string
         miroColors: {
             1: string
             2: string
@@ -124,5 +125,8 @@ export type Theme = {
                 }
             }
         }
+    }
+    common: {
+        border: string // Common border color used across components
     }
 }

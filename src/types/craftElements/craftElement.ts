@@ -1,3 +1,3 @@
-import { CraftParagraphElement } from '@types'
+import { CraftParagraph } from '@types'
 
-export type CraftElement = CraftParagraphElement | null
+export type CraftElement = CraftParagraph | null

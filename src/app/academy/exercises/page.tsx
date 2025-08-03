@@ -2,10 +2,11 @@
 
 import { useTabsNavbar } from '@/lib'
 import { LinksGroups } from '@/types'
-import { Button, Stack } from '@core'
-import Link from 'next/link'
+import { Stack } from '@core'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
+import { CraftExerciseCard } from './_components'
+import { getAllExercises } from './utils'
 
 export default function Page() {
     const pathname = usePathname()
@@ -30,9 +31,14 @@ export default function Page() {
                 padding: '32px',
             }}
         >
-            <Link href="/academy/modules">
-                <Button label="כניסה למודולים" color="primary" />
-            </Link>
+            {getAllExercises().map((exercise) => {
+                return (
+                    <CraftExerciseCard
+                        key={exercise.systemId}
+                        craftExercise={exercise}
+                    />
+                )
+            })}
         </Stack>
     )
 }
