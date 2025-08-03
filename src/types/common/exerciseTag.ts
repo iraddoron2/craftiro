@@ -1,0 +1,10 @@
+export type ExerciseTag =
+    | 'Beginner'
+    | 'Intermediate'
+    | 'Advanced'
+    | 'Piano'
+    | 'Guitar'
+    | 'Drums'
+    | 'Vocals'
+    | 'Sight Reading'
+    | 'Middle C'

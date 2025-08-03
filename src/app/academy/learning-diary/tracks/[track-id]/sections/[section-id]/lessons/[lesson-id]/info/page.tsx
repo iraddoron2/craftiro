@@ -12,7 +12,15 @@ import {
 } from '@/utils'
 import { Stack, Text } from '@core'
 import { useParams, usePathname } from 'next/navigation'
-import { useEffect, useMemo } from 'react'
+import {
+    JSXElementConstructor,
+    Key,
+    ReactElement,
+    ReactNode,
+    ReactPortal,
+    useEffect,
+    useMemo,
+} from 'react'
 import { LessonTitle } from '../_components'
 
 export default function Page() {
@@ -172,17 +180,46 @@ export default function Page() {
             />
             <Stack>
                 <ol>
-                    {mainSubjects.map((subject) => (
-                        <li
-                            key={subject}
-                            style={{
-                                fontSize: '24px',
-                                marginRight: '20px',
-                            }}
-                        >
-                            {subject}
-                        </li>
-                    ))}
+                    {mainSubjects.map(
+                        (
+                            subject:
+                                | boolean
+                                | Key
+                                | ReactElement<
+                                      unknown,
+                                      string | JSXElementConstructor<unknown>
+                                  >
+                                | Iterable<ReactNode>
+                                | Promise<
+                                      | string
+                                      | number
+                                      | bigint
+                                      | boolean
+                                      | ReactPortal
+                                      | ReactElement<
+                                            unknown,
+                                            | string
+                                            | JSXElementConstructor<unknown>
+                                        >
+                                      | Iterable<ReactNode>
+                                      | null
+                                      | undefined
+                                  >
+                                | null
+                                | undefined,
+                            idx: number
+                        ) => (
+                            <li
+                                key={idx}
+                                style={{
+                                    fontSize: '24px',
+                                    marginRight: '20px',
+                                }}
+                            >
+                                {subject}
+                            </li>
+                        )
+                    )}
                 </ol>
             </Stack>
         </Stack>

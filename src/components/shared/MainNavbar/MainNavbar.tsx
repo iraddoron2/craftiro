@@ -2,6 +2,7 @@
 
 import { elementsColors } from '@/styles'
 import { Stack } from '@core'
+import { ThemeSwitcher } from '@shared'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -53,32 +54,45 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                         gap: '10px',
                     }}
                 >
-                    {/* לוגו */}
-                    <Link
-                        href="/"
-                        style={{
-                            display: 'flex',
-                            position: 'relative',
-                            gap: '10px',
-                            justifySelf: 'flex-start',
+                    <Stack
+                        sx={{
+                            flexDirection: 'row',
+                            gap: '16px',
+                            alignItems: 'center',
+                            alignSelf: 'center',
+                            justifyContent: 'flex-start',
+                            position: 'absolute',
                             marginLeft: 'auto',
+                            right: '16px',
                         }}
                     >
-                        <Image
-                            src={'/icons/LogoColor.svg'}
-                            alt="Apps Icon"
-                            width={32}
-                            height={32}
-                        />
-                    </Link>
+                        <Link
+                            href="/"
+                            style={{
+                                display: 'flex',
+                                position: 'relative',
+                                gap: '10px',
+                                justifySelf: 'flex-start',
+                                marginLeft: 'auto',
+                            }}
+                        >
+                            <Image
+                                src={'/icons/LogoColor.svg'}
+                                alt="Apps Icon"
+                                width={32}
+                                height={32}
+                            />
+                        </Link>
+                        <ThemeSwitcher />
+                    </Stack>
 
-                    {/* קישורים */}
+                    {/* Links */}
                     <Stack
                         sx={{
                             flexDirection: 'row',
                             gap: '24px',
                             justifyContent: 'center',
-                            position: 'relative',
+                            position: 'absolute',
                         }}
                     >
                         <NavbarLink
@@ -86,6 +100,7 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                             href="/academy"
                             label="אקדמיה"
                         />
+
                         {/* <NavbarLink
                             isActive={currentMainPage === 'admin'}
                             href="/admin"

@@ -6,6 +6,7 @@ export const darkTheme: Theme = {
         page: colors.gray[20],
         topNavbar: colors.gray[30],
         sideNavbar: colors.gray[40],
+        card: colors.base.white,
         miroColors: {
             1: colors.blue.main,
             2: colors.red.main,
@@ -127,5 +128,8 @@ export const darkTheme: Theme = {
                 },
             },
         },
+    },
+    common: {
+        border: colors.gray[120],
     },
 }

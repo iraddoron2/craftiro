@@ -2,9 +2,9 @@
 
 import { currentUser } from '@/data'
 import { useTabsNavbar } from '@/lib'
-import { LinksGroups } from '@/types'
 import { getLessonFromLessonId } from '@/utils'
 import { Stack, Text } from '@core'
+import { LinksGroups } from '@types'
 import { useParams, usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 import { LessonTitle } from '../_components'
@@ -123,24 +123,34 @@ export default function Page() {
                         marginBottom: '20px',
                     }}
                 />
-                {objectives.map((objective, index) => {
-                    const { id, title, description, status } = objective
+                {objectives.map(
+                    (
+                        objective: {
+                            id: string
+                            title: string
+                            description: string
+                            status: string
+                        },
+                        index: number
+                    ) => {
+                        const { id, title, description, status } = objective
 
-                    return (
-                        <Stack key={id}>
-                            <Text
-                                text={`משימה ${index + 1} - ${title}`}
-                                sx={{
-                                    fontSize: '24px',
-                                    marginBottom: '10px',
-                                }}
-                            />
+                        return (
+                            <Stack key={id}>
+                                <Text
+                                    text={`משימה ${index + 1} - ${title}`}
+                                    sx={{
+                                        fontSize: '24px',
+                                        marginBottom: '10px',
+                                    }}
+                                />
 
-                            <Text text={description} />
-                            <Text text={status} />
-                        </Stack>
-                    )
-                })}
+                                <Text text={description} />
+                                <Text text={status} />
+                            </Stack>
+                        )
+                    }
+                )}
             </Stack>
         </Stack>
     )

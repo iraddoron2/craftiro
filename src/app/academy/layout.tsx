@@ -89,6 +89,7 @@ export default function Layout({
                 links={[
                     { href: '/academy', label: 'עמוד בית' },
                     { href: '/academy/modules', label: 'מודולים' },
+                    { href: '/academy/exercises', label: 'תרגילים' },
                 ]}
             />
             <Stack
@@ -98,7 +99,7 @@ export default function Layout({
                     flexDirection: 'column',
                     alignItems: 'center',
                     minHeight: '100vh',
-                    padding: '16px',
+                    paddingTop: isMobile ? 0 : elementsSizes.mainNavbarHeight,
                 }}
             >
                 {children}

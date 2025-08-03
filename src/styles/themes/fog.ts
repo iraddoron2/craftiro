@@ -6,6 +6,7 @@ export const fogTheme: Theme = {
         page: colors.gray[110],
         topNavbar: colors.brandBlue[100],
         sideNavbar: colors.gray[100],
+        card: colors.base.white,
         miroColors: {
             1: colors.blue.main,
             2: colors.red.main,
@@ -127,5 +128,8 @@ export const fogTheme: Theme = {
                 },
             },
         },
+    },
+    common: {
+        border: colors.gray[120],
     },
 }
