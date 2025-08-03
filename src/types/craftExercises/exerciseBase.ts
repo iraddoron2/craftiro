@@ -8,7 +8,6 @@ import {
     ExerciseTag,
     ExerciseTargetAudience,
     ExerciseType,
-    RelatedExerciseSkill,
 } from '@types'
 
 export type ExerciseBase = {
@@ -29,12 +28,12 @@ export type ExerciseBase = {
         targetAudience?: ExerciseTargetAudience[] // Who is this exercise intended for? Example: 'Beginners', 'Ages 8+', 'Students who learned D major scale'
         expectedDuration?: ExerciseExpectedDuration // Recommended duration with optional bounds (in minutes or hours). Example: { lowerBound: { value: 10, unit: 'minutes' }, upperBound: { value: 1, unit: 'hours' } }
         relatedExercisesIds?: string[] // Related exercise IDs. Example: ['42', '43']
-        relatedSkills?: RelatedExerciseSkill[] // Skills related to this exercise
+        relatedSkillsIds?: string[] // Skills related to this exercise
         instructions?: CraftElement[] // Step-by-step instructions (separate from description). Example: 'Play each note aloud before moving on.'
     }
     baseEvaluation: {
-        feedback?: ExerciseFeedback // Feedback type and content
-        scoreCheckType?: ExerciseScoreCheckType // Scoring type: 'auto' (system checks), 'manual' (teacher), or 'none'. Example: 'auto'
+        feedback?: ExerciseFeedback | null // Feedback type and content
+        scoreCheckType?: ExerciseScoreCheckType | null // Scoring type: 'auto' (system checks), 'manual' (teacher), or 'none'. Example: 'auto'
         xpScore?: number // Optional, if you want to track XP points for completing the exercise
         skillsScore?: number // Optional, a score for skills related to this exercise. Split the score respectively between skills
     }

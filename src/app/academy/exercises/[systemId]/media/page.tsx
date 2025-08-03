@@ -1,37 +1,33 @@
 'use client'
 
-import { exercises } from '@/data/demoData/exercises'
+import { useCraftExercises } from '@/context/craftExercisesContext'
 import { ExerciseVersion } from '@/types/craftExercises'
 import { Button, Stack, Text } from '@core'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { ExerciseDetailCard } from '../../_components'
-import { getExerciseBySystemId } from '../../utils'
 
 export default function Page() {
+    // שליפת כל התרגילים מהקונטקסט
+    const { exercises } = useCraftExercises()
+    // קבלת systemId מה־URL
     const { systemId } = useParams<{ systemId: string }>()
 
-    const exercise = getExerciseBySystemId(exercises, systemId)
+    // חיפוש התרגיל הרלוונטי
+    const exercise = exercises.find((ex) => ex.systemId === systemId)
 
     if (!exercise) {
         return <Text variant="h2" text="תרגיל לא נמצא" />
     }
 
-    const { mainVersion = {} as ExerciseVersion } = exercise // TODO: add "versions" when implemented
+    // שליפת הגרסה הראשית (mainVersion)
+    const { mainVersion = {} as ExerciseVersion } = exercise
 
-    const { assets } = mainVersion
-    // const { meta, details, assets } = mainVersion
-
-    // const { authorsIds, createdAt, updatedAt, version } = meta
-
-    // const { name, description } = details
+    const { assets = { driveChartsLinks: [] } } = mainVersion
 
     const {
-        driveChartsLinks = [],
-        // resources = [],
-        // solution = null,
-        // explanationVideo = null,
-        // abcNotation = '',
+        driveChartsLinks,
+        // אפשר להוסיף שדות נוספים כאן במידת הצורך
     } = assets
 
     return (
@@ -52,7 +48,10 @@ export default function Page() {
                         gap: '16px',
                     }}
                 >
-                    {driveChartsLinks.map((link) => {
+                    {(driveChartsLinks?.length ?? 0) === 0 && (
+                        <Text text="לא נמצאו קישורים לתווים" />
+                    )}
+                    {(driveChartsLinks ?? []).map((link) => {
                         const { labels = [], url = '' } = link
                         const getFormattedLabels = (labels: string[]) => {
                             const seperator = ' | '
@@ -73,12 +72,10 @@ export default function Page() {
 
                         const convertLabelsToTranslatedLabels = (
                             labels: string[]
-                        ) => {
-                            return labels.map(driveLinkLabelTranslator)
-                        }
+                        ) => labels.map(driveLinkLabelTranslator)
+
                         const translatedLabels =
                             convertLabelsToTranslatedLabels(labels)
-
                         const formattedLabels =
                             getFormattedLabels(translatedLabels)
 
@@ -110,11 +107,6 @@ export default function Page() {
                     })}
                 </Stack>
             </ExerciseDetailCard>
-
-            {/* <Stack>
-                <h1>versions</h1>
-                <pre>{JSON.stringify(versions, null, 2)}</pre>
-            </Stack> */}
         </Stack>
     )
 }

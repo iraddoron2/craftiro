@@ -1,17 +1,20 @@
 'use client'
 
+import { useCraftExercises } from '@/context/craftExercisesContext'
 import { useTabsNavbar } from '@/lib'
 import { LinksGroups } from '@/types'
-import { Stack } from '@core'
+import { Stack, Text } from '@core'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 import { CraftExerciseCard } from './_components'
-import { getAllExercises } from './utils'
 
 export default function Page() {
     const pathname = usePathname()
     const tabsNavbar = useTabsNavbar()
     const linksGroups: LinksGroups = useMemo(() => [[]], [])
+
+    // משיכת התרגילים מהקונטקסט
+    const { exercises } = useCraftExercises()
 
     useEffect(() => {
         if (tabsNavbar.currentPath !== pathname) {
@@ -31,14 +34,24 @@ export default function Page() {
                 padding: '32px',
             }}
         >
-            {getAllExercises().map((exercise) => {
-                return (
+            {exercises.length === 0 && <Text text="טוען תרגילים..." />}
+            <Stack
+                sx={{
+                    width: '100%',
+                    maxWidth: '1600px',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    gap: '40px',
+                    flexDirection: 'row',
+                }}
+            >
+                {exercises.map((exercise) => (
                     <CraftExerciseCard
                         key={exercise.systemId}
                         craftExercise={exercise}
                     />
-                )
-            })}
+                ))}
+            </Stack>
         </Stack>
     )
 }

@@ -2,7 +2,6 @@
 
 import { CraftExercise } from '@/types/craftExercises'
 import { Button, Stack, Text } from '@core'
-// import { useTheme } from '@hooks'
 import { useTheme } from '@hooks'
 import { colors } from '@styles'
 import { useRouter } from 'next/navigation'
@@ -75,7 +74,9 @@ export const CraftExerciseCard = ({ craftExercise }: Props) => {
                 }}
             >
                 <Text
-                    text={`סוג תרגיל: ${getTermsTranslate(exerciseType) || ''}`}
+                    text={`סוג תרגיל: ${
+                        getTermsTranslate(exerciseType || 'Unknown') || ''
+                    }`}
                     variant="body1"
                     sx={{
                         fontSize: '20px',

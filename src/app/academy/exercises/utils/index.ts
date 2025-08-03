@@ -1,4 +1,3 @@
-export { getAllExercises } from './getAllExercises'
+export { getDifficultyLabel } from './getDifficultyLabel'
 export { getExerciseBySystemId } from './getExerciseBySystemId'
 export { getTermsTranslate } from './getTermsTranslate'
-export { getDifficultyLabel } from './getDifficultyLabel'

@@ -1,26 +1,24 @@
 'use client'
 
-import { exercises } from '@/data/demoData/exercises'
+import { useCraftExercises } from '@/context/craftExercisesContext'
 import { Stack, Text } from '@core'
 import { useTheme } from '@hooks'
 import { useParams } from 'next/navigation'
-import { getExerciseBySystemId } from '../../utils'
 
 export default function Page() {
     const { systemId } = useParams<{ systemId: string }>()
     const theme = useTheme()
+    const { exercises } = useCraftExercises()
 
-    const exercise = getExerciseBySystemId(exercises, systemId)
+    // מוצא את התרגיל לפי ה־systemId מתוך קונטקסט
+    const exercise = exercises.find((ex) => ex.systemId === systemId)
 
     if (!exercise) {
         return <Text variant="h2" text="תרגיל לא נמצא" />
     }
 
     const { baseEvaluation } = exercise
-
     const { xpScore, skillsScore } = baseEvaluation
-
-    // const { feedback, scoreCheckType, xpScore, skillsScore } = baseEvaluation
 
     return (
         <Stack
@@ -137,7 +135,7 @@ export default function Page() {
                         />
                         <Text
                             variant="body1"
-                            text="נקודות ניסיון כלליות"
+                            text="נקודות מיומנות"
                             sx={{
                                 color: theme.text.onContrastBackground,
                                 fontFamily: 'Assistant',

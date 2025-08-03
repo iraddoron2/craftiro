@@ -1,53 +1,41 @@
 'use client'
 
-import { exercises } from '@/data/demoData/exercises'
-import { CraftElement, CraftTextSegment } from '@/types'
+import { useCraftExercises } from '@/context/craftExercisesContext'
+import { CraftTextSegment } from '@/types'
 import { Stack, Text } from '@core'
 import { Paragraph as CraftParagraph } from '@craftElements/base/Paragraph'
 import { useParams } from 'next/navigation'
 import { ExerciseDetailCard } from '../../_components'
-import { getExerciseBySystemId } from '../../utils'
 
 export default function Page() {
+    // קבלת כל התרגילים מהקונטקסט
+    const { exercises } = useCraftExercises()
+    // שליפת systemId מהכתובת
     const { systemId } = useParams<{ systemId: string }>()
 
-    const exercise = getExerciseBySystemId(exercises, systemId)
+    // חיפוש התרגיל הרלוונטי
+    const exercise = exercises.find((ex) => ex.systemId === systemId)
 
     if (!exercise) {
         return <Text variant="h2" text="תרגיל לא נמצא" />
     }
 
     const { baseDetails } = exercise
-    // const { meta, baseDetails, style, diagramStyle } = exercise
+    const { instructions = [] } = baseDetails
 
-    // const { authorsIds, createdAt, updatedAt } = meta
-
-    const {
-        // exerciseType = 'תרגיל לא מזוהה',
-        // difficulty = 1,
-        // category = '',
-        // tags = [],
-        // targetAudience = [],
-        // expectedDuration,
-        // relatedSkills = [],
-        instructions = [] as CraftElement[],
-    } = baseDetails
-
-    const Instructions = instructions.map((instruction) => {
+    // רנדר של פסקאות/הוראות (CraftElement)
+    const Instructions = instructions.map((instruction, index) => {
         if (!instruction || instruction.type !== 'paragraph') {
             return null // Skip null or non-paragraph instructions
         }
-
-        // Explicitly type instruction as a paragraph
         const { id, content } = instruction as {
             id: string
             type: 'paragraph'
             content: CraftTextSegment[]
         }
-
         return (
             <CraftParagraph
-                key={id}
+                key={index}
                 paragraph={{ id, type: 'paragraph', content }}
             />
         )
@@ -65,57 +53,6 @@ export default function Page() {
             <ExerciseDetailCard title="הנחיות">
                 <Stack>{Instructions}</Stack>
             </ExerciseDetailCard>
-            {/* 
-            <Stack>
-                <h1>relatedSkills</h1>
-                <pre>{JSON.stringify(relatedSkills, null, 2)}</pre>
-            </Stack>
-
-            <Stack>
-                <h1>diagramStyle</h1>
-                <pre>{JSON.stringify(diagramStyle, null, 2)}</pre>
-            </Stack>
-            <Stack>
-                <h1>style</h1>
-                <pre>{JSON.stringify(style, null, 2)}</pre>
-            </Stack>
-
-            <Stack>
-                <h1>authorsIds</h1>
-                <pre>{JSON.stringify(authorsIds, null, 2)}</pre>
-            </Stack>
-            <Stack>
-                <h1>createdAt</h1>
-                <pre>{JSON.stringify(createdAt, null, 2)}</pre>
-            </Stack>
-            <Stack>
-                <h1>updatedAt</h1>
-                <pre>{JSON.stringify(updatedAt, null, 2)}</pre>
-            </Stack>
-            <Stack>
-                <h1>exerciseType</h1>
-                <pre>{JSON.stringify(exerciseType, null, 2)}</pre>
-            </Stack>
-            <Stack>
-                <h1>difficulty</h1>
-                <pre>{JSON.stringify(difficulty, null, 2)}</pre>
-            </Stack>
-            <Stack>
-                <h1>category</h1>
-                <pre>{JSON.stringify(category, null, 2)}</pre>
-            </Stack>
-            <Stack>
-                <h1>tags</h1>
-                <pre>{JSON.stringify(tags, null, 2)}</pre>
-            </Stack>
-            <Stack>
-                <h1>targetAudience</h1>
-                <pre>{JSON.stringify(targetAudience, null, 2)}</pre>
-            </Stack>
-            <Stack>
-                <h1>expectedDuration</h1>
-                <pre>{JSON.stringify(expectedDuration, null, 2)}</pre>
-            </Stack> */}
         </Stack>
     )
 }

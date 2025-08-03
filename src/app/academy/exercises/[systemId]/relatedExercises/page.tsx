@@ -1,32 +1,35 @@
 'use client'
 
-import { exercises } from '@/data/demoData/exercises'
+import { useCraftExercises } from '@/context/craftExercisesContext'
 import { Stack, Text } from '@core'
 import { useParams } from 'next/navigation'
 import { CraftExerciseCard } from '../../_components'
-import { getExerciseBySystemId } from '../../utils'
 
 export default function Page() {
     const { systemId } = useParams<{ systemId: string }>()
+    const { exercises } = useCraftExercises()
 
-    const exercise = getExerciseBySystemId(exercises, systemId)
+    const exercise = exercises.find((ex) => ex.systemId === systemId)
 
     if (!exercise) {
         return <Text variant="h2" text="תרגיל לא נמצא" />
     }
 
     const { baseDetails } = exercise
-
     const { relatedExercisesIds = [] } = baseDetails
 
-    if (!relatedExercisesIds || relatedExercisesIds.length === 0) {
+    if (!relatedExercisesIds.length) {
         return <Text variant="h2" text="אין תרגילים קשורים" />
     }
 
-    const relatedExercises = relatedExercisesIds.map((id) => {
-        const relatedExercise = getExerciseBySystemId(exercises, id)
-        return relatedExercise ? relatedExercise : null
-    })
+    // מוצאים את כל התרגילים הקשורים לפי ה־id שלהם
+    const relatedExercises = relatedExercisesIds
+        .map((id) => exercises.find((ex) => ex.systemId === id))
+        .filter((ex): ex is NonNullable<typeof ex> => ex !== undefined)
+
+    if (relatedExercises.length === 0) {
+        return <Text variant="h2" text="לא נמצאו תרגילים קשורים" />
+    }
 
     return (
         <Stack
@@ -42,12 +45,12 @@ export default function Page() {
                 margin: '0 auto',
             }}
         >
-            {relatedExercises.map((exercise, index) => {
-                if (!exercise) return null
-                return (
-                    <CraftExerciseCard key={index} craftExercise={exercise} />
-                )
-            })}
+            {relatedExercises.map((exercise) => (
+                <CraftExerciseCard
+                    key={exercise.systemId}
+                    craftExercise={exercise}
+                />
+            ))}
         </Stack>
     )
 }

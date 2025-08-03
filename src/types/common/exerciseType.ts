@@ -1,1 +1,1 @@
-export type ExerciseType = 'Piano Score Playing'
+export type ExerciseType = 'Piano Score Playing' | null

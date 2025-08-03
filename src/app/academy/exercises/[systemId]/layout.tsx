@@ -1,30 +1,29 @@
 'use client'
 
-import { exercises } from '@/data/demoData/exercises'
+import { useCraftExercises } from '@/context/craftExercisesContext'
 import { Button, Stack, Text } from '@core'
 import { useTheme } from '@hooks'
 import Link from 'next/link'
-import { useParams, usePathname } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { getExerciseBySystemId } from '../utils'
 
 export default function Layout({
     children,
-}: Readonly<{
-    children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
+    const { exercises } = useCraftExercises()
     const { systemId } = useParams<{ systemId: string }>()
-    const pathname = usePathname()
     const theme = useTheme()
-    const exercise = getExerciseBySystemId(exercises, systemId)
     const [isMobile, setIsMobile] = useState<boolean | null>(null)
 
-    // Sometimes make a hydration error!!!
+    // איתור תרגיל לפי systemId (או לפי _id אם צריך)
+    const exercise = exercises.find(
+        (ex) => ex.systemId === systemId || ex._id === systemId
+    )
+
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth < 768)
         }
-
         handleResize()
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
@@ -33,22 +32,16 @@ export default function Layout({
     if (!exercise) {
         return <Text variant="h2" text="תרגיל לא נמצא" />
     }
+    if (isMobile === null) return null
 
     const { baseDetails } = exercise
-
     const { description = '', name = 'תרגיל לא מזוהה' } = baseDetails
-
-    if (!exercise) {
-        return <Text variant="h2" text="תרגיל לא נמצא" />
-    }
-
-    if (isMobile === null) return null
 
     return (
         <Stack
             sx={{
                 flexDirection: 'column',
-                minHeight: '100vh', // TODO: calc 100vh - elementsSizes.mainNavbarHeight. It's not working
+                minHeight: '100vh',
                 width: '100%',
             }}
         >
@@ -91,14 +84,15 @@ export default function Layout({
                         />
                     </Stack>
 
+                    {/* סרגל ניווט */}
                     <Stack
                         sx={{
                             height: '76px',
                             backgroundColor: theme.background.topNavbar,
                             display: 'flex',
                             padding: '8px',
-                            borderTopColor: theme.common.border,
-                            borderBottomColor: theme.common.border,
+                            borderTopColor: theme.common?.border,
+                            borderBottomColor: theme.common?.border,
                             borderTopWidth: '2px',
                             borderBottomWidth: '2px',
                             borderTopStyle: 'solid',
@@ -129,43 +123,26 @@ export default function Layout({
                                     />
                                 </Link>
                             </Stack>
-                            <Link
-                                href={`/academy/exercises/${
-                                    pathname.split('/')[3]
-                                }/info`}
-                            >
+                            {/* ניווט לדפי התרגיל */}
+                            <Link href={`/academy/exercises/${systemId}/info`}>
                                 <Button variant="text" label="סקירה כללית" />
                             </Link>
-                            <Link
-                                href={`/academy/exercises/${
-                                    pathname.split('/')[3]
-                                }/media`}
-                            >
+                            <Link href={`/academy/exercises/${systemId}/media`}>
                                 <Button variant="text" label="מדיה" />
                             </Link>
                             <Link
-                                href={`/academy/exercises/${
-                                    pathname.split('/')[3]
-                                }/relatedExercises`}
+                                href={`/academy/exercises/${systemId}/relatedExercises`}
                             >
                                 <Button variant="text" label="תרגילים דומים" />
                             </Link>
-                            <Link
-                                href={`/academy/exercises/${
-                                    pathname.split('/')[3]
-                                }/score`}
-                            >
+                            <Link href={`/academy/exercises/${systemId}/score`}>
                                 <Button variant="text" label="ניקוד" />
                             </Link>
                         </Stack>
                     </Stack>
                 </Stack>
-                <Stack
-                    sx={{
-                        height: '60px',
-                    }}
-                ></Stack>
-
+                <Stack sx={{ height: '60px' }}></Stack>
+                {/* <pre>{JSON.stringify(exercise, null, 2)}</pre> */}
                 {children}
             </Stack>
         </Stack>
