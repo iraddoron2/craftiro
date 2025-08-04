@@ -2,8 +2,7 @@
 
 import { useTabsNavbar } from '@/lib'
 import { LinksGroups } from '@/types'
-import { Button, Stack } from '@core'
-import Link from 'next/link'
+import { Stack } from '@core'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 
@@ -29,10 +28,6 @@ export default function Page() {
                 gap: '24px',
                 padding: '32px',
             }}
-        >
-            <Link href="/academy/modules">
-                <Button label="כניסה למודולים" color="primary" />
-            </Link>
-        </Stack>
+        ></Stack>
     )
 }

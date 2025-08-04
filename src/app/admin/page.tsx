@@ -18,6 +18,10 @@ export default function Page() {
 
     return (
         <>
+            <h1>Admin Page</h1>
+            <p>
+                Welcome, {user.firstName} {user.lastName}!
+            </p>
             <h1>admin</h1>
             <pre>{JSON.stringify(user, null, 2)}</pre>
             <br />
