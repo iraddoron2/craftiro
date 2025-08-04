@@ -27,13 +27,16 @@ export const useUser = () => {
         async function fetchUser() {
             try {
                 setIsLoading(true)
-                const response = await fetch('/api/user') // Adjust the path if needed
+                const response = await fetch('/api/user', {
+                    credentials: 'include', // הכי חשוב! שולח cookie לשרת
+                })
                 if (!response.ok) {
                     throw new Error(
                         `Error fetching user: ${response.statusText}`
                     )
                 }
                 const data = await response.json()
+
                 setUser(data.body)
             } catch (err) {
                 setError(err as Error)

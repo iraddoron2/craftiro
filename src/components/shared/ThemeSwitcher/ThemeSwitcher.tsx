@@ -1,8 +1,10 @@
 'use client'
 
 import { useThemeStore } from '@/store/themeStore'
+import { useUserStore } from '@/store/userStore'
 import { themes } from '@/styles'
 import { ThemeName } from '@/types'
+import { isAdmin } from '@/utils'
 import { Button, Stack } from '@core'
 import { useState } from 'react'
 
@@ -15,6 +17,9 @@ function capitalize(str: string) {
 export const ThemeSwitcher = () => {
     const { currentTheme, setTheme } = useThemeStore()
     const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false)
+    const user = useUserStore((state) => state.user)
+    const isUserAdmin = isAdmin(user)
+    if (!isUserAdmin) return null // Hide the switcher for non-admin users
 
     const buttonClickHandler = () => {
         setIsThemeMenuOpen((prev) => !prev)

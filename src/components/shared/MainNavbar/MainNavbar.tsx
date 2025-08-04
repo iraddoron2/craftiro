@@ -1,5 +1,6 @@
 'use client'
 
+import { useUserStore } from '@/store/userStore'
 import { elementsColors } from '@/styles'
 import { Stack } from '@core'
 import { ThemeSwitcher } from '@shared'
@@ -16,9 +17,11 @@ type Props = {
 export const MainNavbar = ({ boxComponent }: Props) => {
     const pathname = usePathname()
     const currentMainPage = pathname.split('/')[1]
-
+    const user = useUserStore((state) => state.user)
     const [isMobile, setIsMobile] = useState<boolean | null>(null)
     const [isMainMenuOpen, setIsMainMenuOpen] = useState(false)
+
+    const isAdmin = user?.roles.includes('admin') || false
 
     useEffect(() => {
         const handleResize = () => {
@@ -34,7 +37,7 @@ export const MainNavbar = ({ boxComponent }: Props) => {
 
     return (
         <>
-            {/* ✅ דסקטופ */}
+            {/* Desktop */}
             {!isMobile && (
                 <Stack
                     component="nav"
@@ -101,11 +104,13 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                             label="אקדמיה"
                         />
 
-                        {/* <NavbarLink
-                            isActive={currentMainPage === 'admin'}
-                            href="/admin"
-                            label="מנהל"
-                        /> */}
+                        {isAdmin && (
+                            <NavbarLink
+                                isActive={currentMainPage === 'admin'}
+                                href="/admin"
+                                label="מנהל"
+                            />
+                        )}
                     </Stack>
 
                     {/* תוספת מימין */}
@@ -186,15 +191,6 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                             width={32}
                             height={32}
                         />
-                        {/* <span
-                            style={{
-                                fontSize: '20px',
-                                fontWeight: 'bold',
-                                color: '#333',
-                            }}
-                        >
-                            דף הבית
-                        </span> */}
                     </Link>
 
                     {/* קישורים */}
@@ -204,12 +200,14 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                         label="אקדמיה"
                         onClick={() => setIsMainMenuOpen(false)}
                     />
-                    {/* <NavbarLink
-                        isActive={currentMainPage === 'admin'}
-                        href="/admin"
-                        label="מנהל"
-                        onClick={() => setIsMainMenuOpen(false)}
-                    /> */}
+                    {isAdmin && (
+                        <NavbarLink
+                            isActive={currentMainPage === 'admin'}
+                            href="/admin"
+                            label="מנהל"
+                            onClick={() => setIsMainMenuOpen(false)}
+                        />
+                    )}
                 </Stack>
             )}
         </>

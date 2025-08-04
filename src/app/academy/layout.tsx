@@ -1,8 +1,10 @@
 'use client'
 
 import { useTabsNavbar } from '@/lib'
+import { useUserStore } from '@/store/userStore'
 import { elementsSizes } from '@/styles'
 import { LinksGroups } from '@/types'
+import { isAdmin } from '@/utils'
 import { Stack } from '@core'
 import { PagesNavbar } from '@shared'
 import { usePathname } from 'next/navigation'
@@ -14,6 +16,8 @@ export default function Layout({
     children: React.ReactNode
 }>) {
     const pathname = usePathname()
+    const user = useUserStore((state) => state.user)
+    const isUserAdmin = isAdmin(user)
     const { linksGroups, updateLinksGroups, updateCurrentPath } =
         useTabsNavbar()
 
@@ -86,11 +90,18 @@ export default function Layout({
     return (
         <Stack sx={{ flexDirection: 'column', minHeight: '100vh' }}>
             <PagesNavbar
-                links={[
-                    { href: '/academy', label: 'עמוד בית' },
-                    { href: '/academy/modules', label: 'מודולים' },
-                    { href: '/academy/exercises', label: 'תרגילים' },
-                ]}
+                links={
+                    isUserAdmin
+                        ? [
+                              { href: '/academy', label: 'עמוד בית' },
+                              { href: '/academy/modules', label: 'מודולים' },
+                              { href: '/academy/exercises', label: 'תרגילים' },
+                          ]
+                        : [
+                              { href: '/academy', label: 'עמוד בית' },
+                              { href: '/academy/exercises', label: 'תרגילים' },
+                          ]
+                }
             />
             <Stack
                 sx={{

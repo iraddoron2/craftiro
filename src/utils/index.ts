@@ -72,8 +72,8 @@ export const getUserData = async () => {
     fetchData()
 }
 
-export const isAdmin = (user: User) => {
-    return user.roles.includes('admin')
+export const isAdmin = (user: User | null) => {
+    return user?.roles.includes('admin') ?? false
 }
 
 type ColorAliasKey = keyof ColorAliases
