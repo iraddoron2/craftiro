@@ -2,6 +2,7 @@ import {
     ProfileButtonBox,
     ProfileButtonContent,
 } from '@/components/shared/MainNavbar/_components'
+import { UserStoreHydrator } from '@/providers/UserStoreHydrator'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { MainNavbar, NextAuthProvider } from '@shared'
 import type { Metadata } from 'next'
@@ -27,23 +28,25 @@ export default function RootLayout({
             <body className={assistant.className}>
                 <AppRouterCacheProvider>
                     <NextAuthProvider>
-                        <header
-                            style={{
-                                position: 'relative',
-                                zIndex: 100,
-                            }}
-                        >
-                            <MainNavbar
-                                boxComponent={
-                                    <ProfileButtonBox
-                                        contentComponent={
-                                            <ProfileButtonContent />
-                                        }
-                                    />
-                                }
-                            />
-                        </header>
-                        <PageContainer>{children}</PageContainer>
+                        <UserStoreHydrator>
+                            <header
+                                style={{
+                                    position: 'relative',
+                                    zIndex: 100,
+                                }}
+                            >
+                                <MainNavbar
+                                    boxComponent={
+                                        <ProfileButtonBox
+                                            contentComponent={
+                                                <ProfileButtonContent />
+                                            }
+                                        />
+                                    }
+                                />
+                            </header>
+                            <PageContainer>{children}</PageContainer>
+                        </UserStoreHydrator>
                     </NextAuthProvider>
                 </AppRouterCacheProvider>
             </body>
