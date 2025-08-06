@@ -1,7 +1,7 @@
 'use client'
 
 import { useCraftExercises } from '@/context/craftExercisesContext'
-import { ExerciseVersion } from '@/types/craftExercises'
+import { ExerciseVersion } from '@/types/craftiroExercises'
 import { Button, Stack, Text } from '@core'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'

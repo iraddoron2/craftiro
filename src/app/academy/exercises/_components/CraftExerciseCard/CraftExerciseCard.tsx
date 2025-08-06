@@ -1,6 +1,6 @@
 'use client'
 
-import { CraftExercise } from '@/types/craftExercises'
+import { CraftExercise } from '@/types/craftiroExercises'
 import { Button, Stack, Text } from '@core'
 import { useTheme } from '@hooks'
 import { colors } from '@styles'
