@@ -1,9 +1,9 @@
 import { Stack } from '@core'
-import { CraftParagraph } from '@types'
+import { CraftiroParagraph } from '@types'
 import { TextSegment } from '../TextSegment/TextSegment'
 
 type Props = {
-    paragraph: CraftParagraph
+    paragraph: CraftiroParagraph
 }
 
 export const Paragraph = ({ paragraph }: Props) => {
@@ -19,9 +19,21 @@ export const Paragraph = ({ paragraph }: Props) => {
         // customAttributes,
     } = paragraph
 
-    const parsedTextSegments = content.map((segment, index) => {
-        return <TextSegment key={`${id}-segment-${index}`} segment={segment} />
-    })
+    interface ParsedTextSegment {
+        key: string
+        segment: CraftiroParagraph['content'][number]
+    }
+
+    const parsedTextSegments: React.ReactNode[] = content.map(
+        (
+            segment: CraftiroParagraph['content'][number],
+            index: number
+        ): React.ReactElement<ParsedTextSegment> => {
+            return (
+                <TextSegment key={`${id}-segment-${index}`} segment={segment} />
+            )
+        }
+    )
 
     return (
         <Stack component="p" className={className} style={style}>

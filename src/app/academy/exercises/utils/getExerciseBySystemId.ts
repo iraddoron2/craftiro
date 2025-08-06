@@ -1,4 +1,4 @@
-import { CraftExercise } from '@/types/craftExercises'
+import { CraftExercise } from '@/types/craftiroExercises'
 
 export const getExerciseBySystemId = (
     exercise: CraftExercise[],

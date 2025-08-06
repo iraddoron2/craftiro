@@ -6,7 +6,7 @@ import {
     ExerciseTargetAudience,
     ExerciseType,
 } from '@/types'
-import { CraftExercise, ExerciseDiagramStyle } from '@/types/craftExercises'
+import { CraftExercise, ExerciseDiagramStyle } from '@/types/craftiroExercises'
 import {
     getArrayFromStringSeperatedByComma,
     getDriveLinksArrayFromRowObject,
@@ -69,9 +69,11 @@ export const getCraftExerciseFromRowArray = (
                             type: 'textSegment',
                             text: rowObject.instructions || '',
                             id: 'instructions-text',
+                            systemId: 'instructions-text-system', // or generate a unique value as needed
                         },
                     ],
                     id: 'instructions',
+                    systemId: 'instructions-system', // or generate a unique value as needed
                 },
             ],
         },

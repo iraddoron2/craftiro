@@ -1,9 +1,9 @@
 import { Stack } from '@core'
-import { CraftTextSegment } from '@types'
+import { CraftiroTextSegment } from '@types'
 import Link from 'next/link'
 
 type Props = {
-    segment: CraftTextSegment
+    segment: CraftiroTextSegment
 }
 export const TextSegment = ({ segment }: Props) => {
     const { text, linkUrl } = segment

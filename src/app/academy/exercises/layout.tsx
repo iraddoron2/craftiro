@@ -1,7 +1,7 @@
 'use client'
 
 import { CraftExercisesContext } from '@/context/craftExercisesContext'
-import { CraftExercise } from '@/types/craftExercises'
+import { CraftExercise } from '@/types/craftiroExercises'
 import { fetchCraftExercisesCsv } from '@/utils/csv'
 import { getParsedCraftExercises } from '@/utils/csv/getParsedCraftExercises'
 import { Stack } from '@core'
