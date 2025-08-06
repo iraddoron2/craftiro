@@ -1,7 +1,7 @@
 'use client'
 
 import { useCraftExercises } from '@/context/craftExercisesContext'
-import { CraftTextSegment } from '@/types'
+import { CraftiroTextSegment } from '@/types'
 import { Stack, Text } from '@core'
 import { Paragraph as CraftParagraph } from '@craftElements/base/Paragraph'
 import { useParams } from 'next/navigation'
@@ -23,20 +23,21 @@ export default function Page() {
     const { baseDetails } = exercise
     const { instructions = [] } = baseDetails
 
-    // רנדר של פסקאות/הוראות (CraftElement)
+    // רנדר של פסקאות/הוראות (CraftiroElement)
     const Instructions = instructions.map((instruction, index) => {
         if (!instruction || instruction.type !== 'paragraph') {
             return null // Skip null or non-paragraph instructions
         }
-        const { id, content } = instruction as {
+        const { id, content, systemId } = instruction as {
             id: string
             type: 'paragraph'
-            content: CraftTextSegment[]
+            content: CraftiroTextSegment[]
+            systemId: string
         }
         return (
             <CraftParagraph
                 key={index}
-                paragraph={{ id, type: 'paragraph', content }}
+                paragraph={{ id, type: 'paragraph', content, systemId }}
             />
         )
     })

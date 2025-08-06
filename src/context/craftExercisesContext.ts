@@ -1,6 +1,6 @@
 // src/context/CraftExercisesContext.tsx
 
-import { CraftExercise } from '@/types/craftExercises'
+import { CraftExercise } from '@/types/craftiroExercises'
 import { createContext, useContext } from 'react'
 
 export type CraftExercisesContextType = {

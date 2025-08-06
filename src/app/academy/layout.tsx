@@ -96,6 +96,7 @@ export default function Layout({
                               { href: '/academy', label: 'עמוד בית' },
                               { href: '/academy/modules', label: 'מודולים' },
                               { href: '/academy/exercises', label: 'תרגילים' },
+                              { href: '/academy/courses', label: 'קורסים' },
                           ]
                         : [
                               { href: '/academy', label: 'עמוד בית' },

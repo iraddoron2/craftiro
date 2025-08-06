@@ -1,4 +1,4 @@
-import { CraftExercise } from '@/types/craftExercises'
+import { CraftExercise } from '@/types/craftiroExercises'
 import { getCraftExerciseFromRowArray, getCsvRows } from '../csv'
 
 export const getParsedCraftExercises = (csvText: string): CraftExercise[] => {
