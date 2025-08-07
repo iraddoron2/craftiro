@@ -1,13 +1,13 @@
 'use client'
 
-import { useCraftExercises } from '@/context/craftExercisesContext'
+import { useCraftiroExercises } from '@/context/craftiroExercisesContext'
 import { Stack, Text } from '@core'
 import { useParams } from 'next/navigation'
-import { CraftExerciseCard } from '../../_components'
+import { CraftiroExerciseCard } from '../../_components'
 
 export default function Page() {
     const { systemId } = useParams<{ systemId: string }>()
-    const { exercises } = useCraftExercises()
+    const { exercises } = useCraftiroExercises()
 
     const exercise = exercises.find((ex) => ex.systemId === systemId)
 
@@ -46,9 +46,9 @@ export default function Page() {
             }}
         >
             {relatedExercises.map((exercise) => (
-                <CraftExerciseCard
+                <CraftiroExerciseCard
                     key={exercise.systemId}
-                    craftExercise={exercise}
+                    craftiroExercise={exercise}
                 />
             ))}
         </Stack>

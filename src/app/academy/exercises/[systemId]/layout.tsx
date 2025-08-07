@@ -1,6 +1,6 @@
 'use client'
 
-import { useCraftExercises } from '@/context/craftExercisesContext'
+import { useCraftiroExercises } from '@/context/craftiroExercisesContext'
 import { Button, Stack, Text } from '@core'
 import { useTheme } from '@hooks'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 export default function Layout({
     children,
 }: Readonly<{ children: React.ReactNode }>) {
-    const { exercises } = useCraftExercises()
+    const { exercises } = useCraftiroExercises()
     const { systemId } = useParams<{ systemId: string }>()
     const theme = useTheme()
     const [isMobile, setIsMobile] = useState<boolean | null>(null)

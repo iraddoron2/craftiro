@@ -1,4 +1,4 @@
-export * from './craftExercise'
+export * from './craftiroExercise'
 export * from './exerciseBase'
 export * from './exerciseDiagramStyle'
 export * from './exerciseVersion'

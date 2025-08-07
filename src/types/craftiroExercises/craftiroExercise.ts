@@ -1,3 +1,3 @@
 import { PianoScorePlayingExercise } from './pianoScorePlaying'
 
-export type CraftExercise = PianoScorePlayingExercise
+export type CraftiroExercise = PianoScorePlayingExercise

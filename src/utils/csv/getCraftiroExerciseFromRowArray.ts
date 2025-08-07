@@ -6,19 +6,22 @@ import {
     ExerciseTargetAudience,
     ExerciseType,
 } from '@/types'
-import { CraftExercise, ExerciseDiagramStyle } from '@/types/craftiroExercises'
+import {
+    CraftiroExercise,
+    ExerciseDiagramStyle,
+} from '@/types/craftiroExercises'
 import {
     getArrayFromStringSeperatedByComma,
     getDriveLinksArrayFromRowObject,
     getRowObject,
-} from '../csv'
+} from '.'
 
-export const getCraftExerciseFromRowArray = (
+export const getCraftiroExerciseFromRowArray = (
     row: string[],
     csvText: string
-): CraftExercise => {
+): CraftiroExercise => {
     const rowObject = getRowObject(row, csvText)
-    const craftExercise: CraftExercise = {
+    const craftiroExercise: CraftiroExercise = {
         _id: rowObject._id || '',
         systemId: rowObject._id || '',
         meta: {
@@ -108,5 +111,5 @@ export const getCraftExerciseFromRowArray = (
         },
     }
 
-    return craftExercise
+    return craftiroExercise
 }

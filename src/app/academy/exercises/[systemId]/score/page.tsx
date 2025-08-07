@@ -1,6 +1,6 @@
 'use client'
 
-import { useCraftExercises } from '@/context/craftExercisesContext'
+import { useCraftiroExercises } from '@/context/craftiroExercisesContext'
 import { Stack, Text } from '@core'
 import { useTheme } from '@hooks'
 import { useParams } from 'next/navigation'
@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation'
 export default function Page() {
     const { systemId } = useParams<{ systemId: string }>()
     const theme = useTheme()
-    const { exercises } = useCraftExercises()
+    const { exercises } = useCraftiroExercises()
 
     // מוצא את התרגיל לפי ה־systemId מתוך קונטקסט
     const exercise = exercises.find((ex) => ex.systemId === systemId)

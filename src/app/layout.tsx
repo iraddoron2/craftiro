@@ -2,7 +2,7 @@ import {
     ProfileButtonBox,
     ProfileButtonContent,
 } from '@/components/shared/MainNavbar/_components'
-import { UserStoreHydrator } from '@/providers/UserStoreHydrator'
+import { UserStoreProvider } from '@/providers/UserStoreProvider'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { MainNavbar, NextAuthProvider } from '@shared'
 import type { Metadata } from 'next'
@@ -28,7 +28,7 @@ export default function RootLayout({
             <body className={assistant.className}>
                 <AppRouterCacheProvider>
                     <NextAuthProvider>
-                        <UserStoreHydrator>
+                        <UserStoreProvider>
                             <header
                                 style={{
                                     position: 'relative',
@@ -45,8 +45,9 @@ export default function RootLayout({
                                     }
                                 />
                             </header>
+
                             <PageContainer>{children}</PageContainer>
-                        </UserStoreHydrator>
+                        </UserStoreProvider>
                     </NextAuthProvider>
                 </AppRouterCacheProvider>
             </body>

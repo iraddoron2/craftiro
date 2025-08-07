@@ -1,3 +1,5 @@
+'use client'
+
 import { CraftiroElement } from '@/types'
 import {
     CraftiroCourse,
@@ -6,6 +8,7 @@ import {
     CraftiroCourseScreenType,
     CraftiroCourseStep,
 } from '@/types/craftiroCourses'
+// import { craftiroError } from '@/utils'
 
 type CraftiroCourseCsvHeaders = {
     _id: string
@@ -46,8 +49,13 @@ type CraftiroCourseCsvHeaders = {
 
 export const converParsedCoursesCsvToCoursesObject = (
     parsedCsv: string[][]
-): CraftiroCourse[] => {
+): CraftiroCourse[] | null => {
+    if (!parsedCsv || parsedCsv.length === 0) {
+        return null
+    }
+
     const headers = parsedCsv[0]
+
     const headerIndexes = {} as Record<keyof CraftiroCourseCsvHeaders, number>
     headers.forEach((header, index) => {
         headerIndexes[header as keyof CraftiroCourseCsvHeaders] = index

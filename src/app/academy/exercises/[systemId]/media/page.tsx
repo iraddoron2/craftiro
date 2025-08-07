@@ -1,6 +1,6 @@
 'use client'
 
-import { useCraftExercises } from '@/context/craftExercisesContext'
+import { useCraftiroExercises } from '@/context/craftiroExercisesContext'
 import { ExerciseVersion } from '@/types/craftiroExercises'
 import { Button, Stack, Text } from '@core'
 import Link from 'next/link'
@@ -9,7 +9,7 @@ import { ExerciseDetailCard } from '../../_components'
 
 export default function Page() {
     // שליפת כל התרגילים מהקונטקסט
-    const { exercises } = useCraftExercises()
+    const { exercises } = useCraftiroExercises()
     // קבלת systemId מה־URL
     const { systemId } = useParams<{ systemId: string }>()
 

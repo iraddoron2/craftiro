@@ -1,6 +1,6 @@
 'use client'
 
-import { CraftExercise } from '@/types/craftiroExercises'
+import { CraftiroExercise } from '@/types/craftiroExercises'
 import { Button, Stack, Text } from '@core'
 import { useTheme } from '@hooks'
 import { colors } from '@styles'
@@ -8,18 +8,18 @@ import { useRouter } from 'next/navigation'
 import { getTermsTranslate } from '../../utils'
 
 type Props = {
-    craftExercise: CraftExercise
+    craftiroExercise: CraftiroExercise
 }
 
-export const CraftExerciseCard = ({ craftExercise }: Props) => {
+export const CraftiroExerciseCard = ({ craftiroExercise }: Props) => {
     const router = useRouter()
     const theme = useTheme()
 
     const handleClick = () => {
-        router.push(`/academy/exercises/${craftExercise.systemId}/info`)
+        router.push(`/academy/exercises/${craftiroExercise.systemId}/info`)
     }
 
-    const { systemId, baseDetails } = craftExercise
+    const { systemId, baseDetails } = craftiroExercise
     const { name, description, exerciseType = 'Unknown' } = baseDetails
 
     return (

@@ -1,12 +1,12 @@
 'use client'
 
-import { useCraftExercises } from '@/context/craftExercisesContext'
+import { useCraftiroExercises } from '@/context/craftiroExercisesContext'
 import { useTabsNavbar } from '@/lib'
 import { LinksGroups } from '@/types'
 import { Stack, Text } from '@core'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
-import { CraftExerciseCard } from './_components'
+import { CraftiroExerciseCard } from './_components'
 
 export default function Page() {
     const pathname = usePathname()
@@ -14,7 +14,7 @@ export default function Page() {
     const linksGroups: LinksGroups = useMemo(() => [[]], [])
 
     // משיכת התרגילים מהקונטקסט
-    const { exercises } = useCraftExercises()
+    const { exercises } = useCraftiroExercises()
 
     useEffect(() => {
         if (tabsNavbar.currentPath !== pathname) {
@@ -46,9 +46,9 @@ export default function Page() {
                 }}
             >
                 {exercises.map((exercise) => (
-                    <CraftExerciseCard
+                    <CraftiroExerciseCard
                         key={exercise.systemId}
-                        craftExercise={exercise}
+                        craftiroExercise={exercise}
                     />
                 ))}
             </Stack>
