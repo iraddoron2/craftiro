@@ -1,19 +1,21 @@
 'use client'
 
-import { CraftExercisesContext } from '@/context/craftExercisesContext'
-import { CraftExercise } from '@/types/craftiroExercises'
-import { fetchCraftExercisesCsv } from '@/utils/csv'
-import { getParsedCraftExercises } from '@/utils/csv/getParsedCraftExercises'
+import { CraftiroExercisesContext } from '@/context/craftiroExercisesContext'
+import { CraftiroExercise } from '@/types/craftiroExercises'
+import {
+    fetchCraftiroExercisesCsv,
+    getParsedCraftiroExercises,
+} from '@/utils/csv'
 import { Stack } from '@core'
 import { useEffect, useState } from 'react'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-    const [exercises, setExercises] = useState<CraftExercise[] | null>(null)
+    const [exercises, setExercises] = useState<CraftiroExercise[] | null>(null)
 
     useEffect(() => {
         const fetchAndSet = async () => {
-            const csvText = await fetchCraftExercisesCsv()
-            const parsedCsv = getParsedCraftExercises(csvText)
+            const csvText = await fetchCraftiroExercisesCsv()
+            const parsedCsv = getParsedCraftiroExercises(csvText)
             setExercises(parsedCsv)
         }
         fetchAndSet()
@@ -34,10 +36,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 minHeight: '100vh',
             }}
         >
-            <CraftExercisesContext.Provider value={{ exercises }}>
-                {/* <pre>{JSON.stringify(exercises, null, 2)}</pre> */}
+            <h1>תרגילים</h1>
+            <CraftiroExercisesContext.Provider value={{ exercises }}>
                 {children}
-            </CraftExercisesContext.Provider>
+            </CraftiroExercisesContext.Provider>
         </Stack>
     )
 }

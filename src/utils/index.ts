@@ -93,3 +93,21 @@ export function createColorPalette(
         lightest: scale[aliasMap?.lightest ?? 190],
     }
 }
+
+// export const craftiroError = (message: string) => {
+//     console.error(`👻🐞🚨🚨🚨🚨🚨 Craftiro Error: ${message}`)
+//     throw new Error(message)
+// }
+
+export const craftiroError = (message: string) => {
+    const header = '%c🚨🐞 Craftiro Error 🐞🚨'
+    const styleHeader = 'color: red; font-weight: bold; font-size: 14px;'
+    const styleMessage = 'color: white; font-size: 18px;'
+
+    console.groupCollapsed(header, styleHeader)
+    console.error('%c' + message, styleMessage)
+    console.trace()
+    console.groupEnd()
+
+    throw new Error(message)
+}

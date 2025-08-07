@@ -1,14 +1,11 @@
 'use client'
 
-import { useUser } from '@/hooks'
+// import { useUser } from '@/hooks'
+import { useUserStore } from '@/store/userStore'
 import { isAdmin } from '@/utils'
 
 export default function Page() {
-    const { user, isLoading, error } = useUser()
-
-    if (isLoading) return <h1>Loading...</h1>
-
-    if (error) return <h1>Error: {error.message}</h1>
+    const { user } = useUserStore()
 
     if (user === null) return <h1>Unauthorized</h1>
 

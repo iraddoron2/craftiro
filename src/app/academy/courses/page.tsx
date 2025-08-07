@@ -1,67 +1,46 @@
 'use client'
 
-import {
-    converParsedCoursesCsvToCoursesObject,
-    fetchCsv,
-    parsedCsv,
-} from '@/utils/csv'
+import { useCraftiroCourses } from '@/context/craftiroCoursesContext'
+import { useTabsNavbar } from '@/lib'
+import { LinksGroups } from '@/types'
 import { Stack } from '@core'
-import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { useEffect, useMemo } from 'react'
+import { CourseCard } from './_components'
 
 export default function Page() {
-    const [parsedCsvData, setParsedCsvData] = useState<string[][]>([])
-    const [showObject, setShowObject] = useState(false)
+    const pathname = usePathname()
+    const tabsNavbar = useTabsNavbar()
+    const linksGroups: LinksGroups = useMemo(() => [[]], [])
 
-    const handleShowObject = () => {
-        setShowObject(!showObject)
-    }
+    // משיכת הקורסים מהקונטקסט
+    const { courses } = useCraftiroCourses()
 
     useEffect(() => {
-        const fetchData = async () => {
-            const csvPath = '/data/craftiroCoursesData.csv'
-            const csvText = await fetchCsv(csvPath)
-            const data = parsedCsv(csvText)
-            setParsedCsvData(data)
+        if (tabsNavbar.currentPath !== pathname) {
+            tabsNavbar.updateCurrentPath(pathname)
+            tabsNavbar.updateLinksGroups(linksGroups)
         }
-        fetchData()
-    }, [])
+    }, [linksGroups, pathname, tabsNavbar])
 
     return (
-        <Stack
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-end',
-                justifyContent: 'flex-start',
-                width: '100%',
-            }}
-        >
-            <h1>courses</h1>
-            <button onClick={handleShowObject}>
-                {showObject ? 'Hide Object' : 'Show Object'}
-            </button>
-            {showObject && (
-                <pre
-                    style={{
-                        direction: 'ltr',
-                    }}
-                >
-                    {JSON.stringify(
-                        converParsedCoursesCsvToCoursesObject(parsedCsvData),
-                        null,
-                        2
-                    )}
-                </pre>
-            )}
-            {!showObject && (
-                <pre
-                    style={{
-                        direction: 'ltr',
-                    }}
-                >
-                    {JSON.stringify(parsedCsvData, null, 2)}
-                </pre>
-            )}
+        <Stack>
+            <h1>Craftiro Courses</h1>
+            <Stack
+                sx={{
+                    width: '100%',
+                    maxWidth: '1600px',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    gap: '40px',
+                    flexDirection: 'row',
+                }}
+            >
+                {courses.length === 0 && <div>טוען קורסים...</div>}
+            </Stack>
+            {courses.map((course) => (
+                <CourseCard key={course.systemId} course={course} />
+            ))}
         </Stack>
     )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useCraftExercises } from '@/context/craftExercisesContext'
+import { useCraftiroExercises } from '@/context/craftiroExercisesContext'
 import { CraftiroTextSegment } from '@/types'
 import { Stack, Text } from '@core'
 import { Paragraph as CraftParagraph } from '@craftElements/base/Paragraph'
@@ -9,7 +9,7 @@ import { ExerciseDetailCard } from '../../_components'
 
 export default function Page() {
     // קבלת כל התרגילים מהקונטקסט
-    const { exercises } = useCraftExercises()
+    const { exercises } = useCraftiroExercises()
     // שליפת systemId מהכתובת
     const { systemId } = useParams<{ systemId: string }>()
 

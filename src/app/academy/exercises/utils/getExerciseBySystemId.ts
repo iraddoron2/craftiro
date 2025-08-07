@@ -1,8 +1,8 @@
-import { CraftExercise } from '@/types/craftiroExercises'
+import { CraftiroExercise } from '@/types/craftiroExercises'
 
 export const getExerciseBySystemId = (
-    exercise: CraftExercise[],
+    exercise: CraftiroExercise[],
     systemId: string
-): CraftExercise | undefined => {
+): CraftiroExercise | undefined => {
     return exercise.find((ex) => ex.systemId === systemId)
 }

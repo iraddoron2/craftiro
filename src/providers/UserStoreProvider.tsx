@@ -3,7 +3,7 @@
 import { useUserStore } from '@/store/userStore'
 import { ReactNode, useEffect } from 'react'
 
-export function UserStoreHydrator({ children }: { children: ReactNode }) {
+export function UserStoreProvider({ children }: { children: ReactNode }) {
     const updateUser = useUserStore((state) => state.updateUser)
 
     useEffect(() => {

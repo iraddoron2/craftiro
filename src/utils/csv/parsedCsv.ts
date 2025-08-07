@@ -1,3 +1,5 @@
+'use client'
+
 import { parse } from 'csv-parse/browser/esm'
 
 export const parsedCsv = (csvText: string): string[][] => {
