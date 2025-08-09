@@ -1,27 +1,48 @@
 'use client'
 
-import { useCraftiroExercises } from '@/context/craftiroExercisesContext'
-import { useTabsNavbar } from '@/lib'
+import { useCraftiroExercisesStore } from '@/store/craftiroExercisesStore'
+import { useTabsNavbarStore } from '@/store/tabsNavbarStore' // ← use your actual path
 import { LinksGroups } from '@/types'
 import { Stack, Text } from '@core'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 import { CraftiroExerciseCard } from './_components'
 
-export default function Page() {
+export default function ExercisesPage() {
     const pathname = usePathname()
-    const tabsNavbar = useTabsNavbar()
+
+    // Navbar store: select only what you need (stable selectors)
+    const currentPath = useTabsNavbarStore((s) => s.currentPath)
+    const updateCurrentPath = useTabsNavbarStore((s) => s.updateCurrentPath)
+    const updateLinksGroups = useTabsNavbarStore((s) => s.updateLinksGroups)
+
+    // Stable links groups (adjust when you have real tabs)
     const linksGroups: LinksGroups = useMemo(() => [[]], [])
 
-    // משיכת התרגילים מהקונטקסט
-    const { exercises } = useCraftiroExercises()
+    // Exercises state from Zustand
+    const craftiroExercises = useCraftiroExercisesStore(
+        (s) => s.craftiroExercises
+    )
+    const craftiroExercisesLoading = useCraftiroExercisesStore(
+        (s) => s.craftiroExercisesLoading
+    )
+    const craftiroExercisesError = useCraftiroExercisesStore(
+        (s) => s.craftiroExercisesError
+    )
 
+    // Sync navbar only when needed
     useEffect(() => {
-        if (tabsNavbar.currentPath !== pathname) {
-            tabsNavbar.updateCurrentPath(pathname)
-            tabsNavbar.updateLinksGroups(linksGroups)
+        if (currentPath !== pathname) {
+            updateCurrentPath(pathname)
+            updateLinksGroups(linksGroups)
         }
-    }, [linksGroups, pathname, tabsNavbar])
+    }, [
+        pathname,
+        currentPath,
+        updateCurrentPath,
+        updateLinksGroups,
+        linksGroups,
+    ])
 
     return (
         <Stack
@@ -34,24 +55,41 @@ export default function Page() {
                 padding: '32px',
             }}
         >
-            {exercises.length === 0 && <Text text="טוען תרגילים..." />}
-            <Stack
-                sx={{
-                    width: '100%',
-                    maxWidth: '1600px',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    gap: '40px',
-                    flexDirection: 'row',
-                }}
-            >
-                {exercises.map((exercise) => (
-                    <CraftiroExerciseCard
-                        key={exercise.systemId}
-                        craftiroExercise={exercise}
-                    />
-                ))}
-            </Stack>
+            {/* Loading */}
+            {craftiroExercisesLoading && <Text text="טוען תרגילים..." />}
+
+            {/* Error */}
+            {craftiroExercisesError && (
+                <Text
+                    text={`שגיאה: ${craftiroExercisesError}`}
+                    sx={{ color: '#c22' }}
+                />
+            )}
+
+            {/* Grid */}
+            {!craftiroExercisesLoading && !craftiroExercisesError && (
+                <Stack
+                    sx={{
+                        width: '100%',
+                        maxWidth: '1600px',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        gap: '40px',
+                        flexDirection: 'row',
+                    }}
+                >
+                    {craftiroExercises.length === 0 ? (
+                        <Text text="לא נמצאו תרגילים" />
+                    ) : (
+                        craftiroExercises.map((exercise) => (
+                            <CraftiroExerciseCard
+                                key={exercise.systemId}
+                                craftiroExercise={exercise}
+                            />
+                        ))
+                    )}
+                </Stack>
+            )}
         </Stack>
     )
 }

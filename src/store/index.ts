@@ -1,3 +1,5 @@
-export { useCoursesStore } from './coursesStore'
+export { useCraftiroCoursesStore } from './craftiroCoursesStore'
+export { useCraftiroExercisesStore } from './craftiroExercisesStore'
+export { useTabsNavbarStore } from './tabsNavbarStore'
 export { useThemeStore } from './themeStore'
 export { useUserStore } from './userStore'

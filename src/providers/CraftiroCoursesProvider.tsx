@@ -1,48 +1,54 @@
 'use client'
 
-import { useCoursesStore } from '@/store/coursesStore'
-import {
-    converParsedCoursesCsvToCoursesObject,
-    fetchCsv,
-    parsedCsv,
-} from '@/utils/csv'
-import { useEffect } from 'react'
+import { useCraftiroCoursesStore } from '@/store'
+import { CraftiroCourse } from '@/types/craftiroCourses'
+import React, { useEffect } from 'react'
 
 export const CraftiroCoursesProvider = ({
     children,
 }: {
     children: React.ReactNode
 }) => {
-    const setCourses = useCoursesStore((s) => s.setCourses)
-    const setLoading = useCoursesStore((s) => s.setLoading)
-    const setError = useCoursesStore((s) => s.setError)
+    const setCraftiroCourses = useCraftiroCoursesStore(
+        (s) => s.setCraftiroCourses
+    )
+    const setCraftiroCoursesLoading = useCraftiroCoursesStore(
+        (s) => s.setCraftiroCoursesLoading
+    )
+    const setCraftiroCoursesError = useCraftiroCoursesStore(
+        (s) => s.setCraftiroCoursesError
+    )
 
     useEffect(() => {
-        const loadCourses = async () => {
+        const loadCraftiroCourses = async () => {
             try {
-                setLoading(true)
-                const csvText = await fetchCsv('/data/craftiroCoursesData.csv')
-                console.log('CSV text from provider:', csvText)
-                if (!csvText) {
+                setCraftiroCoursesLoading(true)
+
+                // Fetch courses from API
+                const res = await fetch('/api/academy/courses')
+                if (!res.ok) {
                     throw new Error(
-                        'Craftiro Error! CSV text is empty or undefined'
+                        `Failed to fetch CraftiroCourses: ${res.status}`
                     )
                 }
-                const parsed = parsedCsv(csvText)
-                console.log('Parsed CSV from provider:', parsed)
-                const courses = converParsedCoursesCsvToCoursesObject(parsed)
-                setCourses(courses ?? [])
-                console.log('courses saved to store:', courses)
+
+                // Extract courses array from response
+                const { courses } = (await res.json()) as {
+                    courses: CraftiroCourse[]
+                }
+
+                // Update store
+                setCraftiroCourses(courses)
             } catch (err) {
-                console.error('Craftiro Error! Error loading courses:', err)
-                setError(err as Error)
+                console.error('Craftiro Error! loading courses:', err)
+                setCraftiroCoursesError((err as Error).message)
             } finally {
-                setLoading(false)
+                setCraftiroCoursesLoading(false)
             }
         }
 
-        loadCourses()
-    }, [setCourses, setError, setLoading])
+        loadCraftiroCourses()
+    }, [setCraftiroCourses, setCraftiroCoursesLoading, setCraftiroCoursesError])
 
     return <>{children}</>
 }

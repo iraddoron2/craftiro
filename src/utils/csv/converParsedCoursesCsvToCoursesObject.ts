@@ -1,5 +1,3 @@
-'use client'
-
 import { CraftiroElement } from '@/types'
 import {
     CraftiroCourse,
@@ -8,13 +6,13 @@ import {
     CraftiroCourseScreenType,
     CraftiroCourseStep,
 } from '@/types/craftiroCourses'
-// import { craftiroError } from '@/utils'
 
 type CraftiroCourseCsvHeaders = {
     _id: string
     systemId: string
     name: string
     seriesId: string
+    courseState: string
     authorsIds: string
     betaDocLink: string
     betaDriveFolder: string
@@ -103,6 +101,10 @@ export const converParsedCoursesCsvToCoursesObject = (
                 systemId: row[headerIndexes.systemId],
                 name: row[headerIndexes.name],
                 seriesId: row[headerIndexes.seriesId],
+                courseState: row[headerIndexes.courseState] as
+                    | 'draft'
+                    | 'beta'
+                    | 'published',
                 authorsIds: convertStringToTrimmedArray(
                     row[headerIndexes.authorsIds]
                 ),

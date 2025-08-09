@@ -1,46 +1,71 @@
 'use client'
 
-import { useCraftiroCourses } from '@/context/craftiroCoursesContext'
-import { useTabsNavbar } from '@/lib'
+import { useTabsNavbarStore } from '@/store' // ← חשוב: גישה ישירה ל-store
+import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
 import { LinksGroups } from '@/types'
 import { Stack } from '@core'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 import { CourseCard } from './_components'
 
-export default function Page() {
+export default function CoursesPage() {
     const pathname = usePathname()
-    const tabsNavbar = useTabsNavbar()
+
+    // Pull only what you need from the navbar store (separate selectors)
+    const currentPath = useTabsNavbarStore((s) => s.currentPath)
+    const updateCurrentPath = useTabsNavbarStore((s) => s.updateCurrentPath)
+    const updateLinksGroups = useTabsNavbarStore((s) => s.updateLinksGroups)
+
+    // Stable linksGroups value
     const linksGroups: LinksGroups = useMemo(() => [[]], [])
 
-    // משיכת הקורסים מהקונטקסט
-    const { courses } = useCraftiroCourses()
+    // Pull courses state from Zustand store (separate selectors)
+    const craftiroCourses = useCraftiroCoursesStore((s) => s.craftiroCourses)
+    const craftiroCoursesLoading = useCraftiroCoursesStore(
+        (s) => s.craftiroCoursesLoading
+    )
+    const craftiroCoursesError = useCraftiroCoursesStore(
+        (s) => s.craftiroCoursesError
+    )
 
+    // Update navbar ONLY when the path actually changes
     useEffect(() => {
-        if (tabsNavbar.currentPath !== pathname) {
-            tabsNavbar.updateCurrentPath(pathname)
-            tabsNavbar.updateLinksGroups(linksGroups)
+        if (currentPath !== pathname) {
+            updateCurrentPath(pathname)
+            updateLinksGroups(linksGroups)
         }
-    }, [linksGroups, pathname, tabsNavbar])
+        // deps רק על מה שבאמת משתנה; אל תשים את כל האובייקט tabsNavbar
+    }, [
+        pathname,
+        currentPath,
+        updateCurrentPath,
+        updateLinksGroups,
+        linksGroups,
+    ])
 
     return (
         <Stack>
             <h1>Craftiro Courses</h1>
-            <Stack
-                sx={{
-                    width: '100%',
-                    maxWidth: '1600px',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    gap: '40px',
-                    flexDirection: 'row',
-                }}
-            >
-                {courses.length === 0 && <div>טוען קורסים...</div>}
-            </Stack>
-            {courses.map((course) => (
-                <CourseCard key={course.systemId} course={course} />
-            ))}
+
+            {craftiroCoursesLoading && <div>טוען קורסים...</div>}
+            {craftiroCoursesError && <div>שגיאה: {craftiroCoursesError}</div>}
+
+            {!craftiroCoursesLoading && !craftiroCoursesError && (
+                <Stack
+                    sx={{
+                        width: '100%',
+                        maxWidth: '1600px',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        gap: '40px',
+                        flexDirection: 'row',
+                    }}
+                >
+                    {craftiroCourses.map((course) => (
+                        <CourseCard key={course.systemId} course={course} />
+                    ))}
+                </Stack>
+            )}
         </Stack>
     )
 }

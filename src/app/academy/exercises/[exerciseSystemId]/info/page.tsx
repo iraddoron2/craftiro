@@ -1,20 +1,33 @@
 'use client'
 
-import { useCraftiroExercises } from '@/context/craftiroExercisesContext'
+import { useCraftiroExercisesStore } from '@/store/craftiroExercisesStore'
 import { CraftiroTextSegment } from '@/types'
 import { Stack, Text } from '@core'
 import { Paragraph as CraftParagraph } from '@craftElements/base/Paragraph'
 import { useParams } from 'next/navigation'
+import { useMemo } from 'react'
 import { ExerciseDetailCard } from '../../_components'
 
-export default function Page() {
-    // קבלת כל התרגילים מהקונטקסט
-    const { exercises } = useCraftiroExercises()
-    // שליפת systemId מהכתובת
-    const { systemId } = useParams<{ systemId: string }>()
+export default function ExerciseInfoPage() {
+    // Read route param ([exerciseSystemId] folder)
+    const { exerciseSystemId } = useParams<{ exerciseSystemId: string }>()
 
-    // חיפוש התרגיל הרלוונטי
-    const exercise = exercises.find((ex) => ex.systemId === systemId)
+    // Pull exercises state from Zustand (separate selectors keep snapshots stable)
+    const craftiroExercises = useCraftiroExercisesStore(
+        (s) => s.craftiroExercises
+    )
+
+    // Find current exercise by systemId (or _id as fallback if needed)
+    const exercise = useMemo(() => {
+        if (!craftiroExercises?.length || !exerciseSystemId) return null
+        return (
+            craftiroExercises.find(
+                (ex) =>
+                    ex.systemId === exerciseSystemId ||
+                    ex._id === exerciseSystemId
+            ) ?? null
+        )
+    }, [craftiroExercises, exerciseSystemId])
 
     if (!exercise) {
         return <Text variant="h2" text="תרגיל לא נמצא" />
@@ -23,11 +36,9 @@ export default function Page() {
     const { baseDetails } = exercise
     const { instructions = [] } = baseDetails
 
-    // רנדר של פסקאות/הוראות (CraftiroElement)
-    const Instructions = instructions.map((instruction, index) => {
-        if (!instruction || instruction.type !== 'paragraph') {
-            return null // Skip null or non-paragraph instructions
-        }
+    // Render paragraph instructions only
+    const Instructions = instructions.map((instruction, idx) => {
+        if (!instruction || instruction.type !== 'paragraph') return null
         const { id, content, systemId } = instruction as {
             id: string
             type: 'paragraph'
@@ -36,7 +47,7 @@ export default function Page() {
         }
         return (
             <CraftParagraph
-                key={index}
+                key={systemId || id || idx}
                 paragraph={{ id, type: 'paragraph', content, systemId }}
             />
         )
