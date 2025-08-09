@@ -5,6 +5,7 @@ export type CraftiroCourse = {
     systemId: string // system identifier for the course
     name: string // name of the course
     seriesId: string // identifier for the series this course belongs to
+    courseState: 'draft' | 'beta' | 'published' // state of the course
     betaDocLink?: string // link to the beta documentation
     betaDriveFolder?: string // link to the beta drive folder
     shortDescription: string // brief description of the course

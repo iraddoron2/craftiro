@@ -1,24 +1,48 @@
 'use client'
 
-import { useCraftiroExercises } from '@/context/craftiroExercisesContext'
+import { useCraftiroExercisesStore } from '@/store/craftiroExercisesStore'
 import { Stack, Text } from '@core'
 import { useTheme } from '@hooks'
 import { useParams } from 'next/navigation'
+import { useMemo } from 'react'
 
-export default function Page() {
-    const { systemId } = useParams<{ systemId: string }>()
+export default function ExerciseScorePage() {
+    // Route param from [exerciseSystemId]
+    const { exerciseSystemId } = useParams<{ exerciseSystemId: string }>()
     const theme = useTheme()
-    const { exercises } = useCraftiroExercises()
 
-    // מוצא את התרגיל לפי ה־systemId מתוך קונטקסט
-    const exercise = exercises.find((ex) => ex.systemId === systemId)
+    // Zustand selectors (separate for stable snapshots)
+    const craftiroExercises = useCraftiroExercisesStore(
+        (s) => s.craftiroExercises
+    )
+    const craftiroExercisesLoading = useCraftiroExercisesStore(
+        (s) => s.craftiroExercisesLoading
+    )
+    const craftiroExercisesError = useCraftiroExercisesStore(
+        (s) => s.craftiroExercisesError
+    )
 
-    if (!exercise) {
-        return <Text variant="h2" text="תרגיל לא נמצא" />
-    }
+    // Resolve current exercise (by systemId, fallback to _id if needed)
+    const exercise = useMemo(() => {
+        if (!craftiroExercises?.length || !exerciseSystemId) return null
+        return (
+            craftiroExercises.find(
+                (ex) =>
+                    ex.systemId === exerciseSystemId ||
+                    ex._id === exerciseSystemId
+            ) ?? null
+        )
+    }, [craftiroExercises, exerciseSystemId])
 
-    const { baseEvaluation } = exercise
-    const { xpScore, skillsScore } = baseEvaluation
+    // Loading / Error / Not found states
+    if (craftiroExercisesLoading)
+        return <Text variant="h2" text="טוען תרגיל..." />
+    if (craftiroExercisesError)
+        return <Text variant="h2" text={`שגיאה: ${craftiroExercisesError}`} />
+    if (!exercise) return <Text variant="h2" text="תרגיל לא נמצא" />
+
+    const xpScore = exercise.baseEvaluation?.xpScore ?? 0
+    const skillsScore = exercise.baseEvaluation?.skillsScore ?? 0
 
     return (
         <Stack
@@ -41,6 +65,7 @@ export default function Page() {
                     flexWrap: 'wrap',
                 }}
             >
+                {/* XP Score card */}
                 <Stack
                     sx={{
                         width: '300px',
@@ -65,19 +90,14 @@ export default function Page() {
                             }}
                         />
                     </Stack>
-                    <Stack
-                        sx={{
-                            height: 'fit-content',
-                        }}
-                    >
+                    <Stack sx={{ height: 'fit-content' }}>
                         <Text
                             variant="h3"
-                            text={(xpScore ?? 0).toString()}
+                            text={xpScore.toString()}
                             sx={{
                                 color: theme.text.onContrastBackground,
                                 fontFamily: 'Assistant',
                                 fontSize: '52px',
-                                fontStyle: 'normal',
                                 fontWeight: 700,
                             }}
                         />
@@ -93,6 +113,8 @@ export default function Page() {
                         />
                     </Stack>
                 </Stack>
+
+                {/* Skills Score card */}
                 <Stack
                     sx={{
                         width: '300px',
@@ -117,19 +139,14 @@ export default function Page() {
                             }}
                         />
                     </Stack>
-                    <Stack
-                        sx={{
-                            height: 'fit-content',
-                        }}
-                    >
+                    <Stack sx={{ height: 'fit-content' }}>
                         <Text
                             variant="h3"
-                            text={(skillsScore ?? 0).toString()}
+                            text={skillsScore.toString()}
                             sx={{
                                 color: theme.text.onContrastBackground,
                                 fontFamily: 'Assistant',
                                 fontSize: '52px',
-                                fontStyle: 'normal',
                                 fontWeight: 700,
                             }}
                         />

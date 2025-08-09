@@ -1,53 +1,90 @@
 'use client'
 
-import { useCraftiroCourses } from '@/context/craftiroCoursesContext'
+import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
 import { CraftiroCourse } from '@/types/craftiroCourses'
 import { Button, Stack, Text } from '@core'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 
-export default function Page() {
-    const [course, setCourse] = useState<CraftiroCourse | null>(null)
+export default function CoursePage() {
     const { courseSystemId } = useParams<{ courseSystemId: string }>()
-    const { courses } = useCraftiroCourses()
 
-    useEffect(() => {
-        const foundCourse = courses.find((c) => c.systemId === courseSystemId)
-        if (foundCourse) {
-            setCourse(foundCourse)
-        } else {
-            console.error('Course not found:', courseSystemId)
+    // Select from Zustand store (separate selectors to avoid getSnapshot loop)
+    const craftiroCourses = useCraftiroCoursesStore((s) => s.craftiroCourses)
+    const craftiroCoursesLoading = useCraftiroCoursesStore(
+        (s) => s.craftiroCoursesLoading
+    )
+    const craftiroCoursesError = useCraftiroCoursesStore(
+        (s) => s.craftiroCoursesError
+    )
+
+    // Find course once inputs change
+    const course: CraftiroCourse | null = useMemo(() => {
+        if (!craftiroCourses?.length || !courseSystemId) return null
+        return (
+            craftiroCourses.find((c) => c.systemId === courseSystemId) ?? null
+        )
+    }, [craftiroCourses, courseSystemId])
+
+    // Map numeric difficulty to label
+    const getDifficultyLabel = (diff?: number) => {
+        switch (diff) {
+            case 1:
+                return 'מתחילים'
+            case 2:
+                return 'קל'
+            case 3:
+                return 'בינוני'
+            case 4:
+                return 'מתקדם'
+            case 5:
+                return 'מאתגר'
+            default:
+                return 'לא ידוע'
         }
-    }, [courseSystemId, courses])
+    }
 
-    if (!course) {
+    // Loading state
+    if (craftiroCoursesLoading) {
         return (
             <Stack sx={{ padding: '40px', alignItems: 'center' }}>
-                <h2>courseSystemId: {courseSystemId}</h2>
-                <h2>course</h2>
-                <pre
-                    style={{
-                        whiteSpace: 'pre-wrap',
-                        wordBreak: 'break-word',
-                        maxWidth: '600px',
-                        marginBottom: '20px',
-                    }}
-                >
-                    {JSON.stringify(course, null, 2)}
-                </pre>
-                <h2>Courses</h2>
-                <pre
-                    style={{
-                        whiteSpace: 'pre-wrap',
-                        wordBreak: 'break-word',
-                        maxWidth: '600px',
-                    }}
-                >
-                    {JSON.stringify(courses, null, 2)}
-                </pre>
+                <Text variant="h2" text="טוען קורס..." />
+            </Stack>
+        )
+    }
 
+    // Error state
+    if (craftiroCoursesError) {
+        return (
+            <Stack sx={{ padding: '40px', alignItems: 'center', gap: '16px' }}>
+                <Text
+                    variant="h2"
+                    text="שגיאה בטעינת קורס"
+                    sx={{ color: '#C72222' }}
+                />
+                <Text
+                    variant="caption"
+                    text={craftiroCoursesError}
+                    sx={{ color: '#C72222' }}
+                />
+                <Link href="/academy/courses">
+                    <Button label="חזרה לכל הקורסים" color="primary" />
+                </Link>
+            </Stack>
+        )
+    }
+
+    // Not found state
+    if (!course) {
+        return (
+            <Stack sx={{ padding: '40px', alignItems: 'center', gap: '16px' }}>
                 <Text variant="h2" text="הקורס לא נמצא" />
+                <Text
+                    variant="caption"
+                    text={`מזהה קורס: ${courseSystemId}`}
+                    sx={{ color: '#777' }}
+                />
                 <Link href="/academy/courses">
                     <Button label="חזרה לכל הקורסים" color="primary" />
                 </Link>
@@ -66,23 +103,6 @@ export default function Page() {
         levels,
     } = course
 
-    const getDifficultyLabel = (diff: number) => {
-        switch (diff) {
-            case 1:
-                return 'מתחילים'
-            case 2:
-                return 'קל'
-            case 3:
-                return 'בינוני'
-            case 4:
-                return 'מתקדם'
-            case 5:
-                return 'מאתגר'
-            default:
-                return 'לא ידוע'
-        }
-    }
-
     return (
         <Stack
             sx={{
@@ -97,28 +117,24 @@ export default function Page() {
             <Text
                 variant="h2"
                 text={name}
-                sx={{
-                    fontWeight: 700,
-                    fontSize: '2.2rem',
-                    color: '#2266C7',
-                }}
+                sx={{ fontWeight: 700, fontSize: '2.2rem', color: '#2266C7' }}
             />
-            <Text
-                variant="body1"
-                text={shortDescription}
-                sx={{
-                    color: '#444',
-                    fontWeight: 600,
-                    fontSize: '1.15rem',
-                }}
-            />
-            <Text
-                variant="body2"
-                text={longDescription}
-                sx={{ color: '#222', fontSize: '1rem' }}
-            />
+            {shortDescription && (
+                <Text
+                    variant="body1"
+                    text={shortDescription}
+                    sx={{ color: '#444', fontWeight: 600, fontSize: '1.15rem' }}
+                />
+            )}
+            {longDescription && (
+                <Text
+                    variant="body2"
+                    text={longDescription}
+                    sx={{ color: '#222', fontSize: '1rem' }}
+                />
+            )}
 
-            {/* רמת קושי + תגיות */}
+            {/* Difficulty + Tags */}
             <Stack
                 sx={{ flexDirection: 'row', gap: '20px', marginTop: '12px' }}
             >
@@ -127,7 +143,7 @@ export default function Page() {
                     text={`רמה: ${getDifficultyLabel(difficulty)}`}
                     sx={{ color: '#2266C7', fontWeight: 700 }}
                 />
-                {tags && tags.length > 0 && (
+                {!!tags?.length && (
                     <Stack sx={{ flexDirection: 'row', gap: '9px' }}>
                         {tags.map((tag) => (
                             <span
@@ -147,8 +163,8 @@ export default function Page() {
                 )}
             </Stack>
 
-            {/* נושאים עיקריים */}
-            {mainSubjects && mainSubjects.length > 0 && (
+            {/* Main Subjects */}
+            {!!mainSubjects?.length && (
                 <Stack
                     sx={{
                         flexDirection: 'row',
@@ -174,8 +190,8 @@ export default function Page() {
                 </Stack>
             )}
 
-            {/* מחברי הקורס */}
-            {authorsIds && authorsIds.length > 0 && (
+            {/* Authors */}
+            {!!authorsIds?.length && (
                 <Text
                     variant="caption"
                     text={`מורים/מחברים: ${authorsIds.join(', ')}`}
@@ -183,8 +199,8 @@ export default function Page() {
                 />
             )}
 
-            {/* רמות הקורס */}
-            {levels && levels.length > 0 && (
+            {/* Levels */}
+            {!!levels?.length && (
                 <Stack sx={{ width: '100%', marginTop: '32px', gap: '24px' }}>
                     <Text
                         variant="h3"
@@ -207,16 +223,20 @@ export default function Page() {
                                 text={level.levelTitle}
                                 sx={{ color: '#2266C7', fontWeight: 700 }}
                             />
-                            <Text
-                                variant="body2"
-                                text={level.levelShortDescription}
-                                sx={{ marginBottom: '4px', color: '#444' }}
-                            />
-                            <Text
-                                variant="caption"
-                                text={level.levelLongDescription}
-                                sx={{ color: '#777' }}
-                            />
+                            {!!level.levelShortDescription && (
+                                <Text
+                                    variant="body2"
+                                    text={level.levelShortDescription}
+                                    sx={{ mb: '4px', color: '#444' }}
+                                />
+                            )}
+                            {!!level.levelLongDescription && (
+                                <Text
+                                    variant="caption"
+                                    text={level.levelLongDescription}
+                                    sx={{ color: '#777' }}
+                                />
+                            )}
                         </Stack>
                     ))}
                 </Stack>

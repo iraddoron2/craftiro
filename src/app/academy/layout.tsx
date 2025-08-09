@@ -1,6 +1,7 @@
 'use client'
 
 import { useTabsNavbar } from '@/lib'
+import { CraftiroCoursesProvider } from '@/providers/CraftiroCoursesProvider'
 import { useUserStore } from '@/store/userStore'
 import { elementsSizes } from '@/styles'
 import { LinksGroups } from '@/types'
@@ -114,7 +115,7 @@ export default function Layout({
                     paddingTop: isMobile ? 0 : elementsSizes.mainNavbarHeight,
                 }}
             >
-                {children}
+                <CraftiroCoursesProvider>{children}</CraftiroCoursesProvider>
             </Stack>
         </Stack>
     )
