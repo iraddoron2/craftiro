@@ -55,3 +55,5 @@ export const useTheme = () => {
     const themeName = useThemeStore((s) => s.currentTheme)
     return themes[themeName]
 }
+
+export { useCraftiroCoursesStatus } from './useCraftiroCoursesStatus'

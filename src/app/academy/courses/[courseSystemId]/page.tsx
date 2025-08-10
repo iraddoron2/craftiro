@@ -99,7 +99,7 @@ export default function CoursePage() {
         mainSubjects,
         difficulty,
         tags,
-        authorsIds,
+        authorIds,
         levels,
     } = course
 
@@ -191,10 +191,10 @@ export default function CoursePage() {
             )}
 
             {/* Authors */}
-            {!!authorsIds?.length && (
+            {!!authorIds?.length && (
                 <Text
                     variant="caption"
-                    text={`מורים/מחברים: ${authorsIds.join(', ')}`}
+                    text={`מורים/מחברים: ${authorIds.join(', ')}`}
                     sx={{ color: '#777', fontWeight: 500, marginTop: '8px' }}
                 />
             )}

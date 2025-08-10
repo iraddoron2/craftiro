@@ -80,6 +80,7 @@ export const Button = ({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 8,
+        fontFamily: 'Assistent',
         border: `1.5px solid ${defaultStyle.border}`,
         fontWeight: 500,
         cursor: disabled ? 'not-allowed' : 'pointer',
@@ -90,6 +91,7 @@ export const Button = ({
         transition: 'background 0.2s, border 0.2s, color 0.2s',
         ...sizeStyles[size],
         ...style,
+        ...muiProps.sx,
     }
 
     let activeTimeout: NodeJS.Timeout | null = null
@@ -108,7 +110,7 @@ export const Button = ({
             onClick={onClick}
             disabled={disabled || loading}
             className={className}
-            style={baseStyles}
+            style={{ ...baseStyles, ...muiProps.sx }}
             onMouseOver={(e) => {
                 if (!disabled) setButtonStyle(e, hoverStyle)
             }}
@@ -130,12 +132,23 @@ export const Button = ({
         >
             {loading ? (
                 <>
-                    <span style={{ marginRight: 8 }}>⏳</span>
+                    <span style={{ marginRight: 8, fontFamily: 'Assistent' }}>
+                        ⏳
+                    </span>
                     {loadingText || label}
                 </>
             ) : (
                 <>
-                    {icon && <span style={{ marginInlineEnd: 8 }}>{icon}</span>}
+                    {icon && (
+                        <span
+                            style={{
+                                marginInlineEnd: 8,
+                                fontFamily: 'Assistent',
+                            }}
+                        >
+                            {icon}
+                        </span>
+                    )}
                     {label}
                 </>
             )}

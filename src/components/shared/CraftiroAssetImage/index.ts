@@ -1,0 +1,1 @@
+export { CraftiroAssetImage } from './CraftiroAssetImage'

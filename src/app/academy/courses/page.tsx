@@ -4,6 +4,7 @@ import { useTabsNavbarStore } from '@/store' // ← חשוב: גישה ישיר�
 import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
 import { LinksGroups } from '@/types'
 import { Stack } from '@core'
+import { MiroHeader } from '@shared'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 import { CourseCard } from './_components'
@@ -44,8 +45,16 @@ export default function CoursesPage() {
     ])
 
     return (
-        <Stack>
-            <h1>Craftiro Courses</h1>
+        <Stack
+            sx={{
+                width: '100%',
+                gap: '40px',
+            }}
+        >
+            <MiroHeader
+                title="קורסים"
+                subtitle="למדו מוזיקה צעד אחר צעד בעזרת הקורסים שלנו"
+            />
 
             {craftiroCoursesLoading && <div>טוען קורסים...</div>}
             {craftiroCoursesError && <div>שגיאה: {craftiroCoursesError}</div>}
