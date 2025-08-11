@@ -1,66 +1,79 @@
 'use client'
 
-import {
-    converParsedCoursesCsvToCoursesObject,
-    fetchCsv,
-    parsedCsv,
-} from '@/utils/csv'
+import { useTabsNavbarStore } from '@/store' // ← חשוב: גישה ישירה ל-store
+import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
+import { LinksGroups } from '@/types'
 import { Stack } from '@core'
-import { useEffect, useState } from 'react'
+import { MiroHeader } from '@shared'
+import { usePathname } from 'next/navigation'
+import { useEffect, useMemo } from 'react'
+import { CourseCard } from './_components'
 
-export default function Page() {
-    const [parsedCsvData, setParsedCsvData] = useState<string[][]>([])
-    const [showObject, setShowObject] = useState(false)
+export default function CoursesPage() {
+    const pathname = usePathname()
 
-    const handleShowObject = () => {
-        setShowObject(!showObject)
-    }
+    // Pull only what you need from the navbar store (separate selectors)
+    const currentPath = useTabsNavbarStore((s) => s.currentPath)
+    const updateCurrentPath = useTabsNavbarStore((s) => s.updateCurrentPath)
+    const updateLinksGroups = useTabsNavbarStore((s) => s.updateLinksGroups)
 
+    // Stable linksGroups value
+    const linksGroups: LinksGroups = useMemo(() => [[]], [])
+
+    // Pull courses state from Zustand store (separate selectors)
+    const craftiroCourses = useCraftiroCoursesStore((s) => s.craftiroCourses)
+    const craftiroCoursesLoading = useCraftiroCoursesStore(
+        (s) => s.craftiroCoursesLoading
+    )
+    const craftiroCoursesError = useCraftiroCoursesStore(
+        (s) => s.craftiroCoursesError
+    )
+
+    // Update navbar ONLY when the path actually changes
     useEffect(() => {
-        const fetchData = async () => {
-            const csvPath = '/data/craftiroCoursesData.csv'
-            const csvText = await fetchCsv(csvPath)
-            const data = parsedCsv(csvText)
-            setParsedCsvData(data)
+        if (currentPath !== pathname) {
+            updateCurrentPath(pathname)
+            updateLinksGroups(linksGroups)
         }
-        fetchData()
-    }, [])
+        // deps רק על מה שבאמת משתנה; אל תשים את כל האובייקט tabsNavbar
+    }, [
+        pathname,
+        currentPath,
+        updateCurrentPath,
+        updateLinksGroups,
+        linksGroups,
+    ])
 
     return (
         <Stack
             sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-end',
-                justifyContent: 'flex-start',
                 width: '100%',
+                gap: '40px',
             }}
         >
-            <h1>courses</h1>
-            <button onClick={handleShowObject}>
-                {showObject ? 'Hide Object' : 'Show Object'}
-            </button>
-            {showObject && (
-                <pre
-                    style={{
-                        direction: 'ltr',
+            <MiroHeader
+                title="קורסים"
+                subtitle="למדו מוזיקה צעד אחר צעד בעזרת הקורסים שלנו"
+            />
+
+            {craftiroCoursesLoading && <div>טוען קורסים...</div>}
+            {craftiroCoursesError && <div>שגיאה: {craftiroCoursesError}</div>}
+
+            {!craftiroCoursesLoading && !craftiroCoursesError && (
+                <Stack
+                    sx={{
+                        width: '100%',
+                        maxWidth: '1600px',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        gap: '40px',
+                        flexDirection: 'row',
                     }}
                 >
-                    {JSON.stringify(
-                        converParsedCoursesCsvToCoursesObject(parsedCsvData),
-                        null,
-                        2
-                    )}
-                </pre>
-            )}
-            {!showObject && (
-                <pre
-                    style={{
-                        direction: 'ltr',
-                    }}
-                >
-                    {JSON.stringify(parsedCsvData, null, 2)}
-                </pre>
+                    {craftiroCourses.map((course) => (
+                        <CourseCard key={course.systemId} course={course} />
+                    ))}
+                </Stack>
             )}
         </Stack>
     )

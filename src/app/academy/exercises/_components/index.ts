@@ -1,2 +1,2 @@
-export { CraftExerciseCard } from './CraftExerciseCard'
+export { CraftiroExerciseCard } from './CraftiroExerciseCard'
 export { ExerciseDetailCard } from './ExerciseDetailCard'

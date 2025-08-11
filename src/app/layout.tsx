@@ -2,7 +2,8 @@ import {
     ProfileButtonBox,
     ProfileButtonContent,
 } from '@/components/shared/MainNavbar/_components'
-import { UserStoreHydrator } from '@/providers/UserStoreHydrator'
+import { CraftiroCoursesProvider, CraftiroExercisesProvider } from '@/providers'
+import { UserStoreProvider } from '@/providers/UserStoreProvider'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { MainNavbar, NextAuthProvider } from '@shared'
 import type { Metadata } from 'next'
@@ -10,6 +11,7 @@ import { Assistant } from 'next/font/google'
 import { PageContainer } from './_components/'
 import './globals.css'
 
+// Load Google font
 const assistant = Assistant({ subsets: ['hebrew'] })
 
 export const metadata: Metadata = {
@@ -28,25 +30,32 @@ export default function RootLayout({
             <body className={assistant.className}>
                 <AppRouterCacheProvider>
                     <NextAuthProvider>
-                        <UserStoreHydrator>
-                            <header
-                                style={{
-                                    position: 'relative',
-                                    zIndex: 100,
-                                }}
-                            >
-                                <MainNavbar
-                                    boxComponent={
-                                        <ProfileButtonBox
-                                            contentComponent={
-                                                <ProfileButtonContent />
+                        <UserStoreProvider>
+                            <CraftiroCoursesProvider>
+                                <CraftiroExercisesProvider>
+                                    {/* Header */}
+                                    <header
+                                        style={{
+                                            position: 'relative',
+                                            zIndex: 100,
+                                        }}
+                                    >
+                                        <MainNavbar
+                                            boxComponent={
+                                                <ProfileButtonBox
+                                                    contentComponent={
+                                                        <ProfileButtonContent />
+                                                    }
+                                                />
                                             }
                                         />
-                                    }
-                                />
-                            </header>
-                            <PageContainer>{children}</PageContainer>
-                        </UserStoreHydrator>
+                                    </header>
+
+                                    {/* Main content */}
+                                    <PageContainer>{children}</PageContainer>
+                                </CraftiroExercisesProvider>
+                            </CraftiroCoursesProvider>
+                        </UserStoreProvider>
                     </NextAuthProvider>
                 </AppRouterCacheProvider>
             </body>

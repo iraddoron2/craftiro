@@ -1,0 +1,1 @@
+export { CraftiroExerciseCard } from './CraftiroExerciseCard'

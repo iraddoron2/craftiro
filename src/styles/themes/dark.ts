@@ -3,9 +3,9 @@ import { colors } from '../colors'
 
 export const darkTheme: Theme = {
     background: {
-        page: colors.gray[20],
-        topNavbar: colors.gray[30],
-        sideNavbar: colors.gray[40],
+        page: colors.brandOrange[190],
+        topNavbar: colors.base.white,
+        sideNavbar: colors.gray[140],
         card: colors.base.white,
         miroColors: {
             1: colors.blue.main,
@@ -15,11 +15,11 @@ export const darkTheme: Theme = {
             5: colors.purple.main,
             6: colors.orange.main,
         },
-        opacityCover: colors.opacityWhite[170],
+        opacityCover: colors.opacityBlack[60],
     },
     text: {
-        onPageBackground: colors.base.white,
-        onContrastBackground: colors.base.black, // Light text on dark backgrounds
+        onPageBackground: colors.base.black,
+        onContrastBackground: colors.base.white,
     },
     button: {
         primary: {
@@ -78,13 +78,13 @@ export const darkTheme: Theme = {
         secondary: {
             contained: {
                 default: {
-                    background: colors.base.white,
-                    text: colors.base.white,
+                    background: colors.gray[190],
+                    text: colors.brandBlue.main,
                     border: colors.base.white,
                 },
                 hover: {
-                    background: colors.base.white,
-                    text: colors.base.white,
+                    background: colors.gray[170],
+                    text: colors.brandBlue.main,
                     border: colors.base.white,
                 },
                 active: {
@@ -129,7 +129,119 @@ export const darkTheme: Theme = {
             },
         },
     },
+
+    chip: {
+        primary: {
+            filled: {
+                default: {
+                    background: colors.brandBlue[100],
+                    text: colors.base.white,
+                    border: colors.brandBlue[120],
+                },
+                hover: {
+                    background: colors.brandBlue[120],
+                    text: colors.base.white,
+                    border: colors.brandBlue[140],
+                },
+                active: {
+                    background: colors.brandBlue[140],
+                    text: colors.base.white,
+                    border: colors.brandBlue[160],
+                },
+            },
+            outlined: {
+                default: {
+                    background: 'transparent',
+                    text: colors.brandBlue[100],
+                    border: colors.brandBlue[100],
+                },
+                hover: {
+                    background: 'transparent',
+                    text: colors.brandBlue[120],
+                    border: colors.brandBlue[120],
+                },
+                active: {
+                    background: 'transparent',
+                    text: colors.brandBlue[140],
+                    border: colors.brandBlue[140],
+                },
+            },
+        },
+        secondary: {
+            filled: {
+                default: {
+                    background: colors.gray[190],
+                    text: colors.brandBlue.main,
+                    border: colors.gray[150],
+                },
+                hover: {
+                    background: colors.gray[170],
+                    text: colors.brandBlue.main,
+                    border: colors.gray[150],
+                },
+                active: {
+                    background: colors.gray[160],
+                    text: colors.brandBlue.main,
+                    border: colors.gray[150],
+                },
+            },
+            outlined: {
+                default: {
+                    background: 'transparent',
+                    text: colors.gray[190],
+                    border: colors.gray[190],
+                },
+                hover: {
+                    background: 'transparent',
+                    text: colors.gray[170],
+                    border: colors.gray[170],
+                },
+                active: {
+                    background: 'transparent',
+                    text: colors.gray[160],
+                    border: colors.gray[160],
+                },
+            },
+        },
+        default: {
+            filled: {
+                default: {
+                    background: colors.gray[140],
+                    text: colors.base.black,
+                    border: colors.gray[160],
+                },
+                hover: {
+                    background: colors.gray[130],
+                    text: colors.base.black,
+                    border: colors.gray[150],
+                },
+                active: {
+                    background: colors.gray[120],
+                    text: colors.base.black,
+                    border: colors.gray[140],
+                },
+            },
+            outlined: {
+                default: {
+                    background: 'transparent',
+                    text: colors.base.black,
+                    border: colors.gray[140],
+                },
+                hover: {
+                    background: 'transparent',
+                    text: colors.base.black,
+                    border: colors.gray[130],
+                },
+                active: {
+                    background: 'transparent',
+                    text: colors.base.black,
+                    border: colors.gray[120],
+                },
+            },
+        },
+    },
+
     common: {
-        border: colors.gray[120],
+        border: colors.gray[170],
     },
 }

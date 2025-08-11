@@ -1,43 +1,52 @@
 'use client'
 
-import { CraftExercisesContext } from '@/context/craftExercisesContext'
-import { CraftExercise } from '@/types/craftiroExercises'
-import { fetchCraftExercisesCsv } from '@/utils/csv'
-import { getParsedCraftExercises } from '@/utils/csv/getParsedCraftExercises'
 import { Stack } from '@core'
-import { useEffect, useState } from 'react'
+import { useCraftiroExercisesStore } from '@store'
+import React from 'react'
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-    const [exercises, setExercises] = useState<CraftExercise[] | null>(null)
-
-    useEffect(() => {
-        const fetchAndSet = async () => {
-            const csvText = await fetchCraftExercisesCsv()
-            const parsedCsv = getParsedCraftExercises(csvText)
-            setExercises(parsedCsv)
-        }
-        fetchAndSet()
-    }, [])
-
-    if (!exercises) {
-        return (
-            <Stack>
-                <div>Loading exercises...</div>
-            </Stack>
-        )
-    }
+export default function ExercisesLayout({
+    children,
+}: {
+    children: React.ReactNode
+}) {
+    // Select only what you need from the store (separate selectors)
+    const craftiroExercises = useCraftiroExercisesStore(
+        (s) => s.craftiroExercises
+    )
+    const craftiroExercisesLoading = useCraftiroExercisesStore(
+        (s) => s.craftiroExercisesLoading
+    )
+    const craftiroExercisesError = useCraftiroExercisesStore(
+        (s) => s.craftiroExercisesError
+    )
 
     return (
-        <Stack
-            sx={{
-                width: '100%',
-                minHeight: '100vh',
-            }}
-        >
-            <CraftExercisesContext.Provider value={{ exercises }}>
-                {/* <pre>{JSON.stringify(exercises, null, 2)}</pre> */}
-                {children}
-            </CraftExercisesContext.Provider>
+        // Load exercises only under /exercises to avoid global fetch
+
+        <Stack sx={{ width: '100%', minHeight: '100vh' }}>
+            <h1>תרגילים</h1>
+
+            {/* Loading state */}
+            {craftiroExercisesLoading && <div>Loading exercises...</div>}
+
+            {/* Error state */}
+            {craftiroExercisesError && (
+                <div style={{ color: '#c22' }}>
+                    Error: {craftiroExercisesError}
+                </div>
+            )}
+
+            {/* Empty state */}
+            {!craftiroExercisesLoading &&
+                !craftiroExercisesError &&
+                (!craftiroExercises || craftiroExercises.length === 0) && (
+                    <div>No exercises found</div>
+                )}
+
+            {/* Content */}
+            {!craftiroExercisesLoading &&
+                !craftiroExercisesError &&
+                craftiroExercises.length > 0 && <>{children}</>}
         </Stack>
     )
 }

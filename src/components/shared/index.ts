@@ -1,8 +1,11 @@
 'use client'
 
+export { BaseCard } from './BaseCard'
+export { CraftiroAssetImage } from './CraftiroAssetImage'
 export { GoogleSignInButton } from './GoogleSignInButton'
 export { MainLinkButton } from './MainLinkButton'
 export { MainNavbar } from './MainNavbar'
+export { MiroHeader } from './MiroHeader'
 export { NextAuthProvider } from './NextAuthProvider'
 export { PagesNavbar } from './PagesNavbar'
 export { SectionTitleWithLines } from './SectionTitleWithLines'

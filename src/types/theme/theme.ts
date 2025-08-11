@@ -1,3 +1,5 @@
+// types/theme.ts (or wherever Theme is defined)
+
 export type Theme = {
     background: {
         page: string
@@ -12,121 +14,43 @@ export type Theme = {
             5: string
             6: string
         }
-        opacityCover: string // Opacity for cover backgrounds
+        opacityCover: string
     }
     text: {
         onPageBackground: string
-        onContrastBackground: string // Text color for contrast backgrounds
+        onContrastBackground: string
     }
     button: {
-        primary: {
-            contained: {
-                default: {
-                    background: string
-                    text: string
-                    border: string
-                }
-                hover: {
-                    background: string
-                    text: string
-                    border: string
-                }
-                active: {
-                    background: string
-                    text: string
-                    border: string
-                }
-            }
-            outlined: {
-                default: {
-                    background: string
-                    text: string
-                    border: string
-                }
-                hover: {
-                    background: string
-                    text: string
-                    border: string
-                }
-                active: {
-                    background: string
-                    text: string
-                    border: string
-                }
-            }
-            text: {
-                default: {
-                    background: string // Usually transparent for text buttons
-                    text: string
-                    border: string // Usually transparent for text buttons
-                }
-                hover: {
-                    background: string // Usually transparent for text buttons
-                    text: string
-                    border: string // Usually transparent for text buttons
-                }
-                active: {
-                    background: string // Usually transparent for text buttons
-                    text: string
-                    border: string // Usually transparent for text buttons
-                }
-            }
-        }
-        secondary: {
-            contained: {
-                default: {
-                    background: string
-                    text: string
-                    border: string
-                }
-                hover: {
-                    background: string
-                    text: string
-                    border: string
-                }
-                active: {
-                    background: string
-                    text: string
-                    border: string
-                }
-            }
-            outlined: {
-                default: {
-                    background: string
-                    text: string
-                    border: string
-                }
-                hover: {
-                    background: string
-                    text: string
-                    border: string
-                }
-                active: {
-                    background: string
-                    text: string
-                    border: string
-                }
-            }
-            text: {
-                default: {
-                    background: string // Usually transparent for text buttons
-                    text: string
-                    border: string // Usually transparent for text buttons
-                }
-                hover: {
-                    background: string // Usually transparent for text buttons
-                    text: string
-                    border: string // Usually transparent for text buttons
-                }
-                active: {
-                    background: string // Usually transparent for text buttons
-                    text: string
-                    border: string // Usually transparent for text buttons
-                }
-            }
-        }
+        primary: VariantsTokens
+        secondary: VariantsTokens
+    }
+    /** NEW: chip theme tokens */
+    chip: {
+        primary: ChipVariantsTokens
+        secondary: ChipVariantsTokens
+        default: ChipVariantsTokens
     }
     common: {
-        border: string // Common border color used across components
+        border: string
     }
+}
+
+/** Reuse this shape for button variants */
+type VariantsTokens = {
+    contained: UIStateTokens
+    outlined: UIStateTokens
+    text: UIStateTokens
+}
+
+/** For chip we usually need only 'filled' and 'outlined' */
+type ChipVariantsTokens = {
+    filled: UIStateTokens
+    outlined: UIStateTokens
+}
+
+/** Colors per interaction state */
+type UIStateTokens = {
+    default: { background: string; text: string; border: string }
+    hover: { background: string; text: string; border: string }
+    active: { background: string; text: string; border: string }
 }

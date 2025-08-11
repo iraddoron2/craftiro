@@ -129,6 +129,118 @@ export const lightTheme: Theme = {
             },
         },
     },
+
+    chip: {
+        primary: {
+            filled: {
+                default: {
+                    background: colors.brandBlue[100],
+                    text: colors.base.white,
+                    border: colors.brandBlue[120],
+                },
+                hover: {
+                    background: colors.brandBlue[120],
+                    text: colors.base.white,
+                    border: colors.brandBlue[140],
+                },
+                active: {
+                    background: colors.brandBlue[140],
+                    text: colors.base.white,
+                    border: colors.brandBlue[160],
+                },
+            },
+            outlined: {
+                default: {
+                    background: 'transparent',
+                    text: colors.brandBlue[100],
+                    border: colors.brandBlue[100],
+                },
+                hover: {
+                    background: 'transparent',
+                    text: colors.brandBlue[120],
+                    border: colors.brandBlue[120],
+                },
+                active: {
+                    background: 'transparent',
+                    text: colors.brandBlue[140],
+                    border: colors.brandBlue[140],
+                },
+            },
+        },
+        secondary: {
+            filled: {
+                default: {
+                    background: colors.gray[190],
+                    text: colors.brandBlue.main,
+                    border: colors.gray[150],
+                },
+                hover: {
+                    background: colors.gray[170],
+                    text: colors.brandBlue.main,
+                    border: colors.gray[150],
+                },
+                active: {
+                    background: colors.gray[160],
+                    text: colors.brandBlue.main,
+                    border: colors.gray[150],
+                },
+            },
+            outlined: {
+                default: {
+                    background: 'transparent',
+                    text: colors.gray[190],
+                    border: colors.gray[190],
+                },
+                hover: {
+                    background: 'transparent',
+                    text: colors.gray[170],
+                    border: colors.gray[170],
+                },
+                active: {
+                    background: 'transparent',
+                    text: colors.gray[160],
+                    border: colors.gray[160],
+                },
+            },
+        },
+        default: {
+            filled: {
+                default: {
+                    background: colors.gray[140],
+                    text: colors.base.black,
+                    border: colors.gray[160],
+                },
+                hover: {
+                    background: colors.gray[130],
+                    text: colors.base.black,
+                    border: colors.gray[150],
+                },
+                active: {
+                    background: colors.gray[120],
+                    text: colors.base.black,
+                    border: colors.gray[140],
+                },
+            },
+            outlined: {
+                default: {
+                    background: 'transparent',
+                    text: colors.base.black,
+                    border: colors.gray[140],
+                },
+                hover: {
+                    background: 'transparent',
+                    text: colors.base.black,
+                    border: colors.gray[130],
+                },
+                active: {
+                    background: 'transparent',
+                    text: colors.base.black,
+                    border: colors.gray[120],
+                },
+            },
+        },
+    },
+
     common: {
         border: colors.gray[170],
     },
