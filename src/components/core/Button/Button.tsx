@@ -1,6 +1,7 @@
 'use client'
 
 import { Theme } from '@/types'
+import { Text } from '@core'
 import { useTheme } from '@hooks'
 import {
     Button as MuiBaseButton,
@@ -29,7 +30,7 @@ type ButtonProps = MuiButtonProps & {
 // You can later move these out if you want
 const sizeStyles = {
     small: { fontSize: 14, padding: '4px 10px' },
-    medium: { fontSize: 18, padding: '18px 24px' },
+    medium: { fontSize: 20, padding: '18px 24px' },
     large: { fontSize: 24, padding: '12px 28px' },
 }
 
@@ -80,6 +81,7 @@ export const Button = ({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 8,
+        fontFamily: 'Assistent',
         border: `1.5px solid ${defaultStyle.border}`,
         fontWeight: 500,
         cursor: disabled ? 'not-allowed' : 'pointer',
@@ -90,6 +92,7 @@ export const Button = ({
         transition: 'background 0.2s, border 0.2s, color 0.2s',
         ...sizeStyles[size],
         ...style,
+        ...muiProps.sx,
     }
 
     let activeTimeout: NodeJS.Timeout | null = null
@@ -108,7 +111,7 @@ export const Button = ({
             onClick={onClick}
             disabled={disabled || loading}
             className={className}
-            style={baseStyles}
+            style={{ ...baseStyles, ...muiProps.sx }}
             onMouseOver={(e) => {
                 if (!disabled) setButtonStyle(e, hoverStyle)
             }}
@@ -130,13 +133,24 @@ export const Button = ({
         >
             {loading ? (
                 <>
-                    <span style={{ marginRight: 8 }}>⏳</span>
+                    <span style={{ marginRight: 8, fontFamily: 'Assistent' }}>
+                        ⏳
+                    </span>
                     {loadingText || label}
                 </>
             ) : (
                 <>
-                    {icon && <span style={{ marginInlineEnd: 8 }}>{icon}</span>}
-                    {label}
+                    {icon && (
+                        <span
+                            style={{
+                                marginInlineEnd: 8,
+                                fontFamily: 'inherit',
+                            }}
+                        >
+                            {icon}
+                        </span>
+                    )}
+                    <Text text={label} sx={{ fontFamily: 'inherit' }} />
                 </>
             )}
         </MuiBaseButton>

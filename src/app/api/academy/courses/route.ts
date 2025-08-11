@@ -1,5 +1,5 @@
 import { CraftiroCourse } from '@/types/craftiroCourses'
-import { converParsedCoursesCsvToCoursesObject } from '@/utils/csv'
+import { convertParsedCoursesCsvToCourses } from '@/utils/csv/courses'
 import { parse } from 'csv-parse/sync'
 import { promises as fs } from 'fs'
 import { NextResponse } from 'next/server'
@@ -27,7 +27,7 @@ export async function GET() {
 
         // Map parsed CSV array to a stricter Course shape
         const courses: CraftiroCourse[] =
-            converParsedCoursesCsvToCoursesObject(parsedCsvArray) ?? []
+            convertParsedCoursesCsvToCourses(parsedCsvArray) ?? []
 
         // Return JSON payload
         return NextResponse.json(
