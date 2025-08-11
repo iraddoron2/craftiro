@@ -1,6 +1,7 @@
 'use client'
 
 import { Theme } from '@/types'
+import { Text } from '@core'
 import { useTheme } from '@hooks'
 import {
     Button as MuiBaseButton,
@@ -29,7 +30,7 @@ type ButtonProps = MuiButtonProps & {
 // You can later move these out if you want
 const sizeStyles = {
     small: { fontSize: 14, padding: '4px 10px' },
-    medium: { fontSize: 18, padding: '18px 24px' },
+    medium: { fontSize: 20, padding: '18px 24px' },
     large: { fontSize: 24, padding: '12px 28px' },
 }
 
@@ -143,13 +144,13 @@ export const Button = ({
                         <span
                             style={{
                                 marginInlineEnd: 8,
-                                fontFamily: 'Assistent',
+                                fontFamily: 'inherit',
                             }}
                         >
                             {icon}
                         </span>
                     )}
-                    {label}
+                    <Text text={label} sx={{ fontFamily: 'inherit' }} />
                 </>
             )}
         </MuiBaseButton>

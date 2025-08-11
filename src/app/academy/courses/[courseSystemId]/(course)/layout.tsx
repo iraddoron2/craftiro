@@ -7,7 +7,7 @@ import { Button, Stack, Text } from '@core'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
-import { CourseLocalNav } from './_components'
+import { CourseLocalNav } from '../_components'
 
 export default function CourseLayout({
     children,

@@ -2,33 +2,37 @@
 
 import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
 import { Button, Stack, Text } from '@core'
-import { Tab, Tabs } from '@mui/material'
-import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 
-type AnyRecord = Record<string, unknown>
+/** Minimal screen shape fallback */
+type ScreenRecord = {
+    screenSystemId?: string
+    systemId?: string
+    _id?: string
+    html?: string
+    content?: Array<{ id?: string | number; text?: string }>
+    [k: string]: unknown
+}
 
 export default function StepScreenPage() {
-    // Route params
-    const { courseSystemId, levelSystemId, stepSystemId, sceenSystemId } =
+    // Route params (ensure correct param name: screenSystemId)
+    const { courseSystemId, levelSystemId, stepSystemId, screenSystemId } =
         useParams<{
             courseSystemId: string
             levelSystemId: string
             stepSystemId: string
-            sceenSystemId: string // note: param name as provided
+            screenSystemId: string
         }>()
+
     const router = useRouter()
 
-    // Local tab state
-    const [tabValue, setTabValue] = useState(0)
-
-    // Courses from store
+    // Store slices
     const courses = useCraftiroCoursesStore((s) => s.craftiroCourses)
     const loading = useCraftiroCoursesStore((s) => s.craftiroCoursesLoading)
     const error = useCraftiroCoursesStore((s) => s.craftiroCoursesError)
 
-    // Resolve course/level/step
+    // Resolve course/level/step (memoized)
     const { course, level, step, stepIndex } = useMemo(() => {
         const course =
             courses.find((c) => c.systemId === courseSystemId) ?? null
@@ -43,56 +47,48 @@ export default function StepScreenPage() {
         return { course, level, step, stepIndex }
     }, [courses, courseSystemId, levelSystemId, stepSystemId])
 
-    // Normalize ID accessor for screens (handles various field names)
-    const getScreenId = useCallback(
-        (scr: AnyRecord, fallbackIndex?: number) => {
-            return (
-                scr?.sceenSystemId ?? // if schema matches route param name
-                scr?.screenSystemId ??
-                scr?.systemId ??
-                scr?._id ??
-                (typeof fallbackIndex === 'number'
-                    ? `screen-${fallbackIndex}`
-                    : '')
-            )
-        },
-        []
-    )
-
-    // Screens list + current index
-    const { screens, currentIndex } = useMemo(() => {
-        const screens = (step?.screens ?? []) as AnyRecord[]
-        const idx = screens.findIndex(
-            (s, i) => getScreenId(s, i) === sceenSystemId
+    // Screen id resolver (robust to schema drift)
+    const getScreenId = useCallback((scr: ScreenRecord, i?: number) => {
+        return (
+            scr?.screenSystemId ??
+            scr?.systemId ??
+            scr?._id ??
+            (typeof i === 'number' ? `screen-${i}` : '')
         )
-        return { screens, currentIndex: idx }
-    }, [step?.screens, getScreenId, sceenSystemId])
+    }, [])
 
-    // Progress (current screen out of total)
-    const { totalScreens, progressPercent, progressLabel } = useMemo(() => {
-        const total = screens.length
-        const currentOrdinal = currentIndex >= 0 ? currentIndex + 1 : 0
-        const percent =
-            total > 0
-                ? Math.max(
-                      0,
-                      Math.min(100, Math.round((currentOrdinal / total) * 100))
-                  )
-                : 0
-        return {
-            totalScreens: total,
-            progressPercent: percent,
-            progressLabel: `${currentOrdinal} / ${total} (${percent}%)`,
-        }
-    }, [screens.length, currentIndex])
+    // Screens list + current index (memoized)
+    const { screens, currentIndex } = useMemo(() => {
+        const list = (step?.screens ?? []) as ScreenRecord[]
+        const idx = list.findIndex(
+            (s, i) => getScreenId(s, i) === screenSystemId
+        )
+        return { screens: list, currentIndex: idx }
+    }, [step?.screens, getScreenId, screenSystemId])
 
-    // Current screen content
+    // Current screen data (memoized)
     const currentScreen = useMemo(
         () => (currentIndex >= 0 ? screens[currentIndex] : null),
         [screens, currentIndex]
     )
 
-    // Build neighboring hrefs
+    // Progress calculation
+    const { totalScreens, progressPercent, progressLabel } = useMemo(() => {
+        const total = screens.length
+        const ord = currentIndex >= 0 ? currentIndex + 1 : 0
+        const pct =
+            total > 0
+                ? Math.min(100, Math.max(0, Math.round((ord / total) * 100)))
+                : 0
+        return {
+            totalScreens: total,
+            ordinal: ord,
+            progressPercent: pct,
+            progressLabel: `${ord} / ${total} (${pct}%)`,
+        }
+    }, [screens.length, currentIndex])
+
+    // Navigation helpers
     const makeHref = useCallback(
         (nextIndex: number) => {
             const id = getScreenId(screens[nextIndex], nextIndex)
@@ -113,7 +109,6 @@ export default function StepScreenPage() {
         router.push(makeHref(currentIndex + 1))
     }
     const onDone = () => {
-        // Example: navigate back to step root or to the map
         router.push(
             `/academy/courses/${courseSystemId}/levels/${levelSystemId}/steps/${stepSystemId}/map`
         )
@@ -129,13 +124,13 @@ export default function StepScreenPage() {
     if (!currentScreen) return <Text variant="h2" text="מסך לא נמצא" />
 
     // Step meta
-    const stepNumber = (stepIndex ?? -1) >= 0 ? stepIndex + 1 : undefined
-    const stepTitle = step?.stepTitle || `צעד ${stepNumber ?? ''}`
+    const stepNumber = stepIndex >= 0 ? stepIndex + 1 : undefined
+    const stepTitle = step.stepTitle || `צעד ${stepNumber ?? ''}`
 
-    // Basic screen content renderer (extend later as needed)
-    const renderScreenContent = (scr: AnyRecord) => {
-        // 1) HTML string
-        if (typeof scr?.html === 'string' && scr.html.trim()) {
+    // Basic screen renderer (extend with screenType when available)
+    const renderScreenContent = (scr: ScreenRecord) => {
+        // 1) Raw HTML
+        if (typeof scr.html === 'string' && scr.html.trim()) {
             return (
                 <div
                     dangerouslySetInnerHTML={{ __html: scr.html }}
@@ -143,20 +138,23 @@ export default function StepScreenPage() {
                 />
             )
         }
-        // 2) Paragraph array [{ type:'paragraph', text:'...' }]
-        if (Array.isArray(scr?.content)) {
-            type ParagraphItem = { id?: string | number; text?: string }
+        // 2) Paragraph array
+        if (Array.isArray(scr.content)) {
             return (
                 <Stack sx={{ gap: '12px' }}>
-                    {scr.content.map((item: ParagraphItem, i: number) => (
-                        <p key={item?.id || i} style={{ margin: 0 }}>
-                            {item?.text ?? ''}
+                    {scr.content.map((item, i) => (
+                        <p
+                            key={(item?.id as string) ?? i}
+                            style={{ margin: 0 }}
+                        >
+                            {(item as { id?: string | number; text?: string })
+                                ?.text ?? ''}
                         </p>
                     ))}
                 </Stack>
             )
         }
-        // 3) Fallback: pretty-print JSON
+        // 3) Fallback JSON
         return (
             <pre
                 style={{
@@ -186,40 +184,9 @@ export default function StepScreenPage() {
                     }`}
                     sx={{ textAlign: 'center' }}
                 />
-                <Text
-                    variant="caption"
-                    text={`קורס: ${course.name ?? course.systemId} · שלב: ${
-                        level.levelTitle ?? level.levelSystemId
-                    }`}
-                    sx={{ color: '#666' }}
-                />
             </Stack>
 
-            {/* Tabs */}
-            <Tabs value={tabValue} onChange={(_, v) => setTabValue(v)}>
-                <Tab label="הקדמה לצעד" />
-                <Tab label="מפת צעדים" />
-            </Tabs>
-
-            {/* Tab panels */}
-            {tabValue === 0 ? (
-                <Stack sx={{ alignItems: 'center', gap: '10px' }}>
-                    <Text
-                        variant="body1"
-                        text={step?.stepShortDescription || ''}
-                    />
-                </Stack>
-            ) : (
-                <Stack sx={{ alignItems: 'center', gap: '10px' }}>
-                    <Link
-                        href={`/academy/courses/${courseSystemId}/levels/${levelSystemId}/steps/${stepSystemId}/map`}
-                    >
-                        <Button label="צפה במפת הצעדים" color="primary" />
-                    </Link>
-                </Stack>
-            )}
-
-            {/* Progress bar (custom) */}
+            {/* Progress bar */}
             <Stack
                 sx={{
                     width: '100%',
@@ -272,7 +239,7 @@ export default function StepScreenPage() {
                 {renderScreenContent(currentScreen)}
             </Stack>
 
-            {/* Navigation buttons */}
+            {/* Navigation */}
             <Stack
                 sx={{
                     flexDirection: 'row',
