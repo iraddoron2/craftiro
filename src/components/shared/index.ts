@@ -3,6 +3,8 @@
 export { BaseCard } from './BaseCard'
 export { CraftiroAssetImage } from './CraftiroAssetImage'
 export { GoogleSignInButton } from './GoogleSignInButton'
+export { InteractivePaintBlobsBackground } from './InteractivePaintBlobsBackground'
+export { MainBackground } from './MainBackground'
 export { MainLinkButton } from './MainLinkButton'
 export { MainNavbar } from './MainNavbar'
 export { MiroHeader } from './MiroHeader'

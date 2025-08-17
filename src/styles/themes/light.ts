@@ -15,7 +15,7 @@ export const lightTheme: Theme = {
             5: colors.purple.main,
             6: colors.orange.main,
         },
-        opacityCover: colors.opacityBlack[60],
+        opacityCover: colors.opacityWhite[60],
     },
     text: {
         onPageBackground: colors.base.black,

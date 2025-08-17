@@ -28,7 +28,6 @@ export const PageContainer: React.FC<PageContainerProps> = ({
                 width: '100%',
                 margin: '0 auto',
                 // padding: '32px 16px',
-                background: theme.background.page, // מתוך ה-theme
                 color: theme.text.onPageBackground,
                 ...style,
             }}

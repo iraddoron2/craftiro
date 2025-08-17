@@ -1,0 +1,1 @@
+export { ScrollingBadges } from './ScrollingBadges'

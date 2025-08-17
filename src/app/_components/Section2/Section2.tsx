@@ -1,12 +1,13 @@
 'use client'
 
 import { Section, Stack } from '@core'
-import { useTheme } from '@hooks'
-import { sizes } from '@styles'
+// import { useTheme } from '@hooks'
+import { InteractivePaintBlobsBackground } from '@shared'
+import { colors, sizes } from '@styles'
 import { AcademyTitle, Section2BoxChips } from '../../_components'
 
 export const Section2 = () => {
-    const theme = useTheme()
+    // const theme = useTheme()
 
     return (
         <Section
@@ -14,10 +15,11 @@ export const Section2 = () => {
                 minHeight: '100vh',
                 width: '100vw',
                 position: 'relative',
-                backgroundImage: 'url("/backgrounds/Miro Background 7.png")',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
+                // backgroundImage: 'url("/backgrounds/Miro Background 7.png")',
+                // backgroundSize: 'cover',
+                // backgroundPosition: 'center',
+                // backgroundRepeat: 'no-repeat',
+                backgroundColor: colors.brandBlue[20],
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -30,13 +32,19 @@ export const Section2 = () => {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    backgroundColor: theme.background.opacityCover,
+                    // backgroundColor: theme.background.opacityCover,
                     backgroundBlendMode: 'darken', // TODO: Not working, need to investigate
                     pointerEvents: 'none',
                     zIndex: 1,
                 },
             }}
         >
+            <InteractivePaintBlobsBackground
+                style={{
+                    zIndex: 0,
+                    position: 'absolute',
+                }}
+            />
             <Stack
                 sx={{
                     width: '100%',

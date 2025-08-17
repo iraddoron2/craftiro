@@ -11,6 +11,7 @@ export const MainTitle = () => {
             sx={{
                 justifyContent: 'center',
                 alignItems: 'center',
+                zIndex: 1,
             }}
         >
             <Text

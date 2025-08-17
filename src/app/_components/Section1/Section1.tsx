@@ -1,25 +1,46 @@
 'use client'
 
+import { colors } from '@/styles'
 import { Section } from '@core'
-import { useTheme } from '@hooks'
-import { LogoImage, MainTitle, Section1BoxChips } from '../../_components'
+import { MainBackground } from '@shared'
+import { LogoImage, MainTitle, ScrollingBadges } from '../../_components'
 
 export const Section1 = () => {
-    const theme = useTheme()
     return (
         <Section
             sx={{
                 minHeight: '100vh',
                 width: '100vw',
-                background: theme.background.page,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
             }}
         >
-            <Section1BoxChips />
             <MainTitle />
             <LogoImage />
+            <ScrollingBadges
+                items={[
+                    'קורסים דיגיטליים',
+                    'תרגילים',
+                    'מאמרים',
+                    'שיעורים פרטיים',
+                    'שירים',
+                    'יצירות',
+                    'משחקים',
+                    'ספרים',
+                    'מעקב למידה',
+                ]}
+                colors={[
+                    colors.brandBlue[100],
+                    colors.brandOrange[100],
+                    colors.brandPink[100],
+                    colors.purple[100],
+                ]}
+                orientation="column"
+                gap={24}
+            />
+
+            <MainBackground />
         </Section>
     )
 }
