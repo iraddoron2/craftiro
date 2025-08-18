@@ -8,8 +8,10 @@ export const MainBackground = () => {
     return (
         <Stack
             sx={{
-                minHeight: '100vh',
+                height: '100vh',
                 width: '100vw',
+                right: 0,
+                top: 0,
                 position: 'absolute',
                 backgroundImage: 'url("/backgrounds/Miro Background 5.png")',
                 backgroundSize: 'cover',

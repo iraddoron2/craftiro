@@ -48,7 +48,7 @@ export const MainNavbar = ({ boxComponent }: Props) => {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        backgroundColor: '#ffffffBF',
+                        backgroundColor: '#ffffffee',
                         position: 'fixed',
                         padding: '0 16px',
                         borderBottom: `2px solid ${elementsColors.divider}`,

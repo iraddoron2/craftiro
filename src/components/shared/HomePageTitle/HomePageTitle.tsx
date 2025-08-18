@@ -4,7 +4,12 @@ import { Stack, Text } from '@core'
 import { useTheme } from '@hooks'
 import { sizes } from '@styles'
 
-export const MainTitle = () => {
+type Props = {
+    title: string
+    subtitle: string
+}
+
+export const HomePageTitle = ({ title, subtitle }: Props) => {
     const theme = useTheme()
     return (
         <Stack
@@ -33,7 +38,7 @@ export const MainTitle = () => {
                         fontSize: '1.6rem',
                     },
                 }}
-                text="כל אחד יכול ללמוד מוזיקה "
+                text={title}
             />
             <Text
                 variant="h2"
@@ -53,7 +58,7 @@ export const MainTitle = () => {
                         fontSize: '1rem',
                     },
                 }}
-                text=" ללמוד מוזיקה בדרך שמתאימה לכם"
+                text={subtitle}
             />
         </Stack>
     )

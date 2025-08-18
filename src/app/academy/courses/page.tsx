@@ -1,13 +1,12 @@
 'use client'
 
 import { useTabsNavbarStore } from '@/store' // ← חשוב: גישה ישירה ל-store
-import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
+// import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
 import { LinksGroups } from '@/types'
 import { Stack } from '@core'
-import { MiroHeader } from '@shared'
+import { HomePageTitle, MainBackground } from '@shared'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
-import { CourseCard } from './_components'
 
 export default function CoursesPage() {
     const pathname = usePathname()
@@ -21,13 +20,13 @@ export default function CoursesPage() {
     const linksGroups: LinksGroups = useMemo(() => [[]], [])
 
     // Pull courses state from Zustand store (separate selectors)
-    const craftiroCourses = useCraftiroCoursesStore((s) => s.craftiroCourses)
-    const craftiroCoursesLoading = useCraftiroCoursesStore(
-        (s) => s.craftiroCoursesLoading
-    )
-    const craftiroCoursesError = useCraftiroCoursesStore(
-        (s) => s.craftiroCoursesError
-    )
+    // const craftiroCourses = useCraftiroCoursesStore((s) => s.craftiroCourses)
+    // const craftiroCoursesLoading = useCraftiroCoursesStore(
+    //     (s) => s.craftiroCoursesLoading
+    // )
+    // const craftiroCoursesError = useCraftiroCoursesStore(
+    //     (s) => s.craftiroCoursesError
+    // )
 
     // Update navbar ONLY when the path actually changes
     useEffect(() => {
@@ -48,18 +47,22 @@ export default function CoursesPage() {
         <Stack
             sx={{
                 width: '100%',
+                minHeight: '100vh',
                 gap: '40px',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
             }}
         >
-            <MiroHeader
+            <HomePageTitle
                 title="קורסים"
                 subtitle="למדו מוזיקה צעד אחר צעד בעזרת הקורסים שלנו"
             />
 
-            {craftiroCoursesLoading && <div>טוען קורסים...</div>}
-            {craftiroCoursesError && <div>שגיאה: {craftiroCoursesError}</div>}
+            {/* {craftiroCoursesLoading && <div>טוען קורסים...</div>}
+            {craftiroCoursesError && <div>שגיאה: {craftiroCoursesError}</div>} */}
 
-            {!craftiroCoursesLoading && !craftiroCoursesError && (
+            {/* {!craftiroCoursesLoading && !craftiroCoursesError && (
                 <Stack
                     sx={{
                         width: '100%',
@@ -74,7 +77,8 @@ export default function CoursesPage() {
                         <CourseCard key={course.systemId} course={course} />
                     ))}
                 </Stack>
-            )}
+            )} */}
+            <MainBackground />
         </Stack>
     )
 }

@@ -456,7 +456,6 @@ export const InteractivePaintBlobsBackground: React.FC<
 
         const W = WRef.current
         const H = HRef.current
-
         const px = x ?? rand(0, W)
         const py = y ?? rand(0, H)
         const r = rand(merged.minRadius, merged.maxRadius)

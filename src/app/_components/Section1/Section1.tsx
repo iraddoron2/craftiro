@@ -2,8 +2,8 @@
 
 import { colors } from '@/styles'
 import { Section } from '@core'
-import { MainBackground } from '@shared'
-import { LogoImage, MainTitle, ScrollingBadges } from '../../_components'
+import { HomePageTitle, MainBackground } from '@shared'
+import { LogoImage, ScrollingBadges } from '../../_components'
 
 export const Section1 = () => {
     return (
@@ -16,7 +16,10 @@ export const Section1 = () => {
                 justifyContent: 'center',
             }}
         >
-            <MainTitle />
+            <HomePageTitle
+                title="כל אחד יכול ללמוד מוזיקה"
+                subtitle="ללמוד מוזיקה בדרך שמתאימה לכם"
+            />
             <LogoImage />
             <ScrollingBadges
                 items={[

@@ -26,14 +26,14 @@ const Title = ({ title }: { title: string }) => (
         text={title}
         variant="h6"
         sx={{
-            color: colors.gray[120],
-            fontWeight: 700,
-            marginBottom: '16px',
-            fontSize: '20px',
-            lineHeight: '24px',
+            color: colors.gray[100],
             textAlign: 'right',
-            fontFamily: 'Assistant, sans-serif',
+            fontFamily: 'Assistant',
+            fontSize: '28px',
             fontStyle: 'normal',
+            fontWeight: 700,
+            lineHeight: 'normal',
+            marginBottom: '10px',
         }}
     />
 )
@@ -58,7 +58,12 @@ const BaseCardWithTitle = ({ title = '', children, sx }: Props) => {
     )
 }
 
-export const BaseCard = ({ children, title, sx }: Props) => {
+type BaseCardProps = {
+    children?: React.ReactNode
+    title?: string
+    sx?: SxProps
+}
+export const BaseCard = ({ children = <></>, title, sx }: BaseCardProps) => {
     const theme = useTheme()
 
     if (title) {

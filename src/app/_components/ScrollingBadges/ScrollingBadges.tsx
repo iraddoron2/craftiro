@@ -156,7 +156,7 @@ export const ScrollingBadges: React.FC<ScrollingBadgesProps> = ({
     tileHeight = 40,
     tileMinWidth = 120,
     radius = 10,
-    durationSec = 30,
+    durationSec = 10,
     pauseOnHover = false,
     className,
     style,
