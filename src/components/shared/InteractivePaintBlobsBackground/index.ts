@@ -1,0 +1,1 @@
+export { InteractivePaintBlobsBackground } from './InteractivePaintBlobsBackground'
