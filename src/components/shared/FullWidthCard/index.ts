@@ -1,0 +1,1 @@
+export { FullWidthCard } from './FullWidthCard'

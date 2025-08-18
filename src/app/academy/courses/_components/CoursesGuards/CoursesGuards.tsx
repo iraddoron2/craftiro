@@ -27,7 +27,11 @@ export const CoursesGuards = ({ children }: { children: React.ReactNode }) => {
     // OK → render content
     return (
         <Stack
-            sx={{ flexDirection: 'column', minHeight: '100vh', width: '100%' }}
+            sx={{
+                flexDirection: 'column',
+                minHeight: '100vh',
+                width: '100%',
+            }}
         >
             {children}
         </Stack>

@@ -1,23 +1,34 @@
 'use client'
 
 import { Section, Stack } from '@core'
-import { useTheme } from '@hooks'
-import { sizes } from '@styles'
-import { AcademyTitle, Section2BoxChips } from '../../_components'
+import { useRouter } from 'next/navigation'
+// import { useTheme } from '@hooks'
+import {
+    BaseCard,
+    BaseCardText,
+    FullWidthCard,
+    InteractivePaintBlobsBackground,
+    MiroButton,
+} from '@shared'
+import { colors, sizes } from '@styles'
 
 export const Section2 = () => {
-    const theme = useTheme()
+    const router = useRouter()
+    // const theme = useTheme()
 
     return (
         <Section
             sx={{
+                paddingTop: '200px',
+                paddingBottom: '200px',
                 minHeight: '100vh',
                 width: '100vw',
-                position: 'relative',
-                backgroundImage: 'url("/backgrounds/Miro Background 7.png")',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
+                position: 'sticky',
+                // backgroundImage: 'url("/backgrounds/Miro Background 7.png")',
+                // backgroundSize: 'cover',
+                // backgroundPosition: 'center',
+                // backgroundRepeat: 'no-repeat',
+                backgroundColor: colors.brandBlue[20],
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -30,13 +41,23 @@ export const Section2 = () => {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    backgroundColor: theme.background.opacityCover,
+                    // backgroundColor: theme.background.opacityCover,
                     backgroundBlendMode: 'darken', // TODO: Not working, need to investigate
                     pointerEvents: 'none',
                     zIndex: 1,
                 },
             }}
         >
+            <InteractivePaintBlobsBackground
+                style={{
+                    zIndex: 0,
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                }}
+            />
             <Stack
                 sx={{
                     width: '100%',
@@ -65,8 +86,106 @@ export const Section2 = () => {
                         },
                     }}
                 >
-                    <AcademyTitle />
-                    <Section2BoxChips />
+                    <FullWidthCard
+                        sx={{
+                            height: '580px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            gap: '40px',
+                            padding: '32px',
+                        }}
+                        title="בקרו באקדמיה שלנו"
+                        color="orange"
+                    >
+                        <Stack
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                gap: '40px',
+                            }}
+                        >
+                            <BaseCard
+                                title="מה זאת האקדמיה של קראפטירו?"
+                                sx={{
+                                    width: '540px',
+                                    height: '240px',
+                                }}
+                            >
+                                <BaseCardText text="סביבת למידה דיגיטלית שבה כל אחד יכול ללמוד מוזיקה בקצב שלו, ברמה שלו ובזמן שלו." />
+                            </BaseCard>
+                            <BaseCard
+                                title="איך לומדים באקדמיה?"
+                                sx={{
+                                    width: '540px',
+                                    height: '240px',
+                                }}
+                            >
+                                <BaseCardText text="באקדמיה אפשר ללמוד בעזרת מערכת קורסים דיגיטליים, מערכת תרגילים ומערכת סיכומים. בנוסף אפשר לתאם שיעורים פרטיים לבדיקה וחיזוק הידע." />
+                            </BaseCard>
+                        </Stack>
+                        <MiroButton
+                            variant="contained"
+                            color="orange"
+                            size="large"
+                            onClick={() => router.push('/academy')}
+                        >
+                            כניסה לאקדמיה
+                        </MiroButton>
+                    </FullWidthCard>
+                    <FullWidthCard
+                        sx={{
+                            height: '580px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            gap: '40px',
+                            padding: '32px',
+                        }}
+                        title="שיעורים פרטיים"
+                        color="blue"
+                    >
+                        <Stack
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                gap: '40px',
+                            }}
+                        >
+                            <BaseCard
+                                title="מדריכים פרטיים"
+                                sx={{
+                                    width: '540px',
+                                    height: '240px',
+                                }}
+                            >
+                                <BaseCardText text="תוכלו למצוא כאן מדריכים שיעזרו לכם ללמוד את מה שאתם רוצים. אפשר לתאם שיעורים פרטיים, ליוויים אישיים, ולקבל עזרה בתהליך הלמידה." />
+                            </BaseCard>
+                            <BaseCard
+                                title="מה זה ליווי אישי?"
+                                sx={{
+                                    width: '540px',
+                                    height: '240px',
+                                }}
+                            >
+                                <BaseCardText text="במנוי של ליווי אישי תקבלו מדריך אישי שתוכלו להתייעץ איתו באופן אישי על החומר שאתם לומדים ולקבל ממנו פידבק וחוות דעת על ההתקדמות שלכם." />
+                            </BaseCard>
+                        </Stack>
+                        <MiroButton
+                            variant="contained"
+                            color="brandBlue"
+                            size="large"
+                            onClick={() => router.push('/lessons')}
+                        >
+                            כניסה לשיעורים פרטיים
+                        </MiroButton>
+                    </FullWidthCard>
                 </Stack>
             </Stack>
         </Section>
