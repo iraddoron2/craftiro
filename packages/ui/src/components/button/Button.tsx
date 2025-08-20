@@ -15,6 +15,7 @@ export const Button: React.FC<ButtonProps> = ({
     fullWidth = false,
     loading = false,
     loadingText,
+    type = 'button',
     className,
     style,
     ...rest
@@ -83,7 +84,7 @@ export const Button: React.FC<ButtonProps> = ({
 
     return (
         <Comp
-            type={Tag === 'button' ? 'button' : undefined}
+            type={type}
             onClick={disabled || loading ? undefined : onClick}
             aria-disabled={disabled || loading || undefined}
             className={clsx('crt-button', className)}

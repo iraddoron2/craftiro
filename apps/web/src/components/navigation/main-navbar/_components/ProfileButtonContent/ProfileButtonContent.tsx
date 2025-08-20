@@ -1,7 +1,7 @@
 'use server'
 
 import { getSession } from '@/lib/auth'
-import { Stack } from '@craftiro/ui'
+import { Stack, Text } from '@craftiro/ui'
 
 const Container = ({ children }: { children?: React.ReactNode }) => {
     return (
@@ -28,8 +28,6 @@ const Content = async () => {
     const session = await getSession()
     const { user } = session || {}
     const { firstName } = user || ''
-    const { lastName } = user || ''
-    const fullName = `${firstName} ${lastName}`
 
     const state = session ? 'authenticated' : 'unauthenticated'
 
@@ -38,12 +36,16 @@ const Content = async () => {
             <Stack direction="row" align="center">
                 <Stack
                     style={{
-                        borderRadius: '50%',
+                        borderRadius: '500px',
+                        minWidth: '48px',
+                        textAlign: 'center',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         overflow: 'hidden',
                     }}
-                ></Stack>
-                <Stack>
-                    <span>{fullName}</span>
+                >
+                    <Text>{firstName}</Text>
                 </Stack>
             </Stack>
         )

@@ -19,6 +19,7 @@ export interface ButtonProps
     fullWidth?: boolean
     loading?: boolean
     loadingText?: string
+    type?: 'button' | 'submit' | 'reset'
     className?: string
     style?: React.CSSProperties
 }
