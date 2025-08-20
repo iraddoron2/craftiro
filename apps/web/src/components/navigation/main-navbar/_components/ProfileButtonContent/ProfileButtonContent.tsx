@@ -28,7 +28,6 @@ const Content = async () => {
     const session = await getSession()
     const { user } = session || {}
     const { firstName } = user || ''
-    const { lastName } = user || ''
 
     const state = session ? 'authenticated' : 'unauthenticated'
 
