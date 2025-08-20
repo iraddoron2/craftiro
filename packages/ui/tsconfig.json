@@ -1,0 +1,17 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "declaration": true,
+        "declarationMap": true,
+        "emitDeclarationOnly": false,
+        "outDir": "dist",
+        "rootDir": "src",
+        "moduleResolution": "bundler",
+        "module": "esnext",
+        "target": "es2020",
+        "skipLibCheck": true,
+        "isolatedModules": true
+    },
+    "include": ["src"]
+}
