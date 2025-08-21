@@ -1,0 +1,41 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "types": ["node", "next/types", "next"],
+        "esModuleInterop": true,
+        "allowJs": false,
+        "incremental": true,
+        "moduleResolution": "bundler",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@styles": ["src/styles/*"],
+            "@craftiro/design-tokens/*": ["../../packages/design-tokens/*"]
+
+            // "@core": ["../../packages/core/src/index"],
+            // "@core/*": ["../../packages/core/src/*"]
+            // "@ui": ["../../packages/ui/src/index"],
+            // "@ui/*": ["../../packages/ui/src/*"],
+
+            // מומלץ: לאפשר גם ייבוא לפי שם החבילה הרשמי
+            // "@craftiro/ui": ["../../packages/ui/src/index"],
+            // "@craftiro/ui/*": ["../../packages/ui/src/*"],
+
+            // "@design-tokens/*": ["../../packages/design-tokens/dist/ts/*"]
+        },
+        "plugins": [{ "name": "next" }]
+    },
+    "include": [
+        "next-env.d.ts",
+        ".next/types/**/*.ts",
+        "app",
+        "pages",
+        "src",
+        "components",
+        "**/*.ts",
+        "**/*.tsx",
+        "next.config.js"
+    ],
+    "exclude": ["node_modules"]
+}

@@ -1,0 +1,24 @@
+{
+    "motion": {
+        "duration": {
+            "instant": { "value": 0 },
+            "fast": { "value": 100 },
+            "normal": { "value": 200 },
+            "snappy": { "value": 250 },
+            "slow": { "value": 300 },
+            "lazy": { "value": 400 }
+        },
+        "easing": {
+            "linear": { "value": "cubic-bezier(0.0, 0.0, 1.0, 1.0)" },
+            "in": { "value": "cubic-bezier(0.4, 0.0, 1.0, 1.0)" },
+            "out": { "value": "cubic-bezier(0.0, 0.0, 0.2, 1.0)" },
+            "inOut": { "value": "cubic-bezier(0.4, 0.0, 0.2, 1.0)" },
+            "emphasized": { "value": "cubic-bezier(0.2, 0.0, 0, 1.0)" }
+        },
+        "delay": {
+            "none": { "value": 0 },
+            "short": { "value": 50 },
+            "long": { "value": 150 }
+        }
+    }
+}

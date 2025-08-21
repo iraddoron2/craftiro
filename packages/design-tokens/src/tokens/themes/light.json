@@ -1,0 +1,53 @@
+{
+    "themeName": { "value": "light" },
+    "color": {
+        "intent": {
+            "primary": {
+                "main": { "value": "{color.brandBlue.main.value}" },
+                "accent": { "value": "{color.brandBlue.dark.value}" },
+                "subtle": { "value": "{color.brandBlue.light.value}" },
+                "soft": { "value": "{color.brandBlue.lightest.value}" },
+                "onMain": { "value": "{color.alpha.white.96.value}" },
+                "onAccent": { "value": "{color.alpha.white.96.value}" },
+                "onSubtle": { "value": "{color.brandBlue.darkest.value}" },
+                "onSoft": { "value": "{color.brandBlue.darkest.value}" }
+            },
+            "secondary": {
+                "main": { "value": "{color.brandOrange.main.value}" },
+                "accent": { "value": "{color.brandOrange.dark.value}" },
+                "subtle": { "value": "{color.brandOrange.light.value}" },
+                "soft": { "value": "{color.brandOrange.lightest.value}" },
+                "onMain": { "value": "{color.alpha.white.96.value}" },
+                "onAccent": { "value": "{color.alpha.white.96.value}" },
+                "onSubtle": { "value": "{color.brandOrange.darkest.value}" },
+                "onSoft": { "value": "{color.brandOrange.darkest.value}" }
+            },
+            "tertiary": {
+                "main": { "value": "{color.brandPink.main.value}" },
+                "accent": { "value": "{color.brandPink.dark.value}" },
+                "subtle": { "value": "{color.brandPink.light.value}" },
+                "soft": { "value": "{color.brandPink.lightest.value}" },
+                "onMain": { "value": "{color.alpha.white.96.value}" },
+                "onAccent": { "value": "{color.alpha.white.96.value}" },
+                "onSubtle": { "value": "{color.brandPink.darkest.value}" },
+                "onSoft": { "value": "{color.brandPink.darkest.value}" }
+            }
+        },
+        "text": {
+            "onBackground": { "value": "{color.gray.40.value}" },
+            "onContrastBackground": { "value": "{color.base.white.value}" }
+        },
+        "background": {
+            "main": { "value": "{color.gray.lightest.value}" },
+            "contrast": { "value": "{color.brandBlue.20.value}" }
+        },
+        "surface": {
+            "main": { "value": "{color.gray.190.value}" }
+        },
+        "divider": {
+            "main": { "value": "{color.gray.160.value}" },
+            "accent": { "value": "{color.gray.140.value}" },
+            "subtle": { "value": "{color.gray.180.value}" }
+        }
+    }
+}

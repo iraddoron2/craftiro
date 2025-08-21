@@ -1,0 +1,52 @@
+{
+    "typography": {
+        "fontFamily": {
+            "sans": {
+                "value": "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Noto Sans Hebrew', Arial, sans-serif"
+            },
+            "serif": {
+                "value": "Georgia, 'Noto Serif', 'Noto Serif Hebrew', serif"
+            },
+            "mono": {
+                "value": "SFMono-Regular, Menlo, Monaco, Consolas, 'Roboto Mono', 'Noto Sans Mono', monospace"
+            }
+        },
+        "fontWeight": {
+            "thin": { "value": 100 },
+            "extraLight": { "value": 200 },
+            "light": { "value": 300 },
+            "regular": { "value": 400 },
+            "medium": { "value": 500 },
+            "semiBold": { "value": 600 },
+            "bold": { "value": 700 },
+            "extraBold": { "value": 800 },
+            "black": { "value": 900 }
+        },
+        "fontSize": {
+            "10": { "value": "0.75rem" },
+            "20": { "value": "0.875rem" },
+            "30": { "value": "1rem" },
+            "40": { "value": "1.125rem" },
+            "50": { "value": "1.25rem" },
+            "60": { "value": "1.5rem" },
+            "70": { "value": "1.875rem" },
+            "80": { "value": "2.25rem" },
+            "90": { "value": "3rem" }
+        },
+        "lineHeight": {
+            "tight": { "value": 1.1 },
+            "snug": { "value": 1.25 },
+            "normal": { "value": 1.5 },
+            "relaxed": { "value": 1.7 },
+            "loose": { "value": 1.9 }
+        },
+        "letterSpacing": {
+            "tighter": { "value": "-0.02em" },
+            "tight": { "value": "-0.01em" },
+            "normal": { "value": "0em" },
+            "wide": { "value": "0.01em" },
+            "wider": { "value": "0.02em" },
+            "widest": { "value": "0.04em" }
+        }
+    }
+}

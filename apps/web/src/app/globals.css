@@ -1,0 +1,4 @@
+@import '@craftiro/design-tokens/dist/css/vars.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
