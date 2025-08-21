@@ -30,7 +30,7 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <html lang="he" dir="rtl" data-theme="dark">
+        <html lang="he" dir="rtl" data-theme="light">
             <body
                 className={assistant.className + ' m-0'}
                 style={{

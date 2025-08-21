@@ -2,9 +2,9 @@
 
 import { useTabsNavbarStore } from '@/store' // ← חשוב: גישה ישירה ל-store
 // import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
-import { MainBackground, SystemHomePageTitle } from '@/components'
+import { SystemHomePageFrame, SystemHomePageHeroSection } from '@/components'
 import { LinksGroups } from '@/types'
-import { Stack } from '@craftiro/ui'
+
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 
@@ -44,25 +44,15 @@ export default function CoursesPage() {
     ])
 
     return (
-        <Stack
-            style={{
-                width: '100%',
-                minHeight: '100vh',
-                gap: '40px',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-        >
-            <SystemHomePageTitle
+        <SystemHomePageFrame>
+            <SystemHomePageHeroSection
                 title="קורסים"
                 subtitle="למדו מוזיקה צעד אחר צעד בעזרת הקורסים שלנו"
-            />
-
-            {/* {craftiroCoursesLoading && <div>טוען קורסים...</div>}
+            >
+                {/* {craftiroCoursesLoading && <div>טוען קורסים...</div>}
             {craftiroCoursesError && <div>שגיאה: {craftiroCoursesError}</div>} */}
 
-            {/* {!craftiroCoursesLoading && !craftiroCoursesError && (
+                {/* {!craftiroCoursesLoading && !craftiroCoursesError && (
                 <Stack
                     style={{
                         width: '100%',
@@ -78,7 +68,7 @@ export default function CoursesPage() {
                     ))}
                 </Stack>
             )} */}
-            <MainBackground />
-        </Stack>
+            </SystemHomePageHeroSection>
+        </SystemHomePageFrame>
     )
 }

@@ -1,6 +1,11 @@
 export { FullWidthCard } from './data-display'
 export { Input, ThemeSwitcher } from './form'
-export { SystemHomePageTitle, type SystemHomePageTitleProps } from './layout'
+export {
+    SystemHomePageFrame,
+    SystemHomePageHeroSection,
+    SystemHomePageTitle,
+    type SystemHomePageTitleProps,
+} from './layout'
 export { SvgImage } from './media'
 export { MainNavbar, type MainNavbarProps } from './navigation'
 export { CraftiroAssetImage } from './other'

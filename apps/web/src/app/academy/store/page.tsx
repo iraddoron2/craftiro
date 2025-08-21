@@ -4,8 +4,8 @@ export default function Page() {
     return (
         <SystemHomePageFrame>
             <SystemHomePageHeroSection
-                title="משחקים"
-                subtitle="משחקים אינטראקטיביים ללמידה מהנה"
+                title="החנות"
+                subtitle="קורסים, תרגילים, מנויים, ספרים ועוד"
             ></SystemHomePageHeroSection>
         </SystemHomePageFrame>
     )

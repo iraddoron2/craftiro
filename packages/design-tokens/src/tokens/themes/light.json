@@ -5,26 +5,32 @@
             "primary": {
                 "main": { "value": "{color.brandBlue.main.value}" },
                 "accent": { "value": "{color.brandBlue.dark.value}" },
-                "subtle": { "value": "{color.brandBlue.lightest.value}" },
+                "subtle": { "value": "{color.brandBlue.light.value}" },
+                "soft": { "value": "{color.brandBlue.lightest.value}" },
                 "onMain": { "value": "{color.alpha.white.96.value}" },
                 "onAccent": { "value": "{color.alpha.white.96.value}" },
-                "onSubtle": { "value": "{color.brandBlue.darkest.value}" }
+                "onSubtle": { "value": "{color.brandBlue.darkest.value}" },
+                "onSoft": { "value": "{color.brandBlue.darkest.value}" }
             },
             "secondary": {
                 "main": { "value": "{color.brandOrange.main.value}" },
                 "accent": { "value": "{color.brandOrange.dark.value}" },
-                "subtle": { "value": "{color.brandOrange.lightest.value}" },
+                "subtle": { "value": "{color.brandOrange.light.value}" },
+                "soft": { "value": "{color.brandOrange.lightest.value}" },
                 "onMain": { "value": "{color.alpha.white.96.value}" },
                 "onAccent": { "value": "{color.alpha.white.96.value}" },
-                "onSubtle": { "value": "{color.brandOrange.darkest.value}" }
+                "onSubtle": { "value": "{color.brandOrange.darkest.value}" },
+                "onSoft": { "value": "{color.brandOrange.darkest.value}" }
             },
             "tertiary": {
                 "main": { "value": "{color.brandPink.main.value}" },
                 "accent": { "value": "{color.brandPink.dark.value}" },
-                "subtle": { "value": "{color.brandPink.lightest.value}" },
+                "subtle": { "value": "{color.brandPink.light.value}" },
+                "soft": { "value": "{color.brandPink.lightest.value}" },
                 "onMain": { "value": "{color.alpha.white.96.value}" },
                 "onAccent": { "value": "{color.alpha.white.96.value}" },
-                "onSubtle": { "value": "{color.brandPink.darkest.value}" }
+                "onSubtle": { "value": "{color.brandPink.darkest.value}" },
+                "onSoft": { "value": "{color.brandPink.darkest.value}" }
             }
         },
         "text": {

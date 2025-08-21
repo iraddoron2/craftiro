@@ -1,3 +1,12 @@
+import { SystemHomePageFrame, SystemHomePageHeroSection } from '@/components'
+
 export default function Page() {
-    return <h1>certificates</h1>
+    return (
+        <SystemHomePageFrame>
+            <SystemHomePageHeroSection
+                title="תעודות"
+                subtitle="אוסף התעודות שלכם"
+            ></SystemHomePageHeroSection>
+        </SystemHomePageFrame>
+    )
 }

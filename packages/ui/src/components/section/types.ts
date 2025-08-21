@@ -1,4 +1,4 @@
-import type React from 'react'
+import React from 'react'
 
 export type SectionTag = 'section' | 'div' | 'article' | 'aside' | 'main'
 
@@ -11,7 +11,7 @@ export interface SectionProps
     /** Which HTML tag to render */
     as?: SectionTag
     /** Children inside the section */
-    children: React.ReactNode
+    children?: React.ReactNode
     /** If true, centers content and constrains width */
     container?: boolean
     /** Max container width (when container=true) */

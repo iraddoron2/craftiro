@@ -89,15 +89,46 @@ export default function Layout({
     if (isMobile === null) return null
 
     return (
-        <Stack style={{ flexDirection: 'column', minHeight: '100vh' }}>
+        <Stack style={{ flexDirection: 'column', minHeight: '100dvh' }}>
             <PagesNavbar
                 links={
                     isUserAdmin
                         ? [
                               { href: '/academy', label: 'עמוד בית' },
-                              { href: '/academy/modules', label: 'מודולים' },
-                              { href: '/academy/exercises', label: 'תרגילים' },
+                              { href: '/academy/store', label: 'חנות' },
+                              {
+                                  href: '/academy/my-learning',
+                                  label: 'הלמידה שלי',
+                              },
                               { href: '/academy/courses', label: 'קורסים' },
+                              { href: '/academy/exercises', label: 'תרגילים' },
+                              { href: '/academy/essays', label: 'מאמרים' },
+                              { href: '/academy/questions', label: 'שאלות' },
+                              { href: '/academy/lessons', label: 'שיעורים' },
+                              { href: '/academy/books', label: 'ספרים' },
+                              {
+                                  href: '/academy/infographics',
+                                  label: 'אינפוגרפיקות',
+                              },
+                              { href: '/academy/feed', label: 'פיד' },
+                              { href: '/academy/songs', label: 'שירים' },
+                              { href: '/academy/pieces', label: 'יצירות' },
+
+                              { href: '/academy/games', label: 'משחקים' },
+                              { href: '/academy/score', label: 'נקודות' },
+                              {
+                                  href: '/academy/achievements',
+                                  label: 'הישגים',
+                              },
+                              { href: '/academy/skills', label: 'כישורים' },
+                              {
+                                  href: '/academy/certificates',
+                                  label: 'תעודות',
+                              },
+                              {
+                                  href: '/academy/stats',
+                                  label: 'סטטיסטיקות',
+                              },
                           ]
                         : [
                               { href: '/academy', label: 'עמוד בית' },
@@ -111,7 +142,7 @@ export default function Layout({
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    minHeight: '100vh',
+                    minHeight: '100dvh',
                     paddingTop: isMobile ? 0 : elementsSizes.mainNavbarHeight,
                 }}
             >
