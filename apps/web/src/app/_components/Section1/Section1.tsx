@@ -2,10 +2,17 @@
 
 import { MainBackground } from '@/components'
 import { SystemHomePageTitle } from '@/components/layout'
+import { useUserStore } from '@/store'
 import { Section } from '@craftiro/ui'
 import { LogoImage, ScrollingBadges } from '../../_components'
 
 export const Section1 = () => {
+    const { user } = useUserStore()
+    const { firstName } = user || {}
+    if (firstName) {
+        console.log(`הי ${firstName}, ברוך הבא לקראפטירו!`)
+    }
+
     return (
         <Section
             padding="none"
