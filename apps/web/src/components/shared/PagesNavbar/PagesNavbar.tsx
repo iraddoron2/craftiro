@@ -1,6 +1,6 @@
 'use client'
 
-import { baseColors, elementsColors, elementsSizes } from '@/styles'
+import { elementsColors, elementsSizes } from '@/styles'
 import { Stack } from '@craftiro/ui'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -24,37 +24,51 @@ const PageLink = ({
     isActive: boolean
     onClick?: () => void
 }) => {
+    const [hover, setHover] = useState(false)
+
+    const bg = isActive
+        ? hover
+            ? 'var(--color-intent-primary-main)'
+            : 'var(--color-intent-primary-main)'
+        : hover
+        ? 'var(--color-intent-primary-subtle)'
+        : 'var(--color-background-subtle)'
+
+    const fg = isActive
+        ? 'var(--color-intent-primary-on-main)'
+        : hover
+        ? 'var(--color-intent-primary-on-accent)'
+        : 'var(--color-intent-primary-main)'
+
     return (
         <Stack
             onClick={onClick}
             style={{
                 display: 'flex',
                 cursor: 'pointer',
-                width: '232px',
-                height: '40px',
+                width: '100%',
+                height: '52px',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderRadius: '12px',
             }}
         >
             <Link
                 href={href}
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
                 style={{
+                    /* layout */
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '16px',
-                    fontFamily: 'Assistant',
-                    fontWeight: 'bold',
-                    border: '2px solid',
-                    color: isActive ? baseColors.blue1 : '#696969',
-                    borderColor: isActive ? baseColors.blue8 : '#00000000',
-                    backgroundColor: isActive ? baseColors.blue6 : '#00000000',
                     width: '100%',
                     height: '100%',
-                    borderRadius: '12px',
                     textDecoration: 'none',
-                    transition: 'background-color 0.2s ease',
+                    /* colors */
+                    color: fg,
+                    backgroundColor: bg,
+                    transition:
+                        'background-color .2s ease, color .2s ease, border-color .2s ease',
                 }}
             >
                 {label}
@@ -116,7 +130,7 @@ export const PagesNavbar = ({ links }: Props) => {
                             left: 0,
                             width: '100vw',
                             height: '100vh',
-                            backgroundColor: '#fff',
+                            backgroundColor: 'var(--color-background-main)',
                             zIndex: 3000,
                             padding: '24px',
                             display: 'flex',
@@ -151,12 +165,11 @@ export const PagesNavbar = ({ links }: Props) => {
                 borderLeft: `${elementsSizes.divider} solid ${elementsColors.divider}`,
                 width: elementsSizes.pagesNavbarWidth,
                 height: 'calc(100vh - 60px)',
-                backgroundColor: '#ffffffBF',
+                backgroundColor: 'var(--color-background-main)',
                 top: '60px',
                 right: 0,
                 justifyContent: 'flex-start',
                 alignItems: 'center',
-                gap: '8px',
                 paddingTop: '10px',
             }}
         >

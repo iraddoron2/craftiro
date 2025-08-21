@@ -24,8 +24,6 @@ export default function ExercisesLayout({
         // Load exercises only under /exercises to avoid global fetch
 
         <Stack style={{ width: '100%', minHeight: '100vh' }}>
-            <h1>תרגילים</h1>
-
             {/* Loading state */}
             {craftiroExercisesLoading && <div>Loading exercises...</div>}
 

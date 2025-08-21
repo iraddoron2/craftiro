@@ -12,8 +12,9 @@ import type { SystemHomePageTitleProps } from './types'
  *   page.hero.text -> color.intent.primary.onSubtle (למשל)
  */
 export const SystemHomePageTitle = ({
-    title,
-    subtitle,
+    title = 'עירד תכניס כותרת',
+    subtitle = 'עירד תכניס גם סאב־טייטל',
+    style = {},
 }: SystemHomePageTitleProps) => {
     return (
         <Stack
@@ -21,6 +22,7 @@ export const SystemHomePageTitle = ({
                 gap: '0px',
                 width: '100%',
                 zIndex: 1,
+                ...style,
             }}
             gap={0}
             align="center"

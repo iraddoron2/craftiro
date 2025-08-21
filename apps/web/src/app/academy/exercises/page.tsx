@@ -1,5 +1,6 @@
 'use client'
 
+import { SystemHomePageFrame, SystemHomePageHeroSection } from '@/components'
 import { useCraftiroExercisesStore } from '@/store/craftiroExercisesStore'
 import { useTabsNavbarStore } from '@/store/tabsNavbarStore' // ← use your actual path
 import { LinksGroups } from '@/types'
@@ -45,50 +46,46 @@ export default function ExercisesPage() {
     ])
 
     return (
-        <Stack
-            style={{
-                flexDirection: 'column',
-                minHeight: '100vh',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '24px',
-                padding: '32px',
-            }}
-        >
-            {/* Loading */}
-            {craftiroExercisesLoading && <Text>טוען תרגילים...</Text>}
+        <SystemHomePageFrame>
+            <SystemHomePageHeroSection
+                title="תרגילים"
+                subtitle="שפרו את כישורי המוזיקה שלכם עם התרגילים שלנו"
+            >
+                {/* Loading */}
+                {craftiroExercisesLoading && <Text>טוען תרגילים...</Text>}
 
-            {/* Error */}
-            {craftiroExercisesError && (
-                <Text style={{ color: '#c22' }}>
-                    שגיאה: {craftiroExercisesError}
-                </Text>
-            )}
+                {/* Error */}
+                {craftiroExercisesError && (
+                    <Text style={{ color: '#c22' }}>
+                        שגיאה: {craftiroExercisesError}
+                    </Text>
+                )}
 
-            {/* Grid */}
-            {!craftiroExercisesLoading && !craftiroExercisesError && (
-                <Stack
-                    style={{
-                        width: '100%',
-                        maxWidth: '1600px',
-                        flexWrap: 'wrap',
-                        justifyContent: 'center',
-                        gap: '40px',
-                        flexDirection: 'row',
-                    }}
-                >
-                    {craftiroExercises.length === 0 ? (
-                        <Text>לא נמצאו תרגילים זמינים כרגע</Text>
-                    ) : (
-                        craftiroExercises.map((exercise) => (
-                            <CraftiroExerciseCard
-                                key={exercise.systemId}
-                                craftiroExercise={exercise}
-                            />
-                        ))
-                    )}
-                </Stack>
-            )}
-        </Stack>
+                {/* Grid */}
+                {!craftiroExercisesLoading && !craftiroExercisesError && (
+                    <Stack
+                        style={{
+                            width: '100%',
+                            maxWidth: '1600px',
+                            flexWrap: 'wrap',
+                            justifyContent: 'center',
+                            gap: '40px',
+                            flexDirection: 'row',
+                        }}
+                    >
+                        {craftiroExercises.length === 0 ? (
+                            <Text>לא נמצאו תרגילים זמינים כרגע</Text>
+                        ) : (
+                            craftiroExercises.map((exercise) => (
+                                <CraftiroExerciseCard
+                                    key={exercise.systemId}
+                                    craftiroExercise={exercise}
+                                />
+                            ))
+                        )}
+                    </Stack>
+                )}
+            </SystemHomePageHeroSection>
+        </SystemHomePageFrame>
     )
 }

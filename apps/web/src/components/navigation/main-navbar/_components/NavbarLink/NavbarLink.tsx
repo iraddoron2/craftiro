@@ -20,7 +20,7 @@ export const NavbarLink = ({ isActive, href, label, onClick }: Props) => {
     // שמות הטוקנים ב־kebab-case כפי שנוצרו מ־Style Dictionary
     const vars = {
         activeBg: 'var(--color-intent-primary-subtle)',
-        activeText: 'var(--color-intent-primary-on-subtle)',
+        activeText: 'var(--color-text-on-background)',
         activeBorder: 'var(--color-intent-primary-main)',
 
         idleText: 'var(--color-text-on-background)',

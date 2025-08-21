@@ -212,7 +212,7 @@ export const Section2: React.FC = () => {
 
                         <Stack align="center">
                             <Button
-                                onClick={() => router.push('/lessons')}
+                                onClick={() => router.push('/academy/lessons')}
                                 label="כניסה לשיעורים פרטיים"
                                 style={{
                                     background: vars.ctaBg,

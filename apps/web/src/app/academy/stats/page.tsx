@@ -1,3 +1,12 @@
+import { SystemHomePageFrame, SystemHomePageHeroSection } from '@/components'
+
 export default function Page() {
-    return <h1>stats</h1>
+    return (
+        <SystemHomePageFrame>
+            <SystemHomePageHeroSection
+                title="סטטיסטיקות"
+                subtitle="מגוון סטטיסטיקות"
+            ></SystemHomePageHeroSection>
+        </SystemHomePageFrame>
+    )
 }
