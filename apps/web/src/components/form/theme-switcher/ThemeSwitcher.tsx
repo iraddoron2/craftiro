@@ -15,8 +15,12 @@ const THEME_OPTIONS: ThemeChoice[] = [
     ...(Object.keys(themes) as ThemeName[]),
 ]
 
+const isAlwaysLight = true // TODO: remove this when we support dark theme
+
 function detectSystemTheme(): ThemeName {
     if (typeof window === 'undefined') return 'light'
+    if (isAlwaysLight) return 'light'
+
     return window.matchMedia('(prefers-color-scheme: dark)').matches
         ? 'dark'
         : 'light'
