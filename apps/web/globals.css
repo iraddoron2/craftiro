@@ -15,6 +15,7 @@
         height: 100%;
         font-family: 'Assistant', sans-serif;
         box-sizing: border-box;
+        user-select: none;
     }
     *,
     *::before,
