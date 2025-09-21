@@ -4,15 +4,19 @@ import { MainBackground, SystemHomePageTitle } from '@/components'
 import { Section, Stack } from '@craftiro/ui'
 
 export type HeroSectionProps = {
-    title?: string
-    subtitle?: string
+    title?: string | null
+    subtitle?: string | null
     children?: React.ReactNode
+    fullscreen?: boolean
+    style?: React.CSSProperties
 }
 
 export const SystemHomePageHeroSection = ({
     title = 'עירד תכניס כותרת',
     subtitle = 'תכניס גם סאב־טייטל',
     children,
+    fullscreen = false,
+    style,
 }: HeroSectionProps) => {
     const NAV_TOP_PX = 64
     const stickyTop = `calc(var(--size-nav-top, ${NAV_TOP_PX}px) + env(safe-area-inset-top))`
@@ -24,9 +28,12 @@ export const SystemHomePageHeroSection = ({
             className="component-hero-section-element-section"
             style={{
                 position: 'relative',
-                minHeight: '180dvh', // קובע כמה זמן הרקע "דבוק"
+                minHeight: '100dvh', // קובע כמה זמן הרקע "דבוק"
                 maxWidth: '100vw',
                 overflow: 'visible',
+                width: fullscreen ? '100vw' : 'calc(100vw - 256px)',
+                right: fullscreen ? 0 : '256px',
+                ...style,
             }}
         >
             {/* Sticky background */}
@@ -45,7 +52,7 @@ export const SystemHomePageHeroSection = ({
                         height: '100%',
                     }}
                 >
-                    <MainBackground />
+                    <MainBackground fullScreen={fullscreen} />
                 </div>
             </div>
 
@@ -60,9 +67,17 @@ export const SystemHomePageHeroSection = ({
                     gap: 16,
                     padding: 24,
                     textAlign: 'center',
+                    height: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                 }}
             >
-                <SystemHomePageTitle title={title} subtitle={subtitle} />
+                {(title || subtitle) && (
+                    <SystemHomePageTitle
+                        title={title ?? ''}
+                        subtitle={subtitle ?? ''}
+                    />
+                )}
                 {children}
             </Stack>
         </Section>

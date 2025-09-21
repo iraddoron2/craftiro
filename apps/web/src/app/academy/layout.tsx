@@ -1,12 +1,12 @@
 'use client'
 
-import { PagesNavbar } from '@/components/shared'
+// import { PagesNavbar } from '@/components/shared'
 import { useTabsNavbar } from '@/lib'
 import { CraftiroCoursesProvider } from '@/providers/CraftiroCoursesProvider'
-import { useUserStore } from '@/store/userStore'
+// import { useUserStore } from '@/store/userStore'
 import { elementsSizes } from '@/styles'
 import { LinksGroups } from '@/types'
-import { isAdmin } from '@/utils'
+// import { isAdmin } from '@/utils'
 import { Stack } from '@craftiro/ui'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
@@ -17,8 +17,8 @@ export default function Layout({
     children: React.ReactNode
 }>) {
     const pathname = usePathname()
-    const user = useUserStore((state) => state.user)
-    const isUserAdmin = isAdmin(user)
+    // const user = useUserStore((state) => state.user)
+    // const isUserAdmin = isAdmin(user)
     const { linksGroups, updateLinksGroups, updateCurrentPath } =
         useTabsNavbar()
 
@@ -90,7 +90,7 @@ export default function Layout({
 
     return (
         <Stack style={{ flexDirection: 'column', minHeight: '100dvh' }}>
-            <PagesNavbar
+            {/* <PagesNavbar
                 links={
                     isUserAdmin
                         ? [
@@ -135,14 +135,14 @@ export default function Layout({
                               { href: '/academy/exercises', label: 'תרגילים' },
                           ]
                 }
-            />
+            /> */}
             <Stack
                 style={{
-                    marginRight: isMobile ? 0 : elementsSizes.pagesNavbarWidth,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    minHeight: '100dvh',
+                    minHeight: 'calc(100dvh - 60px)',
+                    height: '100%',
                     paddingTop: isMobile ? 0 : elementsSizes.mainNavbarHeight,
                 }}
             >

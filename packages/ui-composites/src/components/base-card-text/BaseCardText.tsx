@@ -22,6 +22,7 @@ export const BaseCardText = ({
             )}
             style={{
                 textAlign: 'right',
+                fontSize: '28px',
                 ...style,
             }}
         >

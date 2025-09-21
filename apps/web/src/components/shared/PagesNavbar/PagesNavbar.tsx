@@ -171,6 +171,7 @@ export const PagesNavbar = ({ links }: Props) => {
                 justifyContent: 'flex-start',
                 alignItems: 'center',
                 paddingTop: '10px',
+                zIndex: 2000,
             }}
         >
             {links.map((link) => (

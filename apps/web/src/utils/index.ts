@@ -111,3 +111,6 @@ export const craftiroError = (message: string) => {
 
     throw new Error(message)
 }
+
+export { getCoursesCount, getCoursesLearningTime } from './courses'
+export { timeConvertor } from './timeConvertor'

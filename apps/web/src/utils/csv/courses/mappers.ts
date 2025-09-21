@@ -130,6 +130,7 @@ export const mapScreenRow = (
         screenSystemId: cell(row, I.screenSystemId!),
         screenTitle: cell(row, I.screenTitle!),
         screenType: cell(row, I.screenType!) as CraftiroCourseScreenType,
+        learningTimeInSeconds: toInt(cell(row, I.learningTimeInSeconds!), 0),
         elements: [],
     }
     parent.screens.push(newScreen)
@@ -149,11 +150,49 @@ export const mapElementRow = (
         return
     }
 
-    parent.elements.push({
-        id: cell(row, I.elementSystemId!),
-        type: coerceElementType(cell(row, I.elementType!)),
-        // NOTE: content shape depends on the element "type"; kept as raw string for renderer to parse.
-        // @ts-expect-error dynamic content type by element.type
-        content: cell(row, I.elementContent),
-    })
+    const elementType = coerceElementType(cell(row, I.elementType!))
+    const elementId = cell(row, I.elementSystemId!)
+    const elementContent = cell(row, I.elementContent!)
+
+    let element: CraftiroElement
+
+    if (elementType === 'youtubeVideo') {
+        element = {
+            id: elementId,
+            type: 'youtubeVideo',
+            content: elementContent,
+            systemId: '',
+        }
+    } else if (elementType === 'paragraph') {
+        element = {
+            id: elementId,
+            type: 'paragraph',
+            content: [
+                {
+                    id: elementId,
+                    systemId: '',
+                    type: 'textSegment',
+                    content: elementContent,
+                },
+            ],
+            systemId: '',
+        }
+    } else if (elementType === 'textSegment') {
+        element = {
+            id: elementId,
+            type: 'textSegment',
+            content: elementContent,
+            systemId: '',
+        }
+    } else {
+        // fallback for unknown types
+        element = {
+            id: elementId,
+            type: elementType,
+            content: elementContent,
+            systemId: '',
+        } as CraftiroElement
+    }
+
+    parent.elements.push(element)
 }

@@ -1,4 +1,6 @@
 export * from './craftiroElement'
 export * from './craftiroElementBase'
+export * from './CraftiroElementType'
 export * from './craftiroParagraph'
 export * from './craftiroTextSegment'
+export * from './craftiroYoutubeVideo'
