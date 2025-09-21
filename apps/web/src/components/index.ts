@@ -1,4 +1,4 @@
-export { FullWidthCard } from './data-display'
+export { DataLabels, FullWidthCard } from './data-display'
 export { Input, ThemeSwitcher } from './form'
 export {
     SystemHomePageFrame,

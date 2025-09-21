@@ -13,7 +13,7 @@ export const FullWidthCardTitle = ({ title }: Props) => {
                 fontFamily: 'Assistant',
                 fontSize: '64px',
                 fontStyle: 'normal',
-                fontWeight: 800,
+                fontWeight: 700,
                 lineHeight: 'normal',
             }}
         >

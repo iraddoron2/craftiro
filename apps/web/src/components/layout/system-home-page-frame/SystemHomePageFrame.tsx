@@ -3,18 +3,22 @@ import React from 'react'
 
 export type SystemHomePageFrameProps = {
     children?: React.ReactNode
+    style?: React.CSSProperties
 }
 
-export const SystemHomePageFrame = ({ children }: SystemHomePageFrameProps) => {
+export const SystemHomePageFrame = ({
+    children,
+    style,
+}: SystemHomePageFrameProps) => {
     return (
         <Section
-            // className=
             padding="none"
             style={{
                 position: 'relative',
                 minHeight: '100dvh',
                 overflow: 'visible',
                 display: 'block',
+                ...style,
             }}
         >
             {children}

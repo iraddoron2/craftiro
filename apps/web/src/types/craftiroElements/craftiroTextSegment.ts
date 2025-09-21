@@ -2,6 +2,6 @@ import { CraftiroElementBase } from './craftiroElementBase'
 
 export type CraftiroTextSegment = CraftiroElementBase & {
     type: 'textSegment'
-    text: string
+    content: string
     linkUrl?: string // Optional, relevant if decorations includes 'link'
 }

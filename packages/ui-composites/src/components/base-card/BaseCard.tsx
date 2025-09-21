@@ -14,7 +14,10 @@ export type BaseCardProps = {
 }
 
 /** כותרת כקומפוננטה פנימית */
-const Title: React.FC<{ title: string }> = ({ title }) => {
+const Title: React.FC<{ title: string; style?: React.CSSProperties }> = ({
+    title,
+    style,
+}) => {
     return (
         <Text
             as="h3"
@@ -28,6 +31,7 @@ const Title: React.FC<{ title: string }> = ({ title }) => {
             )}
             style={{
                 lineHeight: '1.2',
+                ...style,
             }}
         >
             {title}
@@ -57,12 +61,12 @@ export const BaseCard: React.FC<BaseCardProps> = ({
                 borderColor: 'var(--color-divider-main)',
                 borderWidth: 'var(--border-width-20)',
                 borderStyle: 'solid',
-                backgroundColor: 'var(--color-surface-main)',
+                backgroundColor: 'var(--color-text-on-contrast-background)',
                 padding: 'var(--spacing-40)',
                 ...style,
             }}
         >
-            {title && <Title title={title} />}
+            {title && <Title title={title} style={{ fontSize: 'inherit' }} />}
             {children}
         </Stack>
     )

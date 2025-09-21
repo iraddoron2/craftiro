@@ -1,6 +1,6 @@
 'use client'
 
-import { Paragraph as CraftParagraph } from '@/components/craftElements/base/Paragraph'
+import { Paragraph as CraftParagraph } from '@/components/craftiroElements/base/Paragraph'
 import { useCraftiroExercisesStore } from '@/store/craftiroExercisesStore'
 import { CraftiroTextSegment } from '@/types'
 import { Stack, Text } from '@craftiro/ui'

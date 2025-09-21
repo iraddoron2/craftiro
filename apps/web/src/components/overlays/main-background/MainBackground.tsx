@@ -17,7 +17,7 @@ export const MainBackground = ({
             style={{
                 height: '100vh',
                 width: fullScreen ? '100vw' : 'calc(100vw - 254px)',
-                right: 0,
+                left: 0,
                 top: '-4px',
                 position: 'absolute',
                 backgroundImage: 'url("/backgrounds/Miro Background 5.png")',
