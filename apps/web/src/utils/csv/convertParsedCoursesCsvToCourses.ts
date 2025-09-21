@@ -48,6 +48,7 @@ type CraftiroCourseCsvHeaders = {
     screenSystemId: string
     screenTitle: string
     screenType: string
+    learningTimeInSeconds: string
 
     // Element
     elementSystemId: string
@@ -165,6 +166,7 @@ export const convertParsedCoursesCsvToCourses = (
         screenSystemId: idx('screenSystemId'),
         screenTitle: idx('screenTitle'),
         screenType: idx('screenType'),
+        learningTimeInSeconds: idx('learningTimeInSeconds'),
 
         elementSystemId: idx('elementSystemId'),
         elementType: idx('elementType'),
@@ -296,8 +298,14 @@ export const convertParsedCoursesCsvToCourses = (
                 screenSystemId: cell(row, I.screenSystemId),
                 screenTitle: cell(row, I.screenTitle),
                 screenType: cell(row, I.screenType) as CraftiroCourseScreenType,
+                learningTimeInSeconds: toInt(
+                    cell(row, I.learningTimeInSeconds),
+                    0
+                ),
                 elements: [],
             }
+
+            console.log(`[CSV] Parsed screen at line ${lineNo}:`, newScreen)
             lastStep.screens.push(newScreen)
             continue
         }
@@ -314,10 +322,12 @@ export const convertParsedCoursesCsvToCourses = (
                 continue
             }
             const newElement: CraftiroElement = {
-                id: cell(row, I.elementSystemId),
-                type: cell(row, I.elementType) as CraftiroElement['type'],
+                id: cell(row, I.elementSystemId), // using systemId as unique id
+                systemId: cell(row, I.elementSystemId),
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
+                type: cell(row, I.elementType),
                 // NOTE: element content may vary per type; keep raw string and parse in renderer
-                // @ts-expect-error dynamic content type by element.type
                 content: cell(row, I.elementContent),
             }
             lastScreen.elements.push(newElement)

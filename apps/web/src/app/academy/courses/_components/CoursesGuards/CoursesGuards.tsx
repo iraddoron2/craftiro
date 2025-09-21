@@ -29,7 +29,8 @@ export const CoursesGuards = ({ children }: { children: React.ReactNode }) => {
         <Stack
             style={{
                 flexDirection: 'column',
-                minHeight: '100vh',
+                // minHeight: 'calc(100dvh - 60px)',
+                height: 'calc(100dvh - 60px)',
                 width: '100%',
             }}
         >

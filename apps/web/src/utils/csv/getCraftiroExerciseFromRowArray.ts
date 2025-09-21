@@ -70,7 +70,7 @@ export const getCraftiroExerciseFromRowArray = (
                     content: [
                         {
                             type: 'textSegment',
-                            text: rowObject.instructions || '',
+                            content: rowObject.instructions || '',
                             id: 'instructions-text',
                             systemId: 'instructions-text-system', // or generate a unique value as needed
                         },

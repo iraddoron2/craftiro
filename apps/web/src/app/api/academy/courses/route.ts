@@ -1,5 +1,5 @@
 import { CraftiroCourse } from '@/types/craftiroCourses'
-import { convertParsedCoursesCsvToCourses } from '@/utils/csv/courses'
+import { convertParsedCoursesCsvToCourses } from '@/utils/csv'
 import { parse } from 'csv-parse/sync'
 import { promises as fs } from 'fs'
 import { NextResponse } from 'next/server'
