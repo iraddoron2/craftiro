@@ -130,7 +130,7 @@ export const PagesNavbar = ({ links }: Props) => {
                             left: 0,
                             width: '100vw',
                             height: '100vh',
-                            backgroundColor: 'var(--color-background-main)',
+                            backgroundColor: 'var(--color-base-white)',
                             zIndex: 3000,
                             padding: '24px',
                             display: 'flex',
@@ -162,16 +162,17 @@ export const PagesNavbar = ({ links }: Props) => {
         <Stack
             style={{
                 position: 'fixed',
-                borderLeft: `${elementsSizes.divider} solid ${elementsColors.divider}`,
-                width: elementsSizes.pagesNavbarWidth,
-                height: 'calc(100vh - 60px)',
-                backgroundColor: 'var(--color-background-main)',
-                top: '60px',
-                right: 0,
+                inlineSize: elementsSizes.pagesNavbarWidth,
+                insetBlockStart: '60px', // top
+                insetInlineStart: 0, // ⟵ היה insetInlineEnd: 0
+                blockSize: 'calc(100dvh - 60px)',
+                backgroundColor: 'var(--color-base-white)',
+                borderInlineEnd: `${elementsSizes.divider} solid ${elementsColors.divider}`, // ⟵ היה borderInlineStart
                 justifyContent: 'flex-start',
                 alignItems: 'center',
-                paddingTop: '10px',
                 zIndex: 2000,
+                overflowY: 'auto',
+                overscrollBehavior: 'contain',
             }}
         >
             {links.map((link) => (

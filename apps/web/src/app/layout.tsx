@@ -35,6 +35,7 @@ export default function RootLayout({
                 className={assistant.className + ' m-0'}
                 style={{
                     margin: '0px !important',
+                    backgroundColor: 'var(--color-brand-pink-190)',
                 }}
             >
                 <AppRouterCacheProvider>

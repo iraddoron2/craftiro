@@ -28,11 +28,11 @@ export const SystemHomePageHeroSection = ({
             className="component-hero-section-element-section"
             style={{
                 position: 'relative',
-                minHeight: '100dvh', // קובע כמה זמן הרקע "דבוק"
-                maxWidth: '100vw',
-                overflow: 'visible',
-                width: fullscreen ? '100vw' : 'calc(100vw - 256px)',
-                right: fullscreen ? 0 : '256px',
+                height: fullscreen ? '100dvh' : 'calc(100dvh - 60px)',
+                maxWidth: '100%', // was 100vw
+                overflow: 'clip', // היה visible → יכול לגרום גלילות
+                width: '100%', // היה 100vw / calc(100vw - 256px)
+                right: '256px', // הסר לחלוטין
                 ...style,
             }}
         >
