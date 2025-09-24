@@ -130,6 +130,8 @@ export default function Page() {
                     flexDirection: 'column',
                     justifyContent: 'flex-start',
                     width: '100%',
+                    height: '100%',
+
                     // minHeight: 'calc(100dvh - 60px)',
                 }}
             >
