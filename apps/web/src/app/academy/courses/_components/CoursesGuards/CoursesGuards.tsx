@@ -32,6 +32,7 @@ export const CoursesGuards = ({ children }: { children: React.ReactNode }) => {
                 // minHeight: 'calc(100dvh - 60px)',
                 height: 'calc(100dvh - 60px)',
                 width: '100%',
+                // maxWidth: '1800px',
             }}
         >
             {children}

@@ -1,6 +1,7 @@
 'use client'
 
-import { Button, Stack } from '@craftiro/ui'
+import { MainButton } from '@/components'
+import { Stack } from '@craftiro/ui'
 import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import React, { useCallback, useEffect, useMemo } from 'react'
 
@@ -210,18 +211,32 @@ export const ScreenNavigationControls: React.FC<Props> = ({
                 marginTop: '8px',
             }}
         >
-            <Button
+            <MainButton
                 label={prevNav.label}
                 variant="outlined"
                 onClick={() => handleGo(prevNav)}
-                disabled={prevNav.disabled}
+                color="brand-blue"
+                state={prevNav.disabled ? 'disabled' : 'default'}
+                style={{
+                    width: '120px',
+                }}
             />
-            <Button label="בוצע" color="secondary" onClick={onMarkAsDone} />
-            <Button
+            <MainButton
+                label="בוצע"
+                color="brand-orange"
+                onClick={onMarkAsDone}
+                style={{
+                    width: '160px',
+                }}
+            />
+            <MainButton
                 label={nextNav.label}
-                color="primary"
+                color="brand-blue"
                 onClick={() => handleGo(nextNav)}
-                disabled={nextNav.disabled}
+                state={nextNav.disabled ? 'disabled' : 'default'}
+                style={{
+                    width: '120px',
+                }}
             />
         </Stack>
     )

@@ -43,10 +43,10 @@ const PALETTE = {
         hover: 'var(--color-brand-blue-dark)',
         hoverContrast: 'var(--color-base-white)',
     },
-    orange: {
+    'brand-orange': {
         main: 'var(--color-brand-orange-main)',
         mainContrast: 'var(--color-base-white)',
-        hover: 'var(--color-brand-orange-light)',
+        hover: 'var(--color-brand-orange-dark)',
         hoverContrast: 'var(--color-base-white)',
     },
 } as const satisfies Record<string, ColorDef>

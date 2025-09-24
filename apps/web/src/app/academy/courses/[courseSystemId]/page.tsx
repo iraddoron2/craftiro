@@ -250,7 +250,7 @@ export default function CoursePage() {
                 />
                 <FullWidthCard
                     title={name}
-                    color="orange"
+                    color="blue"
                     style={{ margin: '24px', width: 'calc(100% - 48px)' }}
                 />
                 <CourseSubNavbar />
