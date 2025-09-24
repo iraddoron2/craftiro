@@ -24,7 +24,7 @@ export const MainBackground = ({
                 // backgroundSize: 'cover',
                 // backgroundPosition: 'right',
                 // backgroundRepeat: 'no-repeat',
-                backgroundColor: 'var(--color-brand-pink-190)',
+                backgroundColor: 'var(--color-base-white)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

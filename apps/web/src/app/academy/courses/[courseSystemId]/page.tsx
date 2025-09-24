@@ -136,7 +136,13 @@ export default function CoursePage() {
                 color="blue"
                 style={{
                     margin: '24px',
-                    width: 'calc(100% - 48px)',
+                    width: 'calc(100% - 320px)',
+                    border: 'solid red 2px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '12px',
                 }}
             />
             <CourseSubNavbar />

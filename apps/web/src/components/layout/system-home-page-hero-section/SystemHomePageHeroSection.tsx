@@ -28,7 +28,7 @@ export const SystemHomePageHeroSection = ({
             className="component-hero-section-element-section"
             style={{
                 position: 'relative',
-                height: fullscreen ? '100dvh' : 'calc(100dvh - 60px)',
+                // height: fullscreen ? '100dvh' : 'calc(100dvh - 60px)',
                 maxWidth: '100%', // was 100vw
                 overflow: 'clip', // היה visible → יכול לגרום גלילות
                 width: '100%', // היה 100vw / calc(100vw - 256px)

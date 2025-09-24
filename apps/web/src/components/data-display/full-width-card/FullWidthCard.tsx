@@ -16,6 +16,7 @@ export const FullWidthCard = ({
 }: Props) => {
     return (
         <Stack
+            className="component-full-width-card"
             style={{
                 width: '100%',
                 backgroundColor: `var(--color-${color}-170)`,

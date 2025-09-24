@@ -46,6 +46,7 @@ export const CourseSubNavbar = ({
                     gap: '12px',
                     position: 'sticky',
                     top: '80px',
+                    zIndex: 9999,
                 }}
             >
                 {isBackButton && (
