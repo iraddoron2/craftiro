@@ -2,6 +2,7 @@
 
 import {
     FullWidthCard,
+    MainButton,
     SystemHomePageFrame,
     SystemHomePageHeroSection,
 } from '@/components'
@@ -10,7 +11,7 @@ import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
 import { useUserStore } from '@/store/userStore'
 import { CraftiroCourse } from '@/types/craftiroCourses'
 import { isAdmin } from '@/utils'
-import { Button, Section, Stack, Text } from '@craftiro/ui'
+import { Section, Stack, Text } from '@craftiro/ui'
 import { useRouter } from 'next/navigation'
 import { CourseSubNavbar } from '../_components/CourseSubNavbar'
 
@@ -99,15 +100,15 @@ const SearchedCourseCard = ({ course }: SearchedCourseCardProps) => {
                     })}
                 </Stack>
             </Stack>
-            <Stack>
-                <Button
+            <Stack
+                style={{
+                    width: '100%',
+                }}
+            >
+                <MainButton
                     label="כניסה לקורס"
                     onClick={() => handleNavigateToCourse(course._id)}
-                    variant="outlined"
-                    style={{
-                        marginTop: 'auto',
-                        alignSelf: 'center',
-                    }}
+                    color="brand-blue"
                 />
             </Stack>
         </Stack>
@@ -131,8 +132,6 @@ export default function Page() {
                     justifyContent: 'flex-start',
                     width: '100%',
                     height: '100%',
-
-                    // minHeight: 'calc(100dvh - 60px)',
                 }}
             >
                 <PagesNavbar
@@ -212,12 +211,14 @@ export default function Page() {
                             width: '100%',
                         }}
                     >
-                        {craftiroCourses.map((course) => (
-                            <SearchedCourseCard
-                                key={course._id}
-                                course={course}
-                            />
-                        ))}
+                        {craftiroCourses.map((course) => {
+                            return (
+                                <SearchedCourseCard
+                                    key={course._id}
+                                    course={course}
+                                />
+                            )
+                        })}
                     </Stack>
                 </Section>
             </SystemHomePageHeroSection>

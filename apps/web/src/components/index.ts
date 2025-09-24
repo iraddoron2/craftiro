@@ -1,5 +1,6 @@
 export { DataLabels, FullWidthCard } from './data-display'
 export { Input, ThemeSwitcher } from './form'
+export { MainButton } from './inputs'
 export {
     SystemHomePageFrame,
     SystemHomePageHeroSection,
