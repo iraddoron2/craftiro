@@ -9,6 +9,8 @@ export type HeroSectionProps = {
     children?: React.ReactNode
     fullscreen?: boolean
     style?: React.CSSProperties
+    opacity?: number
+    contentPosition?: 'center' | 'top' | 'bottom'
 }
 
 export const SystemHomePageHeroSection = ({
@@ -17,6 +19,8 @@ export const SystemHomePageHeroSection = ({
     children,
     fullscreen = false,
     style,
+    opacity = 70,
+    contentPosition = 'center',
 }: HeroSectionProps) => {
     const NAV_TOP_PX = 64
     const stickyTop = `calc(var(--size-nav-top, ${NAV_TOP_PX}px) + env(safe-area-inset-top))`
@@ -33,6 +37,9 @@ export const SystemHomePageHeroSection = ({
                 overflow: 'clip', // היה visible → יכול לגרום גלילות
                 width: '100%', // היה 100vw / calc(100vw - 256px)
                 right: '256px', // הסר לחלוטין
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
                 ...style,
             }}
         >
@@ -52,7 +59,7 @@ export const SystemHomePageHeroSection = ({
                         height: '100%',
                     }}
                 >
-                    <MainBackground fullScreen={fullscreen} />
+                    <MainBackground fullScreen={fullscreen} opacity={opacity} />
                 </div>
             </div>
 
@@ -68,7 +75,12 @@ export const SystemHomePageHeroSection = ({
                     padding: 24,
                     textAlign: 'center',
                     height: '100%',
-                    justifyContent: 'center',
+                    justifyContent:
+                        contentPosition === 'center'
+                            ? 'center'
+                            : contentPosition === 'top'
+                            ? 'flex-start'
+                            : 'flex-end',
                     alignItems: 'center',
                 }}
             >

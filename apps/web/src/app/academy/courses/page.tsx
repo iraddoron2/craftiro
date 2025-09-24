@@ -110,6 +110,8 @@ export default function CoursesPage() {
                 title="קורסים"
                 subtitle="למדו מוזיקה צעד אחר צעד בעזרת הקורסים שלנו"
                 fullscreen={false}
+                opacity={50}
+                contentPosition="center"
             >
                 {/* {craftiroCoursesLoading && <div>טוען קורסים...</div>}
             {craftiroCoursesError && <div>שגיאה: {craftiroCoursesError}</div>} */}

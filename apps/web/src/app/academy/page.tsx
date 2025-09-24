@@ -60,6 +60,7 @@ export default function Page() {
             <SystemHomePageHeroSection
                 title="אקדמיה"
                 subtitle="האקדמיה של קראפטירו - למידה שמביאה תוצאות"
+                opacity={50}
             ></SystemHomePageHeroSection>
         </SystemHomePageFrame>
     )

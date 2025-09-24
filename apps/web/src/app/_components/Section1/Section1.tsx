@@ -53,7 +53,7 @@ export const Section1 = () => {
                 orientation="column"
                 gap={24}
             />
-            <MainBackground fullScreen />
+            <MainBackground fullScreen opacity={50} />
         </Section>
     )
 }
