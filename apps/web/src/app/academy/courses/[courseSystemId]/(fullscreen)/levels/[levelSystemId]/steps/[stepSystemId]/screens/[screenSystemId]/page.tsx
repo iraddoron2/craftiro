@@ -62,8 +62,8 @@ export default function StepScreenPage() {
             style={{
                 backgroundColor: 'var(--color-text-on-contrast-background)',
                 width: '100%',
-                height: '100%',
                 minHeight: '400px',
+                height: '100%',
                 borderRadius: '12px',
                 margin: '0 auto',
                 position: 'static',

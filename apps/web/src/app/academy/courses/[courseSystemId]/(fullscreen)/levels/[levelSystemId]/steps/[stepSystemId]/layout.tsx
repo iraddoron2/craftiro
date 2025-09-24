@@ -98,15 +98,17 @@ export default function Layout({ children }: Props) {
             <SystemHomePageHeroSection
                 title={null}
                 subtitle={null}
+                fullscreen={true}
                 style={{
                     padding: 0,
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'flex-start',
                     width: '100%',
-                    height: '100%',
                     marginRight: '-256px',
+                    height: 'calc(100vh - 60px)',
                 }}
+                contentPosition="top"
             >
                 <Stack
                     className="file:academy-course-step-layout-header"
@@ -128,9 +130,10 @@ export default function Layout({ children }: Props) {
                     >
                         <Stack
                             style={{
-                                backgroundColor: 'var(--color-purple-190)',
+                                backgroundColor:
+                                    'var(--color-brand-orange-190)',
                                 minWidth: '320px',
-                                border: 'solid 2px var(--color-purple-100)',
+                                border: 'solid 2px var(--color-brand-orange-100)',
                                 display: 'flex',
                                 flexDirection: 'row',
                                 alignItems: 'center',
@@ -143,7 +146,7 @@ export default function Layout({ children }: Props) {
                                 variant="h3"
                                 style={{
                                     padding: '4px 8px',
-                                    color: 'var(--color-purple-100)',
+                                    color: 'var(--color-brand-orange-100)',
                                     textAlign: 'right',
                                     fontWeight: 'bold',
                                     fontSize: '32px',
@@ -155,7 +158,7 @@ export default function Layout({ children }: Props) {
                                 style={{
                                     fontSize: '20px',
                                     fontWeight: 'bold',
-                                    color: 'var(--color-purple-100)',
+                                    color: 'var(--color-brand-orange-100)',
                                 }}
                             >
                                 {currentLevel.levelTitle || ''}
