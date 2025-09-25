@@ -5,11 +5,13 @@ import { Stack } from '@craftiro/ui'
 export type MainBackgroundProps = {
     className?: string
     fullScreen?: boolean
+    opacity?: number
 }
 
 export const MainBackground = ({
     className,
     fullScreen = false,
+    opacity = 70,
 }: MainBackgroundProps) => {
     return (
         <Stack
@@ -24,6 +26,7 @@ export const MainBackground = ({
                 backgroundSize: 'cover',
                 backgroundPosition: 'right',
                 backgroundRepeat: 'no-repeat',
+                // backgroundColor: 'var(--color-base-white)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -39,7 +42,7 @@ export const MainBackground = ({
                     width: '100%',
                     height: '100%',
                     backgroundColor: 'var(--color-background-main)',
-                    opacity: 'var(--opacity-80)',
+                    opacity: `var(--opacity-${opacity.toString()})`,
                     pointerEvents: 'none',
                     overflow: 'hidden',
                     zIndex: 1,

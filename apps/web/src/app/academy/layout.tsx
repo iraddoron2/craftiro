@@ -89,7 +89,12 @@ export default function Layout({
     if (isMobile === null) return null
 
     return (
-        <Stack style={{ flexDirection: 'column', minHeight: '100dvh' }}>
+        <Stack
+            style={{
+                flexDirection: 'column',
+                minHeight: '100dvh',
+            }}
+        >
             {/* <PagesNavbar
                 links={
                     isUserAdmin

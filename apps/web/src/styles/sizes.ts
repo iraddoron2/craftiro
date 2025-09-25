@@ -14,11 +14,11 @@ export const breakpoints = {
 type BreakpointKey = keyof typeof breakpoints
 
 export const up = (key: BreakpointKey) =>
-    `@media (min-width:${breakpoints[key]}px)`
+    `@media (minWidth:${breakpoints[key]}px)`
 export const down = (key: BreakpointKey) =>
-    `@media (max-width:${breakpoints[key]}px)`
+    `@media (maxWidth:${breakpoints[key]}px)`
 export const between = (minKey: BreakpointKey, maxKey: BreakpointKey) =>
-    `@media (min-width:${breakpoints[minKey]}px) and (max-width:${breakpoints[maxKey]}px)`
+    `@media (minWidth:${breakpoints[minKey]}px) and (maxWidth:${breakpoints[maxKey]}px)`
 
 export const sizes = {
     breakpoints: {
@@ -27,3 +27,8 @@ export const sizes = {
         between,
     },
 } as const
+
+export const FONT_SIZES = {
+    runningText: 18,
+    bigRunningText: 22,
+}

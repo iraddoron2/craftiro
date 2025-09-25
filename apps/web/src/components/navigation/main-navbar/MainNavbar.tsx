@@ -37,6 +37,7 @@ export const MainNavbar = ({ boxComponent }: MainNavbarProps) => {
             {/* Desktop */}
             {!isMobile && (
                 <Stack
+                    className="main-navbar"
                     as="nav"
                     style={{
                         height: '60px',
@@ -45,7 +46,7 @@ export const MainNavbar = ({ boxComponent }: MainNavbarProps) => {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        backgroundColor: 'var(--color-background-main)',
+                        backgroundColor: 'var(--color-base-white)',
                         position: 'fixed',
                         padding: '0 16px',
                         borderBottom: `2px solid ${elementsColors.divider}`,

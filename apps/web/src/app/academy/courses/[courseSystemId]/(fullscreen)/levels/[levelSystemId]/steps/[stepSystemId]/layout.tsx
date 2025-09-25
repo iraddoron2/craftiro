@@ -1,6 +1,6 @@
 'use client'
 
-import { SystemHomePageHeroSection } from '@/components'
+import { SystemHomePageFrame, SystemHomePageHeroSection } from '@/components'
 import { useCraftiroCoursesStore } from '@/store'
 import { Button, Stack, Text } from '@craftiro/ui'
 import { useParams, useRouter } from 'next/navigation'
@@ -89,124 +89,207 @@ export default function Layout({ children }: Props) {
     }
 
     return (
-        <Stack
+        <SystemHomePageFrame
+            // className="file:academy-course-step-layout-container"
             style={{
-                display: 'flex',
-                width: '100%',
-                height: '100%',
+                padding: '0px',
             }}
         >
-            <SystemHomePageHeroSection title={null} subtitle={null} fullscreen>
-                <>
+            <SystemHomePageHeroSection
+                title={null}
+                subtitle={null}
+                fullscreen={true}
+                style={{
+                    padding: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    width: '100%',
+                    marginRight: '-256px',
+                    height: 'calc(100vh - 60px)',
+                }}
+                contentPosition="top"
+            >
+                <Stack
+                    className="file:academy-course-step-layout-header"
+                    style={{
+                        width: '100%',
+                        maxWidth: '1200px',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                    }}
+                >
                     <Stack
                         style={{
-                            width: '100%',
-                            maxWidth: '1200px',
                             display: 'flex',
                             flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
+                            gap: '16px',
                         }}
                     >
                         <Stack
                             style={{
+                                backgroundColor:
+                                    'var(--color-brand-orange-190)',
+                                minWidth: '320px',
+                                border: 'solid 2px var(--color-brand-orange-100)',
                                 display: 'flex',
                                 flexDirection: 'row',
+                                alignItems: 'center',
                                 gap: '16px',
+                                padding: '8px 16px',
+                                borderRadius: '12px',
                             }}
                         >
-                            <Stack
+                            <Text
+                                variant="h3"
                                 style={{
-                                    backgroundColor: 'var(--color-purple-190)',
-                                    minWidth: '320px',
-                                    border: 'solid 2px var(--color-purple-100)',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    gap: '16px',
-                                    padding: '8px 16px',
-                                    borderRadius: '12px',
+                                    padding: '4px 8px',
+                                    color: 'var(--color-brand-orange-100)',
+                                    textAlign: 'right',
+                                    fontWeight: 'bold',
+                                    fontSize: '32px',
                                 }}
                             >
-                                <Text
-                                    variant="h3"
-                                    style={{
-                                        padding: '4px 8px',
-                                        color: 'var(--color-purple-100)',
-                                        textAlign: 'right',
-                                        fontWeight: 'bold',
-                                        fontSize: '32px',
-                                    }}
-                                >
-                                    שלב {levelSystemId}
-                                </Text>
-                                <Text
-                                    style={{
-                                        fontSize: '20px',
-                                        fontWeight: 'bold',
-                                        color: 'var(--color-purple-100)',
-                                    }}
-                                >
-                                    {currentLevel.levelTitle || ''}
-                                </Text>
-                            </Stack>
-                            <Stack
+                                שלב {levelSystemId}
+                            </Text>
+                            <Text
                                 style={{
-                                    backgroundColor:
-                                        'var(--color-brand-blue-190)',
-                                    minWidth: '320px',
-                                    border: 'solid 2px var(--color-brand-blue-100)',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    gap: '16px',
-                                    padding: '8px 16px',
-                                    borderRadius: '12px',
-                                    height: '68px',
+                                    fontSize: '20px',
+                                    fontWeight: 'bold',
+                                    color: 'var(--color-brand-orange-100)',
                                 }}
                             >
-                                <Text
-                                    variant="h3"
-                                    style={{
-                                        padding: '4px 8px',
-                                        color: 'var(--color-brand-blue-100)',
-                                        textAlign: 'right',
-                                        fontWeight: 'bold',
-                                        fontSize: '32px',
-                                    }}
-                                >
-                                    צעד {stepSystemId}
-                                </Text>
-                                <Text
-                                    style={{
-                                        fontSize: '20px',
-                                        fontWeight: 'bold',
-                                        color: 'var(--color-brand-blue-100)',
-                                    }}
-                                >
-                                    {currentStep.stepTitle || ''}
-                                </Text>
-                            </Stack>
+                                {currentLevel.levelTitle || ''}
+                            </Text>
                         </Stack>
                         <Stack
                             style={{
                                 backgroundColor: 'var(--color-brand-blue-190)',
+                                minWidth: '320px',
                                 border: 'solid 2px var(--color-brand-blue-100)',
                                 display: 'flex',
                                 flexDirection: 'row',
                                 alignItems: 'center',
+                                gap: '16px',
+                                padding: '8px 16px',
                                 borderRadius: '12px',
                                 height: '68px',
-                                width: '320px',
-                                padding: '8px 12px',
-                                boxSizing: 'border-box',
                             }}
-                            role="progressbar"
-                            aria-valuemin={0}
-                            aria-valuemax={100}
-                            aria-valuenow={
-                                totalScreens > 0 && currentScreenIndex >= 0
-                                    ? Math.max(
+                        >
+                            <Text
+                                variant="h3"
+                                style={{
+                                    padding: '4px 8px',
+                                    color: 'var(--color-brand-blue-100)',
+                                    textAlign: 'right',
+                                    fontWeight: 'bold',
+                                    fontSize: '32px',
+                                }}
+                            >
+                                צעד {stepSystemId}
+                            </Text>
+                            <Text
+                                style={{
+                                    fontSize: '20px',
+                                    fontWeight: 'bold',
+                                    color: 'var(--color-brand-blue-100)',
+                                }}
+                            >
+                                {currentStep.stepTitle || ''}
+                            </Text>
+                        </Stack>
+                    </Stack>
+                    <Stack
+                        style={{
+                            backgroundColor: 'var(--color-brand-blue-190)',
+                            border: 'solid 2px var(--color-brand-blue-100)',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            borderRadius: '12px',
+                            height: '68px',
+                            width: '320px',
+                            padding: '8px 12px',
+                            boxSizing: 'border-box',
+                        }}
+                        role="progressbar"
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-valuenow={
+                            totalScreens > 0 && currentScreenIndex >= 0
+                                ? Math.max(
+                                      0,
+                                      Math.min(
+                                          100,
+                                          Math.round(
+                                              ((currentScreenIndex + 1) /
+                                                  totalScreens) *
+                                                  100
+                                          )
+                                      )
+                                  )
+                                : 0
+                        }
+                        aria-label="התקדמות במסכי הצעד"
+                    >
+                        {/* מסגרת פנימית של הפרוגרס־בר */}
+                        <div
+                            style={{
+                                position: 'relative',
+                                width: '100%',
+                                height: '28px',
+                                borderRadius: '10px',
+                                backgroundColor: 'var(--color-brand-blue-160)',
+                                overflow: 'hidden',
+                            }}
+                        >
+                            {/* מילוי */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    height: '100%',
+                                    width:
+                                        totalScreens > 0 &&
+                                        currentScreenIndex >= 0
+                                            ? `${Math.max(
+                                                  0,
+                                                  Math.min(
+                                                      100,
+                                                      Math.round(
+                                                          ((currentScreenIndex +
+                                                              1) /
+                                                              totalScreens) *
+                                                              100
+                                                      )
+                                                  )
+                                              )}%`
+                                            : '0%',
+                                    backgroundColor:
+                                        'var(--color-intent-primary-main)',
+                                    transition: 'width 240ms ease-in-out',
+                                }}
+                            />
+
+                            {/* טקסט אחוזים במרכז */}
+                            <span
+                                style={{
+                                    position: 'absolute',
+                                    inset: 0,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: '16px',
+                                    fontWeight: 700,
+                                    color: 'var(--color-base-white)',
+                                    userSelect: 'none',
+                                }}
+                            >
+                                {totalScreens > 0 && currentScreenIndex >= 0
+                                    ? `${Math.max(
                                           0,
                                           Math.min(
                                               100,
@@ -216,147 +299,70 @@ export default function Layout({ children }: Props) {
                                                       100
                                               )
                                           )
-                                      )
-                                    : 0
-                            }
-                            aria-label="התקדמות במסכי הצעד"
-                        >
-                            {/* מסגרת פנימית של הפרוגרס־בר */}
-                            <div
-                                style={{
-                                    position: 'relative',
-                                    width: '100%',
-                                    height: '28px',
-                                    borderRadius: '10px',
-                                    backgroundColor:
-                                        'var(--color-brand-blue-160)',
-                                    overflow: 'hidden',
-                                }}
-                            >
-                                {/* מילוי */}
-                                <div
-                                    style={{
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 0,
-                                        height: '100%',
-                                        width:
-                                            totalScreens > 0 &&
-                                            currentScreenIndex >= 0
-                                                ? `${Math.max(
-                                                      0,
-                                                      Math.min(
-                                                          100,
-                                                          Math.round(
-                                                              ((currentScreenIndex +
-                                                                  1) /
-                                                                  totalScreens) *
-                                                                  100
-                                                          )
-                                                      )
-                                                  )}%`
-                                                : '0%',
-                                        backgroundColor:
-                                            'var(--color-intent-primary-main)',
-                                        transition: 'width 240ms ease-in-out',
-                                    }}
-                                />
-
-                                {/* טקסט אחוזים במרכז */}
-                                <span
-                                    style={{
-                                        position: 'absolute',
-                                        inset: 0,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: '16px',
-                                        fontWeight: 700,
-                                        color: 'var(--color-base-white)',
-                                        userSelect: 'none',
-                                    }}
-                                >
-                                    {totalScreens > 0 && currentScreenIndex >= 0
-                                        ? `${Math.max(
-                                              0,
-                                              Math.min(
-                                                  100,
-                                                  Math.round(
-                                                      ((currentScreenIndex +
-                                                          1) /
-                                                          totalScreens) *
-                                                          100
-                                                  )
-                                              )
-                                          )}%`
-                                        : '0%'}
-                                </span>
-                            </div>
-                        </Stack>
+                                      )}%`
+                                    : '0%'}
+                            </span>
+                        </div>
                     </Stack>
-                    {/* אזור התוכן עם גובה קבוע וגלילה פנימית */}
-                    <Stack
-                        className="file:academy-course-step-layout"
-                        style={{
-                            width: '100%',
-                            maxWidth: '1200px',
+                </Stack>
+                {/* אזור התוכן עם גובה קבוע וגלילה פנימית */}
+                <Stack
+                    className="file:academy-course-step-layout"
+                    style={{
+                        width: '100%',
+                        maxWidth: '1200px',
 
-                            // גובה קבוע + גלילה פנימית
-                            height: 'calc(100vh - 300px)',
-                            overflowY: 'auto',
+                        // גובה קבוע + גלילה פנימית
+                        height: 'calc(100vh - 300px)',
+                        overflowY: 'auto',
 
-                            // חוויית גלילה
-                            WebkitOverflowScrolling: 'touch',
-                            overscrollBehavior: 'contain',
+                        // חוויית גלילה
+                        WebkitOverflowScrolling: 'touch',
+                        overscrollBehavior: 'contain',
 
-                            // מסגרת/רקע לפי הסגנון שהיה לך קודם
-                            flexShrink: 0,
-                            position: 'relative',
-                            borderRadius: '12px',
-                            border: '2px solid var(--color-divider-main)',
-                            backgroundColor:
-                                'var(--color-text-on-contrast-background)',
-                        }}
-                    >
-                        {/* פס הכלים העליון של המסך (הקומפוננטה שכבר יש לך) */}
-                        <ScreenToolsBar
-                            onBack={handleNavigateToLevel}
-                            screenTitle={currentScreen.screenTitle}
-                            learningTimeSec={
-                                currentScreen.learningTimeInSeconds
-                            }
-                            screenType={currentScreen.screenType}
-                            currentIndex={currentScreenNumber ?? undefined}
-                            totalScreens={totalScreens}
-                        />
-
-                        {/* תוכן המסך בפועל */}
-                        <Stack style={{ padding: '12px 24px' }}>
-                            {children}
-                        </Stack>
-                    </Stack>
-
-                    {/* כפתורי הניווט התחתונים (קומפוננטה נפרדת שכבר יצרת) */}
-                    <ScreenNavigationControls
-                        courseSystemId={courseSystemId}
-                        levelSystemId={levelSystemId}
-                        stepSystemId={stepSystemId}
-                        screenSystemId={screenSystemId}
-                        currentCourse={currentCourse}
-                        currentLevel={currentLevel}
-                        currentStep={currentStep}
-                        router={router}
-                        onMarkAsDone={() => {
-                            console.log('mark as done', {
-                                courseSystemId,
-                                levelSystemId,
-                                stepSystemId,
-                                screenSystemId,
-                            })
-                        }}
+                        // מסגרת/רקע לפי הסגנון שהיה לך קודם
+                        flexShrink: 0,
+                        position: 'relative',
+                        borderRadius: '12px',
+                        border: '2px solid var(--color-divider-main)',
+                        backgroundColor:
+                            'var(--color-text-on-contrast-background)',
+                    }}
+                >
+                    {/* פס הכלים העליון של המסך (הקומפוננטה שכבר יש לך) */}
+                    <ScreenToolsBar
+                        onBack={handleNavigateToLevel}
+                        screenTitle={currentScreen.screenTitle}
+                        learningTimeSec={currentScreen.learningTimeInSeconds}
+                        screenType={currentScreen.screenType}
+                        currentIndex={currentScreenNumber ?? undefined}
+                        totalScreens={totalScreens}
                     />
-                </>
+
+                    {/* תוכן המסך בפועל */}
+                    <Stack style={{ padding: '12px 24px' }}>{children}</Stack>
+                </Stack>
+
+                {/* כפתורי הניווט התחתונים (קומפוננטה נפרדת שכבר יצרת) */}
+                <ScreenNavigationControls
+                    courseSystemId={courseSystemId}
+                    levelSystemId={levelSystemId}
+                    stepSystemId={stepSystemId}
+                    screenSystemId={screenSystemId}
+                    currentCourse={currentCourse}
+                    currentLevel={currentLevel}
+                    currentStep={currentStep}
+                    router={router}
+                    onMarkAsDone={() => {
+                        console.log('mark as done', {
+                            courseSystemId,
+                            levelSystemId,
+                            stepSystemId,
+                            screenSystemId,
+                        })
+                    }}
+                />
             </SystemHomePageHeroSection>
-        </Stack>
+        </SystemHomePageFrame>
     )
 }

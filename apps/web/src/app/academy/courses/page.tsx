@@ -5,17 +5,19 @@ import {
     PaintBlobs,
     SystemHomePageFrame,
     SystemHomePageHeroSection,
+    MainButton,
 } from '@/components'
 import { PagesNavbar } from '@/components/shared'
 import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
 import { useUserStore } from '@/store/userStore'
+import { FONT_SIZES } from '@/styles'
 import {
     getCoursesCount,
     getCoursesLearningTime,
     isAdmin,
     timeConvertor,
 } from '@/utils'
-import { Button, Section, Stack, Text } from '@craftiro/ui'
+import { Section, Stack, Text } from '@craftiro/ui'
 import { BaseCard } from '@craftiro/ui-composites'
 import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
@@ -110,6 +112,8 @@ export default function CoursesPage() {
                 title="קורסים"
                 subtitle="למדו מוזיקה צעד אחר צעד בעזרת הקורסים שלנו"
                 fullscreen={false}
+                opacity={50}
+                contentPosition="center"
             >
                 {/* {craftiroCoursesLoading && <div>טוען קורסים...</div>}
             {craftiroCoursesError && <div>שגיאה: {craftiroCoursesError}</div>} */}
@@ -171,7 +175,13 @@ export default function CoursesPage() {
                 >
                     <BaseCard
                         title="מה זאת מערכת הקורסים של קראפטירו?"
-                        style={{ width: 400, maxWidth: '100%', zIndex: 1 }}
+                        style={{
+                            width: 440,
+                            maxWidth: '100%',
+                            zIndex: 1,
+                            fontSize: `${FONT_SIZES.bigRunningText}px`,
+                            padding: '18px',
+                        }}
                     >
                         <Text
                             as="p"
@@ -179,6 +189,7 @@ export default function CoursesPage() {
                                 margin: 0,
                                 lineHeight: 1.5,
                                 textAlign: 'right',
+                                fontSize: `${FONT_SIZES.runningText}px`,
                             }}
                         >
                             מערכת קורסים דיגיטליים אינטראקטיביים. בכל קורס יש
@@ -193,17 +204,13 @@ export default function CoursesPage() {
                             gap: '16px',
                         }}
                     >
-                        <Button
+                        <MainButton
                             label="חיפוש קורסים"
                             onClick={() => handleNavigate('search')}
-                        />
-                        <Button
-                            label="הקורסים שלי"
-                            onClick={() => handleNavigate('my-courses')}
-                        />
-                        <Button
-                            label="סטטיסטיקות"
-                            onClick={() => handleNavigate('statistics')}
+                            size="large"
+                            style={{
+                                width: 180,
+                            }}
                         />
                     </Stack>
                 </Stack>
@@ -211,6 +218,15 @@ export default function CoursesPage() {
         </SystemHomePageFrame>
     )
 }
+
+// <Button
+//                         label="הקורסים שלי"
+//                         onClick={() => handleNavigate('my-courses')}
+//                     />
+//                     <Button
+//                         label="סטטיסטיקות"
+//                         onClick={() => handleNavigate('statistics')}
+//                     />
 
 // type BaseCardProps = {
 //     title?: string;

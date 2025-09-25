@@ -2,6 +2,7 @@
 
 import {
     FullWidthCard,
+    MainButton,
     SystemHomePageFrame,
     SystemHomePageHeroSection,
 } from '@/components'
@@ -10,10 +11,10 @@ import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
 import { useUserStore } from '@/store/userStore'
 import { CraftiroCourse } from '@/types/craftiroCourses'
 import { isAdmin } from '@/utils'
-import { Button, Section, Stack, Text } from '@craftiro/ui'
-import Image from 'next/image'
+import { Section, Stack, Text } from '@craftiro/ui'
 import { useRouter } from 'next/navigation'
 import { CourseSubNavbar } from '../_components/CourseSubNavbar'
+import { FONT_SIZES } from '@/styles'
 
 type SearchedCourseCardProps = {
     course: CraftiroCourse
@@ -21,43 +22,28 @@ type SearchedCourseCardProps = {
 
 const SearchedCourseCard = ({ course }: SearchedCourseCardProps) => {
     const router = useRouter()
-    const { name, shortDescription, systemId, tags } = course
+    const { name, shortDescription, tags } = course
     const handleNavigateToCourse = (courseId: string) => {
         router.push(`/academy/courses/${courseId}`)
     }
-    const thumbnailUrl = `/tempDb/assets/courses/${systemId}/thumb.png`
 
     return (
         <Stack
             style={{
                 backgroundColor: 'var(--color-text-on-contrast-background)',
-                width: '460px',
-                height: '420px',
+                width: '420px',
+                height: '240px',
                 borderRadius: '12px',
-                borderStyle: 'solid',
-                borderWidth: '2px',
-                borderColor: 'var(--color-divider-main)',
+                border: 'solid 2px var(--color-divider-main)',
                 display: 'flex',
                 flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '16px',
+                boxSizing: 'border-box',
+                gap: '8px',
             }}
         >
-            <Stack
-                style={{
-                    position: 'relative',
-                    width: '460px',
-                    height: '180px',
-                }}
-            >
-                <Image
-                    src={thumbnailUrl}
-                    alt={`Course: ${name}, systemId: ${systemId} thumbnail`}
-                    fill // תופס את כל הגודל של ה־Stack ההורה
-                    style={{
-                        objectFit: 'cover',
-                        borderRadius: '12px 12px 0 0',
-                    }}
-                />
-            </Stack>
             <Stack>
                 <Text
                     style={{
@@ -72,7 +58,7 @@ const SearchedCourseCard = ({ course }: SearchedCourseCardProps) => {
                 </Text>
                 <Text
                     style={{
-                        fontSize: '16px',
+                        fontSize: `${FONT_SIZES.runningText}px`,
                         fontWeight: 400,
                         color: 'var(--color-text-secondary)',
                         textAlign: 'center',
@@ -115,15 +101,15 @@ const SearchedCourseCard = ({ course }: SearchedCourseCardProps) => {
                     })}
                 </Stack>
             </Stack>
-            <Stack>
-                <Button
+            <Stack
+                style={{
+                    width: '100%',
+                }}
+            >
+                <MainButton
                     label="כניסה לקורס"
                     onClick={() => handleNavigateToCourse(course._id)}
-                    variant="outlined"
-                    style={{
-                        marginTop: 'auto',
-                        alignSelf: 'center',
-                    }}
+                    color="brand-blue"
                 />
             </Stack>
         </Stack>
@@ -137,7 +123,19 @@ export default function Page() {
 
     return (
         <SystemHomePageFrame>
-            <SystemHomePageHeroSection title={null} subtitle={null}>
+            <SystemHomePageHeroSection
+                title={null}
+                subtitle={null}
+                style={{
+                    padding: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    width: '100%',
+                    height: 'calc(100vh - 60px)',
+                }}
+                contentPosition="top"
+            >
                 <PagesNavbar
                     links={
                         isUserAdmin
@@ -207,17 +205,22 @@ export default function Page() {
                     <Stack
                         style={{
                             display: 'flex',
-                            flexDirection: 'column',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
                             alignItems: 'center',
                             gap: '16px',
+                            flexWrap: 'wrap',
+                            width: '100%',
                         }}
                     >
-                        {craftiroCourses.map((course) => (
-                            <SearchedCourseCard
-                                key={course._id}
-                                course={course}
-                            />
-                        ))}
+                        {craftiroCourses.map((course) => {
+                            return (
+                                <SearchedCourseCard
+                                    key={course._id}
+                                    course={course}
+                                />
+                            )
+                        })}
                     </Stack>
                 </Section>
             </SystemHomePageHeroSection>

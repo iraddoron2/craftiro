@@ -1,16 +1,22 @@
 'use client'
 
-import { FullWidthCard, SystemHomePageHeroSection } from '@/components'
+import {
+    FullWidthCard,
+    MainButton,
+    SystemHomePageFrame,
+    SystemHomePageHeroSection,
+} from '@/components'
 import { PagesNavbar } from '@/components/shared'
 import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
 import { useUserStore } from '@/store/userStore'
+import { FONT_SIZES } from '@/styles'
 import {
     CraftiroCourse,
     CraftiroCourseLevel,
     CraftiroCourseStep,
 } from '@/types/craftiroCourses'
 import { isAdmin } from '@/utils'
-import { Button } from '@craftiro/ui'
+import { Text } from '@craftiro/ui'
 import { BaseCard, BaseCardText } from '@craftiro/ui-composites'
 import Stack from '@mui/material/Stack/Stack'
 import { useParams, useRouter } from 'next/navigation'
@@ -23,6 +29,7 @@ export type LevelStepCardProps = {
     levelSystemId: string
     stepSystemId: string
     courseSystemId: string
+    state: 'not-started' | 'in-progress' | 'completed'
 }
 
 const LevelStepCard = ({
@@ -30,6 +37,7 @@ const LevelStepCard = ({
     stepNumber,
     courseSystemId,
     levelSystemId,
+    state,
 }: LevelStepCardProps) => {
     const router = useRouter()
     const { stepTitle, stepSystemId } = step
@@ -40,20 +48,106 @@ const LevelStepCard = ({
         )
     }
 
+    const getBackgroundColor = (
+        state: 'not-started' | 'in-progress' | 'completed'
+    ) => {
+        switch (state) {
+            case 'not-started':
+                return 'var(--color-gray-190)'
+            case 'in-progress':
+                return 'var(--color-brand-blue-170)'
+            case 'completed':
+                return 'var(--color-green-170)'
+            default:
+                return 'var(--color-gray-190)'
+        }
+    }
+
+    const getButtonColor = (
+        state: 'not-started' | 'in-progress' | 'completed'
+    ) => {
+        switch (state) {
+            case 'not-started':
+                return 'gray'
+            case 'in-progress':
+                return 'brand-blue'
+            case 'completed':
+                return 'green'
+            default:
+                return 'gray'
+        }
+    }
+
+    const getChipColor = (
+        state: 'not-started' | 'in-progress' | 'completed'
+    ) => {
+        switch (state) {
+            case 'not-started':
+                return 'var(--color-gray-160)'
+            case 'in-progress':
+                return 'var(--color-brand-blue-150)'
+            case 'completed':
+                return 'var(--color-green-150)'
+            default:
+                return 'var(--color-gray-160)'
+        }
+    }
+
     return (
         <BaseCard
-            title={`${stepNumber}. ${stepTitle || 'אין שם לצעד הזה'}`}
             style={{
-                width: '100%',
-                minHeight: '120px',
+                width: '360px',
+                minHeight: '160px',
                 fontSize: '24px',
                 marginBottom: '12px',
+                backgroundColor: getBackgroundColor(state),
+                gap: '12px',
             }}
         >
-            <Button
+            <Stack
+                style={{
+                    backgroundColor: getChipColor(state),
+                    padding: '4px 12px',
+                    borderRadius: '8px',
+                    width: 'fit-content',
+                    marginBottom: '12px',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                }}
+            >
+                <Text
+                    style={{
+                        margin: 0,
+                        lineHeight: 1.5,
+                        fontSize: '20px',
+                        fontWeight: 700,
+                    }}
+                >
+                    {`צעד ${stepNumber}: `}
+                </Text>
+                <Text
+                    style={{
+                        margin: 0,
+                        lineHeight: 1.5,
+                        fontSize: '20px',
+                    }}
+                >
+                    {`${stepTitle || 'אין שם לשלב הזה'}`}
+                </Text>
+            </Stack>
+
+            <MainButton
                 onClick={handleEnterStep}
-                style={{ marginTop: '12px' }}
                 label="כניסה לצעד"
+                color={getButtonColor(state)}
+                variant="contained"
+                style={{
+                    width: '100%',
+                    marginTop: '12px',
+                }}
             />
         </BaseCard>
     )
@@ -113,134 +207,167 @@ export default function LevelPage() {
     const { levelTitle, levelLongDescription, steps } = level
 
     return (
-        <SystemHomePageHeroSection title={null} subtitle={null}>
-            <PagesNavbar
-                links={
-                    isUserAdmin
-                        ? [
-                              { href: '/academy', label: 'עמוד בית' },
-                              { href: '/academy/store', label: 'חנות' },
-                              {
-                                  href: '/academy/my-learning',
-                                  label: 'הלמידה שלי',
-                              },
-                              { href: '/academy/courses', label: 'קורסים' },
-                              {
-                                  href: '/academy/exercises',
-                                  label: 'תרגילים',
-                              },
-                              { href: '/academy/essays', label: 'מאמרים' },
-                              {
-                                  href: '/academy/questions',
-                                  label: 'שאלות',
-                              },
-                              {
-                                  href: '/academy/lessons',
-                                  label: 'שיעורים',
-                              },
-                              { href: '/academy/books', label: 'ספרים' },
-                              {
-                                  href: '/academy/infographics',
-                                  label: 'אינפוגרפיקות',
-                              },
-                              { href: '/academy/feed', label: 'פיד' },
-                              { href: '/academy/songs', label: 'שירים' },
-                              { href: '/academy/pieces', label: 'יצירות' },
-
-                              { href: '/academy/games', label: 'משחקים' },
-                              { href: '/academy/score', label: 'נקודות' },
-                              {
-                                  href: '/academy/achievements',
-                                  label: 'הישגים',
-                              },
-                              { href: '/academy/skills', label: 'כישורים' },
-                              {
-                                  href: '/academy/certificates',
-                                  label: 'תעודות',
-                              },
-                              {
-                                  href: '/academy/stats',
-                                  label: 'סטטיסטיקות',
-                              },
-                          ]
-                        : [
-                              { href: '/academy', label: 'עמוד בית' },
-                              {
-                                  href: '/academy/exercises',
-                                  label: 'תרגילים',
-                              },
-                          ]
-                }
-            />
-            <FullWidthCard
-                title={levelTitle || 'אין שם לשלב הזה'}
-                color="blue"
-                style={{ margin: '24px', width: 'calc(100% - 48px)' }}
-            />
-            <CourseSubNavbar
-                isBackButton={true}
-                backLabel="חזרה לדף הקורס"
-                backUrl={`/academy/courses/${courseSystemId}`}
-            />
-            <Stack
+        <SystemHomePageFrame>
+            <SystemHomePageHeroSection
+                title={null}
+                subtitle={null}
                 style={{
+                    padding: 0,
                     display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'start',
-                    justifyContent: 'center',
-                    gap: '24px',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    width: '100%',
+                    height: 'calc(100vh - 60px)',
                 }}
+                contentPosition="top"
             >
-                <BaseCard
-                    title="מה נלמד בשלב הזה?"
+                <PagesNavbar
+                    links={
+                        isUserAdmin
+                            ? [
+                                  { href: '/academy', label: 'עמוד בית' },
+                                  { href: '/academy/store', label: 'חנות' },
+                                  {
+                                      href: '/academy/my-learning',
+                                      label: 'הלמידה שלי',
+                                  },
+                                  { href: '/academy/courses', label: 'קורסים' },
+                                  {
+                                      href: '/academy/exercises',
+                                      label: 'תרגילים',
+                                  },
+                                  { href: '/academy/essays', label: 'מאמרים' },
+                                  {
+                                      href: '/academy/questions',
+                                      label: 'שאלות',
+                                  },
+                                  {
+                                      href: '/academy/lessons',
+                                      label: 'שיעורים',
+                                  },
+                                  { href: '/academy/books', label: 'ספרים' },
+                                  {
+                                      href: '/academy/infographics',
+                                      label: 'אינפוגרפיקות',
+                                  },
+                                  { href: '/academy/feed', label: 'פיד' },
+                                  { href: '/academy/songs', label: 'שירים' },
+                                  { href: '/academy/pieces', label: 'יצירות' },
+
+                                  { href: '/academy/games', label: 'משחקים' },
+                                  { href: '/academy/score', label: 'נקודות' },
+                                  {
+                                      href: '/academy/achievements',
+                                      label: 'הישגים',
+                                  },
+                                  { href: '/academy/skills', label: 'כישורים' },
+                                  {
+                                      href: '/academy/certificates',
+                                      label: 'תעודות',
+                                  },
+                                  {
+                                      href: '/academy/stats',
+                                      label: 'סטטיסטיקות',
+                                  },
+                              ]
+                            : [
+                                  { href: '/academy', label: 'עמוד בית' },
+                                  {
+                                      href: '/academy/exercises',
+                                      label: 'תרגילים',
+                                  },
+                              ]
+                    }
+                />
+                <FullWidthCard
+                    title={levelTitle || 'אין שם לשלב הזה'}
+                    color="blue"
+                    style={{ margin: '24px', width: 'calc(100% - 48px)' }}
+                />
+                <CourseSubNavbar
+                    isBackButton={true}
+                    backLabel="חזרה לדף הקורס"
+                    backUrl={`/academy/courses/${courseSystemId}`}
+                />
+                <Stack
                     style={{
-                        width: 'fit-content',
-                        maxWidth: '100%',
-                        fontSize: '28px',
-                        minHeight: '220px',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'start',
+                        justifyContent: 'center',
+                        gap: '24px',
                     }}
                 >
-                    <BaseCardText
+                    <BaseCard
+                        title="מה נלמד בשלב הזה?"
                         style={{
-                            margin: 0,
-                            lineHeight: 1.5,
-                            textAlign: 'right',
+                            width: 'fit-content',
+                            maxWidth: '100%',
+                            fontSize: '28px',
+                            minHeight: '220px',
+                            color: 'var(--color-gray-80)',
                         }}
-                        text={levelLongDescription || 'אין תיאור לקורס הזה.'}
-                    />
-                </BaseCard>
-            </Stack>
-            <BaseCard
-                title="צעדים"
-                style={{
-                    margin: '24px',
-                    width: '100%',
-                    minHeight: '220px',
-                    fontSize: '28px',
-                }}
-            >
-                {steps && steps.length > 0 ? (
-                    steps.map((step, index) => (
-                        <LevelStepCard
-                            key={index}
-                            step={step}
-                            stepNumber={index + 1}
-                            courseSystemId={courseSystemId}
-                            levelSystemId={levelSystemId}
-                            stepSystemId={step.stepSystemId}
+                    >
+                        <BaseCardText
+                            style={{
+                                margin: 0,
+                                lineHeight: 1.5,
+                                textAlign: 'right',
+                                fontSize: `${FONT_SIZES.runningText}px`,
+                            }}
+                            text={
+                                levelLongDescription || 'אין תיאור לקורס הזה.'
+                            }
                         />
-                    ))
-                ) : (
-                    <BaseCardText
+                    </BaseCard>
+                </Stack>
+                <BaseCard
+                    title="צעדים"
+                    style={{
+                        margin: '24px',
+                        width: '100%',
+                        minHeight: '220px',
+                        fontSize: '28px',
+                        color: 'var(--color-gray-80)',
+                    }}
+                >
+                    <Stack
                         style={{
-                            margin: 0,
-                            lineHeight: 1.5,
-                            textAlign: 'right',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'start',
+                            justifyContent: 'center',
+                            flexWrap: 'wrap',
+                            gap: '24px',
+                            marginTop: '12px',
+                            width: '100%',
                         }}
-                        text="אין צעדים לקורס הזה."
-                    />
-                )}
-            </BaseCard>
-        </SystemHomePageHeroSection>
+                    >
+                        {steps && steps.length > 0 ? (
+                            steps.map((step, index) => (
+                                <LevelStepCard
+                                    key={index}
+                                    step={step}
+                                    stepNumber={index + 1}
+                                    courseSystemId={courseSystemId}
+                                    levelSystemId={levelSystemId}
+                                    stepSystemId={step.stepSystemId}
+                                    state="in-progress"
+                                />
+                            ))
+                        ) : (
+                            <BaseCardText
+                                style={{
+                                    margin: 0,
+                                    lineHeight: 1.5,
+                                    textAlign: 'right',
+                                }}
+                                text="אין צעדים לקורס הזה."
+                            />
+                        )}
+                    </Stack>
+                </BaseCard>
+            </SystemHomePageHeroSection>
+        </SystemHomePageFrame>
     )
 }

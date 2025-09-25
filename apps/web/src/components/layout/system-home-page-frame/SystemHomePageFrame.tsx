@@ -1,3 +1,4 @@
+import { elementsSizes } from '@/styles'
 import { Section } from '@craftiro/ui'
 import React from 'react'
 
@@ -13,11 +14,12 @@ export const SystemHomePageFrame = ({
     return (
         <Section
             padding="none"
+            className="system-home-page-frame"
             style={{
                 position: 'relative',
-                minHeight: '100dvh',
-                overflow: 'visible',
-                display: 'block',
+                paddingInlineEnd: elementsSizes.pagesNavbarWidth, // מפנה מקום לתפריט הימני
+                // minHeight: '100dvh',
+                overflow: 'clip',
                 ...style,
             }}
         >
