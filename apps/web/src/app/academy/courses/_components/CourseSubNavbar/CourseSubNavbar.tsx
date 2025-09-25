@@ -1,10 +1,10 @@
 'use client'
 
 import BackArrowIcon from '@/assets/icons/back-arrow-icon.svg'
-import MyCoursesIcon from '@/assets/icons/my-courses-icon.svg'
-import ProgressionIconUrl from '@/assets/icons/progression-icon.svg'
+// import MyCoursesIcon from '@/assets/icons/my-courses-icon.svg'
+// import ProgressionIconUrl from '@/assets/icons/progression-icon.svg'
 import SearchIconUrl from '@/assets/icons/search-icon.svg'
-import StatsIconUrl from '@/assets/icons/stats-icon.svg'
+// import StatsIconUrl from '@/assets/icons/stats-icon.svg'
 import { Stack, Text } from '@craftiro/ui'
 import Image from 'next/image'
 
@@ -108,7 +108,7 @@ export const CourseSubNavbar = ({
                     }}
                 >
                     {/* Icon button: My Courses */}
-                    <button
+                    {/* <button
                         type="button"
                         onClick={() =>
                             handleNavigate('/academy/courses/my-courses')
@@ -135,7 +135,7 @@ export const CourseSubNavbar = ({
                             width={24}
                             height={24}
                         />
-                    </button>
+                    </button> */}
 
                     {/* Icon button: Search */}
                     <button
@@ -168,7 +168,7 @@ export const CourseSubNavbar = ({
                     </button>
 
                     {/* Icon button: Progression */}
-                    <button
+                    {/* <button
                         type="button"
                         onClick={() =>
                             handleNavigate('/academy/courses/progress')
@@ -195,9 +195,9 @@ export const CourseSubNavbar = ({
                             width={24}
                             height={24}
                         />
-                    </button>
+                    </button> */}
                     {/* Icon button: Stats */}
-                    <button
+                    {/* <button
                         type="button"
                         onClick={() => handleNavigate('/academy/courses/stats')}
                         aria-label="סטטיסטיקות הקורסים"
@@ -222,7 +222,7 @@ export const CourseSubNavbar = ({
                             width={24}
                             height={24}
                         />
-                    </button>
+                    </button> */}
                 </Stack>
             </Stack>
         </>
