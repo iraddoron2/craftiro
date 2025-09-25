@@ -14,6 +14,7 @@ import { isAdmin } from '@/utils'
 import { Section, Stack, Text } from '@craftiro/ui'
 import { useRouter } from 'next/navigation'
 import { CourseSubNavbar } from '../_components/CourseSubNavbar'
+import { FONT_SIZES } from '@/styles'
 
 type SearchedCourseCardProps = {
     course: CraftiroCourse
@@ -57,7 +58,7 @@ const SearchedCourseCard = ({ course }: SearchedCourseCardProps) => {
                 </Text>
                 <Text
                     style={{
-                        fontSize: '16px',
+                        fontSize: `${FONT_SIZES.runningText}px`,
                         fontWeight: 400,
                         color: 'var(--color-text-secondary)',
                         textAlign: 'center',

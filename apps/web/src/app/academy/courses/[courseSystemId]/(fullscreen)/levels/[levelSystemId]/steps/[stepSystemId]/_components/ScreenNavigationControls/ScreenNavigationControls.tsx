@@ -34,7 +34,7 @@ export const ScreenNavigationControls: React.FC<Props> = ({
     currentLevel,
     currentStep,
     router,
-    onMarkAsDone,
+    // onMarkAsDone,
     enableKeyboardArrows = true,
 }) => {
     const nextNav = useMemo<NavInfo>(() => {
@@ -224,7 +224,7 @@ export const ScreenNavigationControls: React.FC<Props> = ({
             <MainButton
                 label="בוצע"
                 color="brand-orange"
-                onClick={onMarkAsDone}
+                onClick={() => handleGo(nextNav)}
                 style={{
                     width: '160px',
                 }}

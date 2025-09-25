@@ -27,3 +27,8 @@ export const sizes = {
         between,
     },
 } as const
+
+export const FONT_SIZES = {
+    runningText: 18,
+    bigRunningText: 22,
+}

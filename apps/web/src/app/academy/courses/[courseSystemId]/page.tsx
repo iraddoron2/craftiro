@@ -9,6 +9,7 @@ import {
 import { PagesNavbar } from '@/components/shared'
 import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
 import { useUserStore } from '@/store/userStore'
+import { FONT_SIZES } from '@/styles'
 import { CraftiroCourse, CraftiroCourseLevel } from '@/types/craftiroCourses'
 import { isAdmin } from '@/utils'
 import { Text } from '@craftiro/ui'
@@ -272,6 +273,7 @@ export default function CoursePage() {
                             fontSize: '28px',
                             minHeight: '220px',
                             color: 'var(--color-gray-80)',
+                            padding: '18px 24px',
                         }}
                     >
                         <BaseCardText
@@ -279,7 +281,7 @@ export default function CoursePage() {
                                 margin: 0,
                                 lineHeight: 1.5,
                                 textAlign: 'right',
-                                fontSize: '20px',
+                                fontSize: `${FONT_SIZES.runningText}px`,
                             }}
                             text={longDescription || 'אין תיאור לקורס הזה.'}
                         />
@@ -292,6 +294,7 @@ export default function CoursePage() {
                             fontSize: '28px',
                             minHeight: '220px',
                             color: 'var(--color-gray-80)',
+                            padding: '18px 24px',
                         }}
                     >
                         {mainSubjects && mainSubjects.length > 0 ? (
@@ -306,7 +309,6 @@ export default function CoursePage() {
                                     <li
                                         key={index}
                                         style={{
-                                            fontSize: '20px',
                                             lineHeight: 1.5,
                                         }}
                                     >
@@ -333,7 +335,7 @@ export default function CoursePage() {
                                                     margin: 0,
                                                     lineHeight: 1.5,
                                                     textAlign: 'right',
-                                                    fontSize: '20px',
+                                                    fontSize: `${FONT_SIZES.runningText}px`,
                                                 }}
                                             />
                                         </Stack>

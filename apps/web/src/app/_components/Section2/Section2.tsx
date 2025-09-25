@@ -1,7 +1,8 @@
 'use client'
 
-import { FullWidthCard, PaintBlobs } from '@/components'
-import { Button, Section, Stack, Text } from '@craftiro/ui'
+import { FullWidthCard, MainButton, PaintBlobs } from '@/components'
+import { FONT_SIZES } from '@/styles'
+import { Section, Stack, Text } from '@craftiro/ui'
 import { BaseCard } from '@craftiro/ui-composites'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -68,7 +69,7 @@ export const Section2: React.FC = () => {
                 }}
             >
                 {/* Top card */}
-                <FullWidthCard title="בקרו באקדמיה שלנו" color="orange">
+                <FullWidthCard title="בקרו באקדמיה שלנו" color="blue">
                     <Stack
                         style={{
                             display: 'flex',
@@ -88,7 +89,11 @@ export const Section2: React.FC = () => {
                         >
                             <BaseCard
                                 title="מה זאת האקדמיה של קראפטירו?"
-                                style={{ width: 400, maxWidth: '100%' }}
+                                style={{
+                                    width: 400,
+                                    maxWidth: '100%',
+                                    fontSize: `${FONT_SIZES.bigRunningText}px`,
+                                }}
                             >
                                 <Text
                                     as="p"
@@ -96,6 +101,7 @@ export const Section2: React.FC = () => {
                                         margin: 0,
                                         lineHeight: 1.5,
                                         textAlign: 'right',
+                                        fontSize: `${FONT_SIZES.runningText}px`,
                                     }}
                                 >
                                     סביבת למידה דיגיטלית שבה כל אחד יכול ללמוד
@@ -105,7 +111,11 @@ export const Section2: React.FC = () => {
 
                             <BaseCard
                                 title="איך לומדים באקדמיה?"
-                                style={{ width: 400, maxWidth: '100%' }}
+                                style={{
+                                    width: 400,
+                                    maxWidth: '100%',
+                                    fontSize: `${FONT_SIZES.bigRunningText}px`,
+                                }}
                             >
                                 <Text
                                     as="p"
@@ -113,49 +123,32 @@ export const Section2: React.FC = () => {
                                         margin: 0,
                                         lineHeight: 1.5,
                                         textAlign: 'right',
+                                        fontSize: `${FONT_SIZES.runningText}px`,
                                     }}
                                 >
-                                    באקדמיה אפשר ללמוד בעזרת מערכת קורסים
-                                    דיגיטליים, מערכת תרגילים ומערכת סיכומים.
-                                    בנוסף אפשר לתאם שיעורים פרטיים לבדיקה וחיזוק
-                                    הידע.
+                                    נכנסים למערכת הקורסים, בוחרים איזה קורס
+                                    ללמוד, נכנסים אליו ולומדים את שלבי הקורס לפי
+                                    הסדר. סיימתם את הקורס? תתקדמו לקורס הבא!
                                 </Text>
                             </BaseCard>
                         </Stack>
 
                         <Stack align="center">
-                            <Button
+                            <MainButton
                                 label="כניסה לאקדמיה"
                                 onClick={() => router.push('/academy')}
+                                size="large"
                                 style={{
-                                    background: vars.ctaBg,
-                                    color: vars.ctaText,
-                                    border: `1px solid ${vars.border}`,
-                                    fontSize: 18,
-                                    padding: '14px 20px',
-                                    minWidth: 220,
-                                    transition:
-                                        'background 0.2s ease, border-color 0.2s ease',
+                                    width: '180px',
                                 }}
-                                onMouseOver={(e) => {
-                                    e.currentTarget.style.background =
-                                        vars.ctaHoverBg
-                                    e.currentTarget.style.borderColor =
-                                        vars.ctaHoverBg
-                                }}
-                                onMouseOut={(e) => {
-                                    e.currentTarget.style.background =
-                                        vars.ctaBg
-                                    e.currentTarget.style.borderColor =
-                                        vars.border
-                                }}
+                                color="brand-blue"
                             />
                         </Stack>
                     </Stack>
                 </FullWidthCard>
 
                 {/* Bottom card – UPDATED to match the top one */}
-                <FullWidthCard title="שיעורים פרטיים" color="blue">
+                {/* <FullWidthCard title="שיעורים פרטיים" color="blue">
                     <Stack
                         style={{
                             display: 'flex',
@@ -239,7 +232,7 @@ export const Section2: React.FC = () => {
                             />
                         </Stack>
                     </Stack>
-                </FullWidthCard>
+                </FullWidthCard> */}
             </Stack>
         </Section>
     )

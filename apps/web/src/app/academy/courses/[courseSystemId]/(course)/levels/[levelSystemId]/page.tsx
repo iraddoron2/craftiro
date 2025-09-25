@@ -9,6 +9,7 @@ import {
 import { PagesNavbar } from '@/components/shared'
 import { useCraftiroCoursesStore } from '@/store/craftiroCoursesStore'
 import { useUserStore } from '@/store/userStore'
+import { FONT_SIZES } from '@/styles'
 import {
     CraftiroCourse,
     CraftiroCourseLevel,
@@ -312,7 +313,7 @@ export default function LevelPage() {
                                 margin: 0,
                                 lineHeight: 1.5,
                                 textAlign: 'right',
-                                fontSize: '20px',
+                                fontSize: `${FONT_SIZES.runningText}px`,
                             }}
                             text={
                                 levelLongDescription || 'אין תיאור לקורס הזה.'
